@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Avios AI | Intelligent AI Solutions</title>
-
-<!-- SEO Meta -->
 <meta name="description" content="Avios AI develops intelligent solutions using advanced AI, NLP, and multimodal intelligence to simplify tasks and enhance productivity.">
 <meta name="keywords" content="AI, Artificial Intelligence, NLP, Machine Learning, Automation, Multimodal AI, Productivity AI, AI Startup">
 <meta name="author" content="Vineeth Reddy">
@@ -15,40 +13,54 @@
 
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
-
 <!-- Particles.js -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
 <style>
-body { font-family: 'Inter', sans-serif; background: #0d1b2a; color: #fff; margin:0; }
+body { font-family: 'Inter', sans-serif; margin:0; background:#0d1b2a; color:#fff; scroll-behavior:smooth; }
 .fade-up { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
-.scale-up { transform: scale(0.95); opacity:0; transition: all 0.8s ease-out; }
-.scale-up.visible { transform: scale(1); opacity:1; }
-header { position: fixed; width: 100%; z-index: 100; background: rgba(13,27,42,0.9); backdrop-filter: blur(10px); }
-nav a { margin-left: 20px; font-weight:600; color:#fff; transition:0.3s; }
-nav a:hover { color:#fca311; }
-.hero { position: relative; height: 100vh; display:flex; justify-content:center; align-items:center; text-align:center; overflow:hidden; background: url('assets/hero-image.png') center center/cover no-repeat; }
-.hero-overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.45); z-index:0; }
-.hero-content { position: relative; z-index:1; max-width:700px; padding:0 20px; }
-button.cta { background: linear-gradient(90deg, #fca311, #ffb347); color:#fff; padding:15px 35px; border-radius:12px; font-weight:600; font-size:1.1rem; cursor:pointer; transition: all 0.3s ease; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+.hero { position:relative; display:flex; align-items:center; justify-content:center; min-height:100vh; background: url('assets/hero-image.png') center center/cover no-repeat; }
+.hero-overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:0; }
+.hero-content { position:relative; z-index:10; text-align:center; padding:0 20px; }
+button.cta { background: linear-gradient(90deg, #fca311, #ffb347); color:#fff; padding:15px 35px; border-radius:12px; font-weight:600; font-size:1.1rem; cursor:pointer; transition: all 0.3s; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
 button.cta:hover { transform: translateY(-3px) scale(1.05); box-shadow:0 12px 25px rgba(0,0,0,0.3); background: linear-gradient(90deg,#ffb347,#fca311); }
-button.cta:active { transform: translateY(0) scale(1); box-shadow:0 8px 20px rgba(0,0,0,0.2); }
-section { padding-top:80px; }
-input, textarea { width:100%; }
-h1 { font-size:2.5rem; }
-@media(min-width:768px){ h1{ font-size:5rem; } p{ font-size:1.25rem; } }
+a.btn-secondary { background: linear-gradient(90deg, #374151, #4B5563); padding:15px 35px; border-radius:12px; font-weight:600; transition:all 0.3s; display:inline-block; }
+a.btn-secondary:hover { background: linear-gradient(90deg,#4B5563,#6B7280); transform:translateY(-2px) scale(1.03);}
+section { padding:100px 20px; }
+h1,h2,h3{margin:0 0 20px 0;}
+p { margin-bottom:15px; }
+.card { background:linear-gradient(135deg, #1f2937, #111827); padding:25px; border-radius:16px; transition:all 0.4s; }
+.card:hover { transform:translateY(-5px) scale(1.03); box-shadow:0 15px 30px rgba(0,0,0,0.4); }
+
+/* Testimonials */
+.swiper { width: 100%; padding: 50px 0; }
+.swiper-slide { display:flex; justify-content:center; align-items:center; }
+.testimonial-card { background:#111827; padding:30px; border-radius:20px; max-width:400px; text-align:center; }
+.testimonial-card p { font-style:italic; margin-bottom:15px; }
+
+/* FAQ */
+.faq-item { border-bottom:1px solid #374151; padding:15px 0; cursor:pointer; }
+.faq-answer { display:none; padding-top:10px; color:#9ca3af; }
+
+@media(min-width:768px){ .hero-content h1{ font-size:4rem; } .hero-content p{ font-size:1.25rem; } }
 </style>
+
+<!-- Swiper CSS for testimonials -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 </head>
 <body>
 
 <!-- Header -->
-<header class="p-5 flex justify-between items-center max-w-7xl mx-auto">
+<header class="fixed top-0 left-0 w-full bg-black bg-opacity-70 backdrop-blur z-50 p-5 flex justify-between items-center max-w-7xl mx-auto">
   <h1 class="text-2xl font-bold text-white">Avios AI</h1>
   <nav>
-    <a href="#about">About</a>
-    <a href="#features">Features</a>
-    <a href="#contact">Contact</a>
+    <a href="#about" class="ml-5 font-semibold text-white hover:text-yellow-400">About</a>
+    <a href="#services" class="ml-5 font-semibold text-white hover:text-yellow-400">Services</a>
+    <a href="#features" class="ml-5 font-semibold text-white hover:text-yellow-400">Features</a>
+    <a href="#testimonials" class="ml-5 font-semibold text-white hover:text-yellow-400">Testimonials</a>
+    <a href="#faq" class="ml-5 font-semibold text-white hover:text-yellow-400">FAQ</a>
+    <a href="#contact" class="ml-5 font-semibold text-white hover:text-yellow-400">Contact</a>
   </nav>
 </header>
 
@@ -56,121 +68,145 @@ h1 { font-size:2.5rem; }
 <section class="hero">
   <div id="particles-js"></div>
   <div class="hero-overlay"></div>
-  <div class="hero-content fade-up scale-up">
-    <h1>
+  <div class="hero-content fade-up">
+    <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white leading-tight">
       <span id="typing-text"></span>
     </h1>
-    <p class="mb-6 text-lg">We simplify complex tasks for businesses and individuals using advanced AI models, NLP, and multimodal intelligence to boost productivity and provide actionable insights.</p>
-    <button class="cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
+    <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8">
+      We leverage advanced AI, NLP, and multimodal intelligence to automate tasks, provide insights, and make AI accessible for businesses and individuals.
+    </p>
+    <div class="flex flex-col md:flex-row justify-center gap-4">
+      <button class="cta px-10 py-4">Get in Touch</button>
+      <a href="#services" class="btn-secondary px-10 py-4">Explore Services</a>
+    </div>
+    <p class="mt-6 text-gray-400 text-sm">Trusted by innovators and AI enthusiasts worldwide</p>
   </div>
 </section>
 
 <!-- About Section -->
-<section id="about" class="py-20 px-5 max-w-7xl mx-auto bg-gray-900 rounded-xl my-10">
-  <h2 class="text-4xl font-bold text-center mb-12 fade-up">About Avios AI</h2>
-  <div class="grid md:grid-cols-2 gap-10">
-    <div class="fade-up p-6 bg-gray-800 rounded-xl shadow-lg">
+<section id="about" class="max-w-7xl mx-auto bg-gray-900 rounded-xl my-10 p-10 fade-up">
+  <h2 class="text-4xl font-bold text-center mb-12">About Avios AI</h2>
+  <div class="grid md:grid-cols-3 gap-10">
+    <div class="card">
       <h3 class="text-2xl font-semibold mb-3">Our Mission</h3>
-      <p>We bridge the gap between cutting-edge AI research and real-world applications, making AI accessible and impactful for everyone.</p>
+      <p>Bridge the gap between cutting-edge AI research and real-world applications, making AI accessible and impactful for everyone.</p>
     </div>
-    <div class="fade-up p-6 bg-gray-800 rounded-xl shadow-lg">
+    <div class="card">
+      <h3 class="text-2xl font-semibold mb-3">Our Vision</h3>
+      <p>Empower businesses and individuals with intelligent AI tools to enhance productivity and innovation.</p>
+    </div>
+    <div class="card">
       <h3 class="text-2xl font-semibold mb-3">Our Approach</h3>
-      <p>By leveraging advanced ML models, NLP, and multimodal AI, we automate processes and provide actionable insights to businesses and individuals.</p>
+      <p>We combine ML, NLP, and multimodal AI to deliver scalable, reliable, and actionable solutions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="max-w-7xl mx-auto my-10 p-10 fade-up">
+  <h2 class="text-4xl font-bold text-center mb-12">Our Services</h2>
+  <div class="grid md:grid-cols-3 gap-8">
+    <div class="card text-center">
+      <h3 class="text-2xl font-semibold mb-2">AI Automation</h3>
+      <p>Automate repetitive tasks to save time and reduce errors.</p>
+    </div>
+    <div class="card text-center">
+      <h3 class="text-2xl font-semibold mb-2">Predictive Analytics</h3>
+      <p>Data-driven insights for smarter business decisions.</p>
+    </div>
+    <div class="card text-center">
+      <h3 class="text-2xl font-semibold mb-2">Multimodal AI</h3>
+      <p>Integrate text, image, and voice AI into seamless applications.</p>
+    </div>
+    <div class="card text-center">
+      <h3 class="text-2xl font-semibold mb-2">Business Productivity</h3>
+      <p>Tools designed to boost efficiency across workflows.</p>
+    </div>
+    <div class="card text-center">
+      <h3 class="text-2xl font-semibold mb-2">Intelligent Insights</h3>
+      <p>Real-time analytics and actionable recommendations.</p>
+    </div>
+    <div class="card text-center">
+      <h3 class="text-2xl font-semibold mb-2">Custom AI Solutions</h3>
+      <p>Tailored AI solutions to fit your business needs.</p>
     </div>
   </div>
 </section>
 
 <!-- Features Section -->
-<section id="features" class="py-20 px-5 max-w-7xl mx-auto bg-gray-800 rounded-xl my-10">
-  <h2 class="text-4xl font-bold text-center mb-12 fade-up">What We Do</h2>
-  <div class="grid md:grid-cols-3 gap-10">
-    <div class="fade-up p-6 bg-gray-700 rounded-xl text-center shadow-lg">
-      <h3 class="text-2xl font-semibold mb-2">Automation</h3>
-      <p>AI tools that automate workflows, saving time and reducing errors.</p>
+<section id="features" class="max-w-7xl mx-auto my-10 p-10 fade-up">
+  <h2 class="text-4xl font-bold text-center mb-12">Why Choose Avios AI</h2>
+  <div class="grid md:grid-cols-3 gap-8">
+    <div class="card text-center">
+      <h3 class="text-xl font-semibold mb-2">Scalable Solutions</h3>
+      <p>Our AI grows with your business needs.</p>
     </div>
-    <div class="fade-up p-6 bg-gray-700 rounded-xl text-center shadow-lg">
-      <h3 class="text-2xl font-semibold mb-2">Insights</h3>
-      <p>Analyze data to provide actionable insights for smarter decisions.</p>
+    <div class="card text-center">
+      <h3 class="text-xl font-semibold mb-2">Expert Team</h3>
+      <p>Experienced engineers and AI researchers at your service.</p>
     </div>
-    <div class="fade-up p-6 bg-gray-700 rounded-xl text-center shadow-lg">
-      <h3 class="text-2xl font-semibold mb-2">Multimodal AI</h3>
-      <p>Integrates text, voice, and image processing for seamless AI experience.</p>
+    <div class="card text-center">
+      <h3 class="text-xl font-semibold mb-2">Reliable Support</h3>
+      <p>Dedicated support to ensure smooth AI integration.</p>
     </div>
   </div>
 </section>
 
+<!-- Testimonials Section -->
+<section id="testimonials" class="max-w-7xl mx-auto my-10 p-10 fade-up">
+  <h2 class="text-4xl font-bold text-center mb-12">Testimonials</h2>
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><div class="testimonial-card"><p>"Avios AI transformed our workflow with intelligent automation!"</p><strong>- John Doe</strong></div></div>
+      <div class="swiper-slide"><div class="testimonial-card"><p>"The predictive analytics saved us countless hours in decision-making."</p><strong>- Jane Smith</strong></div></div>
+      <div class="swiper-slide"><div class="testimonial-card"><p>"Amazing team and incredible AI solutions!"</p><strong>- Mike Johnson</strong></div></div>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" class="max-w-7xl mx-auto my-10 p-10 fade-up">
+  <h2 class="text-4xl font-bold text-center mb-12">FAQ</h2>
+  <div class="max-w-3xl mx-auto">
+    <div class="faq-item">What is Avios AI? <div class="faq-answer">Avios AI develops intelligent AI solutions for businesses and individuals.</div></div>
+    <div class="faq-item">Can I integrate AI into my business? <div class="faq-answer">Yes, our solutions are scalable and customizable for any industry.</div></div>
+    <div class="faq-item">Do you provide support? <div class="faq-answer">We offer dedicated support for all our clients to ensure smooth integration.</div></div>
+  </div>
+</section>
+
 <!-- Contact Section -->
-<section id="contact" class="py-20 px-5 max-w-7xl mx-auto bg-gray-900 rounded-xl my-10">
-  <h2 class="text-4xl font-bold text-center mb-12 fade-up">Contact Us</h2>
-  <div class="max-w-3xl mx-auto fade-up">
+<section id="contact" class="max-w-7xl mx-auto bg-gray-800 rounded-xl my-10 p-10 fade-up">
+  <h2 class="text-4xl font-bold text-center mb-12">Contact Us</h2>
+  <div class="max-w-3xl mx-auto">
     <form id="contact-form" class="grid gap-6">
-      <input type="text" name="name" placeholder="Your Name" required class="p-4 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
-      <input type="email" name="email" placeholder="Your Email" required class="p-4 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
-      <textarea name="message" placeholder="Your Message" rows="5" required class="p-4 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"></textarea>
+      <input type="text" name="name" placeholder="Your Name" required class="p-4 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      <input type="email" name="email" placeholder="Your Email" required class="p-4 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      <textarea name="message" placeholder="Your Message" rows="5" required class="p-4 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"></textarea>
       <button type="submit" class="cta w-full">Send Message</button>
       <p id="form-status" class="text-center mt-2"></p>
     </form>
   </div>
 </section>
 
+<!-- Footer -->
 <footer class="py-10 text-center bg-gray-900 text-white mt-10">
   <p>&copy; 2025 Avios AI. All Rights Reserved.</p>
+  <div class="mt-4 flex justify-center gap-6">
+    <a href="#" class="hover:text-yellow-400">LinkedIn</a>
+    <a href="#" class="hover:text-yellow-400">Twitter</a>
+    <a href="#" class="hover:text-yellow-400">GitHub</a>
+  </div>
 </footer>
 
 <!-- Scripts -->
-<script>
-  // Scroll fade-in
-  const faders = document.querySelectorAll('.fade-up');
-  const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
-  const appearOnScroll = new IntersectionObserver((entries, observer)=>{
-    entries.forEach(entry => {
-      if(!entry.isIntersecting) return;
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    });
-  }, appearOptions);
-  faders.forEach(fader => appearOnScroll.observe(fader));
-
-  // Particles.js
-  particlesJS("particles-js", {
-    "particles": {
-      "number": { "value": 50, "density": {"enable": true,"value_area":800} },
-      "color": { "value": "#fca311" },
-      "shape": { "type":"circle" },
-      "opacity": { "value":0.4 },
-      "size": { "value":3 },
-      "line_linked": { "enable":true, "distance":120, "color":"#fca311", "opacity":0.3, "width":1 },
-      "move": { "enable": true, "speed":1.5, "direction":"none", "random":false, "straight":false, "out_mode":"out" }
-    },
-    "interactivity": {
-      "detect_on":"canvas",
-      "events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":true,"mode":"push"},"resize":true}
-    },
-    "retina_detect": true
-  });
-
-  // Typing effect
-  const text = "Intelligent AI Solutions for Everyone";
-  let index = 0;
-  const typingElement = document.getElementById("typing-text");
-  function typeText() {
-    if(index < text.length){
-      typingElement.innerHTML += text.charAt(index);
-      index++;
-      setTimeout(typeText, 80);
-    }
-  }
-  window.addEventListener('load', typeText);
-</script>
-
-<!-- EmailJS -->
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script>
-  (function(){ emailjs.init("user_ABC123XYZ"); })(); // <-- Your EmailJS Public Key
-
+  emailjs.init("user_ABC123XYZ"); // EmailJS Public Key
   const form = document.getElementById('contact-form');
   const status = document.getElementById('form-status');
-
   form.addEventListener('submit', function(event){
     event.preventDefault();
     emailjs.sendForm('service_u3yyjeb', 'template_contact', this)
@@ -183,7 +219,43 @@ h1 { font-size:2.5rem; }
           console.error(err); 
       });
   });
-</script>
 
+  // Particles.js
+  particlesJS("particles-js", {
+    "particles": { "number":{"value":50,"density":{"enable":true,"value_area":800}},"color":{"value":"#fca311"},"shape":{"type":"circle"},"opacity":{"value":0.4},"size":{"value":3},"line_linked":{"enable":true,"distance":120,"color":"#fca311","opacity":0.3,"width":1},"move":{"enable":true,"speed":1.5,"direction":"none","random":false,"straight":false,"out_mode":"out"} },
+    "interactivity": {"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":true,"mode":"push"},"resize":true}},
+    "retina_detect":true
+  });
+
+  // Hero Typing Effect
+  const text = "Intelligent AI Solutions for Everyone";
+  let index=0;
+  const typingElement=document.getElementById("typing-text");
+  function typeText(){ if(index<text.length){ typingElement.innerHTML+=text.charAt(index); index++; setTimeout(typeText,80);} }
+  window.addEventListener('load', typeText);
+
+  // Scroll Fade In
+  const faders = document.querySelectorAll('.fade-up');
+  const appearOptions = { threshold:0.2, rootMargin:"0px 0px -50px 0px" };
+  const appearOnScroll = new IntersectionObserver((entries, observer)=>{
+    entries.forEach(entry => { if(!entry.isIntersecting) return; entry.target.classList.add('visible'); observer.unobserve(entry.target); });
+  }, appearOptions);
+  faders.forEach(fader => appearOnScroll.observe(fader));
+
+  // FAQ Toggle
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const answer = item.querySelector('.faq-answer');
+      answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+    });
+  });
+
+  // Swiper (Testimonials)
+  const swiper = new Swiper('.swiper', {
+    loop: true,
+    autoplay: { delay:5000 },
+    pagination: { el: '.swiper-pagination', clickable:true }
+  });
+</script>
 </body>
 </html>
