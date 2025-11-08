@@ -1,66 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Avios AI | Intelligent AI Solutions</title>
-<meta name="description" content="Avios AI delivers practical, production-ready AI solutions—automation, NLP, and multimodal intelligence—to drive real business outcomes." />
-<meta name="keywords" content="AI, Artificial Intelligence, NLP, Machine Learning, Automation, Multimodal AI, Productivity" />
-<meta name="author" content="Vineeth Reddy" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!-- Open Graph / Social -->
-<meta property="og:title" content="Avios AI | Intelligent AI Solutions" />
-<meta property="og:description" content="Production-ready AI that delivers measurable results—automation, NLP, and multimodal intelligence." />
-<meta property="og:image" content="assets/hero-image_v2.png" />
-<meta property="og:type" content="website" />
-<meta property="twitter:card" content="summary_large_image" />
+  <title>Avios AI — Smart AI Automation, NLP & Intelligent Assistants</title>
 
-<!-- Favicon -->
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <meta name="description" content="Avios AI builds intelligent AI automation, NLP assistants, and multimodal solutions to streamline workflows and enhance productivity for modern businesses.">
+  <meta name="keywords" content="AI, Artificial Intelligence, NLP, Machine Learning, Automation, Multimodal AI, Productivity, AI automation for business, predictive analytics, AI copilots">
+  <meta name="author" content="Avios AI" />
 
-<!-- Fonts & CSS -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Avios AI — AI Automation & Smart Assistants" />
+  <meta property="og:description" content="Enhance workflow, automate tasks, and build AI copilots with Avios AI." />
+  <meta property="og:image" content="https://vineeth2002.github.io/Avios-AI/assets/hero-image_v2.png" />
+  <meta property="og:url" content="https://vineeth2002.github.io/Avios-AI/" />
+  <meta property="og:type" content="website" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Avios AI — AI Automation & Smart Assistants" />
+  <meta name="twitter:description" content="Enhance workflow, automate tasks, and build AI copilots with Avios AI." />
+  <meta name="twitter:image" content="https://vineeth2002.github.io/Avios-AI/assets/hero-image_v2.png" />
 
-<!-- Tailwind -->
-<script src="https://cdn.tailwindcss.com"></script>
+  <!-- Canonical -->
+  <link rel="canonical" href="https://vineeth2002.github.io/Avios-AI/" />
 
-<!-- Swiper -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-<style>
-  :root { color-scheme: dark; }
-  body { font-family: 'Inter', sans-serif; background:#0b1220; color:#fff; margin:0; scroll-behavior:smooth; }
-  .fade-up { opacity:0; transform: translateY(16px); transition: all .6s ease-out; }
-  .fade-up.visible { opacity:1; transform:none; }
+  <!-- Fonts & CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    background: url('assets/hero-image_v2.png') center/cover no-repeat;
-    display: flex; align-items: center; justify-content: center;
+  <!-- JSON-LD: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Avios AI",
+    "url": "https://vineeth2002.github.io/Avios-AI/",
+    "logo": "https://vineeth2002.github.io/Avios-AI/assets/hero-image_v2.png",
+    "description": "Avios AI builds intelligent AI automation, NLP assistants, and multimodal solutions to streamline workflows and enhance productivity.",
+    "sameAs": [
+      "https://github.com/vineeth2002"
+    ],
+    "contactPoint": [{
+      "@type": "ContactPoint",
+      "email": "freevpncoupon@gmail.com",
+      "contactType": "customer support",
+      "availableLanguage": ["English"]
+    }]
   }
-  .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(90deg, rgba(0,0,0,.65), rgba(0,0,0,.25)); }
-  .hero-content { position: relative; z-index: 1; text-align: center; padding: 0 1rem; }
+  </script>
 
-  .card { background: linear-gradient(135deg, #1f2937, #111827); padding: 24px; border-radius: 16px; transition: transform .25s ease, box-shadow .25s ease; }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,.35); }
+  <style>
+    :root { color-scheme: dark; }
+    body { font-family: 'Inter', sans-serif; background:#0b1220; color:#fff; margin:0; scroll-behavior:smooth; }
+    .fade-up { opacity:0; transform: translateY(16px); transition: all .6s ease-out; }
+    .fade-up.visible { opacity:1; transform:none; }
 
-  .btn-primary { background: linear-gradient(90deg,#fca311,#ffb347); color:#111; font-weight:700; padding:14px 28px; border-radius:12px; display:inline-block; text-align:center; }
-  .btn-primary:hover { filter: brightness(1.05); transform: translateY(-2px); }
-  .btn-secondary { background: linear-gradient(90deg,#374151,#4B5563); color:#fff; font-weight:700; padding:14px 28px; border-radius:12px; display:inline-block; text-align:center; }
-  .btn-secondary:hover { filter: brightness(1.05); transform: translateY(-2px); }
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: url('assets/hero-image_v2.png') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(90deg, rgba(0,0,0,.65), rgba(0,0,0,.25)); }
+    .hero-content { position: relative; z-index: 1; text-align: center; padding: 0 1rem; }
 
-  .swiper { width: 100%; }
-  .swiper-slide { display:flex; justify-content:center; align-items:center; }
-  .testimonial-card { background:#111827; padding:30px; border-radius:20px; max-width:560px; text-align:center; }
-  .testimonial-card p { font-style: italic; margin-bottom: 12px; color:#e5e7eb; }
+    .card { background: linear-gradient(135deg, #1f2937, #111827); padding: 24px; border-radius: 16px; transition: transform .25s ease, box-shadow .25s ease; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,.35); }
 
-  .faq-item { border-bottom:1px solid #374151; padding:16px 0; cursor:pointer; }
-  .faq-q { font-weight:700; }
-  .faq-answer { display:none; padding-top:10px; color:#9ca3af; }
+    .btn-primary { background: linear-gradient(90deg,#fca311,#ffb347); color:#111; font-weight:700; padding:14px 28px; border-radius:12px; display:inline-block; text-align:center; }
+    .btn-primary:hover { filter: brightness(1.05); transform: translateY(-2px); }
+    .btn-secondary { background: linear-gradient(90deg,#374151,#4B5563); color:#fff; font-weight:700; padding:14px 28px; border-radius:12px; display:inline-block; text-align:center; }
+    .btn-secondary:hover { filter: brightness(1.05); transform: translateY(-2px); }
 
-  header.nav { position:fixed; top:0; left:0; right:0; z-index:50; background: rgba(0,0,0,.6); backdrop-filter: blur(8px); }
-</style>
+    .swiper { width: 100%; }
+    .swiper-slide { display:flex; justify-content:center; align-items:center; }
+    .testimonial-card { background:#111827; padding:30px; border-radius:20px; max-width:560px; text-align:center; }
+    .testimonial-card p { font-style: italic; margin-bottom: 12px; color:#e5e7eb; }
+
+    .faq-item { border-bottom:1px solid #374151; padding:16px 0; cursor:pointer; }
+    .faq-q { font-weight:700; }
+    .faq-answer { display:none; padding-top:10px; color:#9ca3af; }
+
+    header.nav { position:fixed; top:0; left:0; right:0; z-index:50; background: rgba(0,0,0,.6); backdrop-filter: blur(8px); }
+  </style>
 </head>
 <body>
 
@@ -86,7 +113,7 @@
       Intelligent AI Solutions for Everyone
     </h1>
     <p class="text-lg md:text-xl text-gray-200 mb-8">
-      We build production-ready automation, NLP, and multimodal AI that delivers measurable business results—fast.
+      AI automation, NLP copilots, predictive analytics, and intelligent tools that accelerate productivity and transform workflows.
     </p>
     <div class="flex items-center justify-center gap-4">
       <a href="#contact" class="btn-primary">Get in Touch</a>
@@ -227,7 +254,6 @@
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-
 <script>
   /* ✅ EmailJS config */
   const PUBLIC_KEY  = "public_gf3Q5jLBYPf1ZOUko";
@@ -259,7 +285,7 @@
       });
   });
 
-  /* Swiper */
+  /* Swiper (testimonials) */
   const swiper = new Swiper('.swiper', {
     loop: true,
     centeredSlides: true,
@@ -270,7 +296,7 @@
     spaceBetween: 24
   });
 
-  /* Fade-in */
+  /* Fade-in on scroll */
   const faders = document.querySelectorAll('.fade-up');
   const io = new IntersectionObserver((entries, obs) => {
     entries.forEach(e => { 
@@ -282,7 +308,7 @@
   }, { threshold: 0.2 });
   faders.forEach(el => io.observe(el));
 
-  /* FAQ */
+  /* FAQ toggle */
   document.querySelectorAll('.faq-item').forEach(item => {
     item.addEventListener('click', () => {
       const ans = item.querySelector('.faq-answer');
