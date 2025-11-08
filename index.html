@@ -58,109 +58,150 @@
     :root { color-scheme: dark; }
 
     /* ===============================
-       THEMES (top-1% palettes)
-       Use [data-theme="name"] to switch
+       THEMES (Emerald / Purple / Amber)
        =============================== */
-
-    /* Default — Emerald/Cyan */
-    :root,
-    [data-theme="emerald"]{
+    :root, [data-theme="emerald"]{
       --bg:#07161a; --text:#ffffff; --muted:#cbd5e1;
-      --panel-1:#0d1f24; --panel-2:#0a1418;
+      --panel-1:#0d1f24aa; --panel-2:#0a1418aa; /* with alpha for glass */
+      --glass-border: 1px solid rgba(255,255,255,0.08);
       --accent-1:#34d399; --accent-2:#22d3ee;
       --secondary-1:#334155; --secondary-2:#475569;
       --hero-overlay-a:rgba(0,0,0,.66); --hero-overlay-b:rgba(0,0,0,.25);
-      --line-soft: rgba(52,211,153,0.25);
-      --dot: rgba(34,211,238,0.9);
-      --dot-glow: rgba(34,211,238,0.35);
+      --line-soft:rgba(52,211,153,0.28);
+      --dot:rgba(34,211,238,0.92); --dot-glow:rgba(34,211,238,0.36);
     }
-
-    /* Purple Glow — Futuristic */
     [data-theme="purple"]{
       --bg:#0f0a1f; --text:#ffffff; --muted:#d1c4e9;
-      --panel-1:#1a1233; --panel-2:#120a26;
+      --panel-1:#1a1233aa; --panel-2:#120a26aa; --glass-border:1px solid rgba(255,255,255,0.08);
       --accent-1:#a78bfa; --accent-2:#f472b6;
       --secondary-1:#3b2f5c; --secondary-2:#4a3a73;
-      --hero-overlay-a:rgba(0,0,0,.60); --hero-overlay-b:rgba(0,0,0,.20);
-      --line-soft:rgba(167,139,250,0.28);
-      --dot:rgba(244,114,182,0.92);
-      --dot-glow:rgba(244,114,182,0.38);
+      --hero-overlay-a:rgba(0,0,0,.6); --hero-overlay-b:rgba(0,0,0,.2);
+      --line-soft:rgba(167,139,250,0.3);
+      --dot:rgba(244,114,182,0.92); --dot-glow:rgba(244,114,182,0.38);
     }
-
-    /* Amber Gold — Luxe */
     [data-theme="amber"]{
       --bg:#0d0f12; --text:#ffffff; --muted:#e5e7eb;
-      --panel-1:#171a20; --panel-2:#0d1014;
+      --panel-1:#171a20aa; --panel-2:#0d1014aa; --glass-border:1px solid rgba(255,255,255,0.08);
       --accent-1:#f59e0b; --accent-2:#fbbf24;
       --secondary-1:#374151; --secondary-2:#4b5563;
       --hero-overlay-a:rgba(0,0,0,.62); --hero-overlay-b:rgba(0,0,0,.22);
-      --line-soft:rgba(245,158,11,0.28);
-      --dot:rgba(251,191,36,0.92);
-      --dot-glow:rgba(251,191,36,0.38);
+      --line-soft:rgba(245,158,11,0.3);
+      --dot:rgba(251,191,36,0.92); --dot-glow:rgba(251,191,36,0.38);
     }
 
     /* ===== Base / Layout ===== */
+    html { scroll-behavior: smooth; }
     body{
-      font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); margin:0; scroll-behavior:smooth;
+      font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); margin:0;
     }
-
-    /* Premium grain */
+    /* premium grain */
     body::before{
       content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0 0 .12 0'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0 0 .12 0'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
       opacity:.25;
     }
-
     .fade-up{opacity:0;transform:translateY(16px);transition:all .6s ease-out;}
     .fade-up.visible{opacity:1;transform:none;}
 
-    header.nav{position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(0,0,0,.55);backdrop-filter:blur(10px);}
+    /* ===== Header ===== */
+    header.nav{
+      position:fixed; top:0; left:0; right:0; z-index:60;
+      background:rgba(0,0,0,.55); backdrop-filter:blur(12px);
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    /* anchor offset for fixed header */
+    [id]{ scroll-margin-top: 88px; }
 
-    /* ==== Theme Toggle Button ==== */
     .theme-toggle{
       display:flex; align-items:center; gap:.5rem;
       background:linear-gradient(90deg,var(--panel-1),var(--panel-2));
       padding:.5rem .8rem; border-radius:12px; font-weight:700; cursor:pointer;
-      box-shadow:0 8px 24px rgba(0,0,0,.25);
+      box-shadow:0 8px 24px rgba(0,0,0,.25); border:var(--glass-border);
     }
     .theme-chip{width:.85rem;height:.85rem;border-radius:9999px;box-shadow:0 0 0 2px rgba(255,255,255,.08) inset;}
     .chip-emerald{background:linear-gradient(90deg,#34d399,#22d3ee);}
     .chip-purple{background:linear-gradient(90deg,#a78bfa,#f472b6);}
     .chip-amber{background:linear-gradient(90deg,#f59e0b,#fbbf24);}
 
-    /* ==== HERO with animated canvas ==== */
-    .hero{
-      position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;
-    }
-    #ai-bg{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;}
+    /* ===== Hero (animated canvas) ===== */
+    .hero{ position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    #ai-bg{ position:absolute; inset:0; width:100%; height:100%; display:block; z-index:0; }
     .hero::before{
-      content:"";position:absolute;inset:-20%;z-index:0;
+      content:""; position:absolute; inset:-20%; z-index:0;
       background:
         radial-gradient(60% 60% at 15% 20%, rgba(255,255,255,.04), transparent 55%),
         radial-gradient(50% 50% at 85% 30%, rgba(255,255,255,.03), transparent 55%);
     }
-    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--hero-overlay-a),var(--hero-overlay-b));z-index:0;}
-    .hero-content{position:relative;z-index:2;text-align:center;padding:0 1rem;}
-    .hero-content p{color:var(--muted);}
+    .hero::after{ content:""; position:absolute; inset:0; background:linear-gradient(90deg,var(--hero-overlay-a),var(--hero-overlay-b)); z-index:0; }
+    .hero-content{ position:relative; z-index:2; text-align:center; padding:0 1rem; }
+    .hero-content p{ color:var(--muted); }
 
-    .card{background:linear-gradient(135deg,var(--panel-1),var(--panel-2));padding:24px;border-radius:16px;transition:transform .25s ease, box-shadow .25s ease;}
-    .card:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(0,0,0,.35);}
+    /* Accent orbs between sections */
+    .orb{
+      position:absolute; width:520px; height:520px; filter:blur(80px);
+      background: radial-gradient(circle at 30% 30%, var(--accent-2), transparent 60%);
+      opacity:.18; z-index:1; pointer-events:none;
+    }
 
-    .btn-primary{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#0b1220;font-weight:700;padding:14px 28px;border-radius:12px;display:inline-block;text-align:center;transition:transform .2s ease, filter .2s ease, box-shadow .2s ease;box-shadow:0 8px 20px rgba(0,0,0,.25);}
-    .btn-primary:hover{filter:brightness(1.05);transform:translateY(-2px);}
-    .btn-secondary{background:linear-gradient(90deg,var(--secondary-1),var(--secondary-2));color:#fff;font-weight:700;padding:14px 28px;border-radius:12px;display:inline-block;text-align:center;transition:transform .2s ease, filter .2s ease;}
-    .btn-secondary:hover{filter:brightness(1.06);transform:translateY(-2px);}
+    /* ===== Glass Cards ===== */
+    .glass{
+      background: linear-gradient(135deg, var(--panel-1), var(--panel-2));
+      border: var(--glass-border);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 16px; padding: 24px;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,.28);
+    }
+    .glass:hover{ transform: translateY(-4px); box-shadow:0 18px 44px rgba(0,0,0,.38); border-color: rgba(255,255,255,0.14); }
 
-    .swiper{width:100%;}
-    .swiper-slide{display:flex;justify-content:center;align-items:center;}
-    .testimonial-card{background:var(--panel-2);padding:30px;border-radius:20px;max-width:560px;text-align:center;}
-    .testimonial-card p{font-style:italic;margin-bottom:12px;color:var(--muted);}
+    /* ===== Buttons ===== */
+    .btn-primary{
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      color:#0b1220; font-weight:700; padding:14px 28px; border-radius:12px; display:inline-block; text-align:center;
+      transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,.25);
+    }
+    .btn-primary:hover{ filter:brightness(1.05); transform:translateY(-2px); }
+    .btn-secondary{
+      background: linear-gradient(90deg, var(--secondary-1), var(--secondary-2));
+      color:#fff; font-weight:700; padding:14px 28px; border-radius:12px; display:inline-block; text-align:center;
+      transition: transform .2s ease, filter .2s ease;
+    }
+    .btn-secondary:hover{ filter:brightness(1.06); transform:translateY(-2px); }
 
-    .faq-item{border-bottom:1px solid rgba(148,163,184,.35);padding:16px 0;cursor:pointer;}
-    .faq-q{font-weight:700;}
-    .faq-answer{display:none;padding-top:10px;color:var(--muted);}
+    /* ===== Section divider line ===== */
+    .divider{
+      height:1px; width:100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+      margin: 30px 0 10px 0;
+    }
 
-    @media (prefers-reduced-motion: reduce){ #ai-bg{display:none;} }
+    /* ===== Testimonials / FAQ ===== */
+    .swiper{ width:100%; }
+    .swiper-slide{ display:flex; justify-content:center; align-items:center; }
+    .testimonial-card{ composes: glass; }
+    .testimonial-card{ background: linear-gradient(135deg, var(--panel-1), var(--panel-2)); border: var(--glass-border); border-radius:20px; padding:30px; max-width:560px; text-align:center; }
+    .testimonial-card p{ font-style: italic; margin-bottom:12px; color:var(--muted); }
+
+    .faq-item{ border-bottom:1px solid rgba(148,163,184,.25); padding:16px 0; cursor:pointer; }
+    .faq-q{ font-weight:700; }
+    .faq-answer{ display:none; padding-top:10px; color:var(--muted); }
+
+    /* ===== Scroll-to-top FAB ===== */
+    #toTop{
+      position: fixed; right: 18px; bottom: 18px; z-index:70;
+      opacity:0; pointer-events:none; transform: translateY(10px);
+      transition: all .25s ease;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      color:#0b1220; font-weight:800; width:48px; height:48px; border-radius:12px;
+      display:flex; align-items:center; justify-content:center; box-shadow:0 12px 26px rgba(0,0,0,.35);
+      border: var(--glass-border);
+    }
+    #toTop.show{ opacity:1; pointer-events:auto; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce){ #ai-bg{ display:none; } }
   </style>
 </head>
 
@@ -169,7 +210,7 @@
   <!-- Header -->
   <header class="nav">
     <div class="max-w-7xl mx-auto flex items-center justify-between px-5 py-4">
-      <a href="#" class="text-xl font-extrabold">Avios AI</a>
+      <a href="/Avios-AI/" class="text-xl font-extrabold">Avios AI</a>
       <nav class="hidden md:flex items-center gap-6">
         <a href="#about" class="hover:text-[var(--accent-1)]">About</a>
         <a href="#services" class="hover:text-[var(--accent-1)]">Services</a>
@@ -177,7 +218,8 @@
         <a href="#testimonials" class="hover:text-[var(--accent-1)]">Testimonials</a>
         <a href="#faq" class="hover:text-[var(--accent-1)]">FAQ</a>
         <a href="#contact" class="hover:text-[var(--accent-1)]">Contact</a>
-        <!-- Theme Toggle (cycles Emerald → Purple → Amber) -->
+        <a href="/Avios-AI/blog/" class="hover:text-[var(--accent-1)]">Blog</a>
+        <!-- Theme toggle -->
         <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
           <span class="theme-chip chip-emerald" title="Emerald"></span>
           <span class="theme-chip chip-purple" title="Purple"></span>
@@ -207,49 +249,64 @@
     </div>
   </section>
 
-  <!-- About -->
-  <section id="about" class="max-w-7xl mx-auto bg-gray-900 rounded-xl my-10 p-10 fade-up">
-    <h2 class="text-4xl font-bold text-center mb-12">About Avios AI</h2>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="card">
-        <h3 class="text-2xl font-semibold mb-2">Our Mission</h3>
-        <p>Bridge cutting-edge research and real business value by shipping AI that is reliable, secure, and cost-effective.</p>
-      </div>
-      <div class="card">
-        <h3 class="text-2xl font-semibold mb-2">Our Vision</h3>
-        <p>Empower teams with intelligent systems that automate work, surface insights, and unlock new products and services.</p>
-      </div>
-      <div class="card">
-        <h3 class="text-2xl font-semibold mb-2">Our Approach</h3>
-        <p>Start focused, measure ROI fast, then scale. We combine ML, NLP, and multimodal AI with robust MLOps.</p>
+  <!-- Decorative orb -->
+  <div class="orb" style="top:-140px; left:-120px;"></div>
+
+  <!-- ABOUT -->
+  <section id="about" class="max-w-7xl mx-auto my-10 p-6 md:p-10 fade-up relative">
+    <div class="glass">
+      <h2 class="text-4xl font-bold text-center mb-8">About Avios AI</h2>
+      <div class="divider"></div>
+      <div class="grid md:grid-cols-3 gap-8 mt-6">
+        <div class="glass">
+          <h3 class="text-2xl font-semibold mb-2">Our Mission</h3>
+          <p>Bridge cutting-edge research and real business value by shipping AI that is reliable, secure, and cost-effective.</p>
+        </div>
+        <div class="glass">
+          <h3 class="text-2xl font-semibold mb-2">Our Vision</h3>
+          <p>Empower teams with intelligent systems that automate work, surface insights, and unlock new products and services.</p>
+        </div>
+        <div class="glass">
+          <h3 class="text-2xl font-semibold mb-2">Our Approach</h3>
+          <p>Start focused, measure ROI fast, then scale. We combine ML, NLP, and multimodal AI with robust MLOps.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Services -->
-  <section id="services" class="max-w-7xl mx-auto my-10 p-10 fade-up">
-    <h2 class="text-4xl font-bold text-center mb-12">Our Services</h2>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="card text-center"><h3 class="text-2xl font-semibold mb-1">AI Automation</h3><p>Remove repetitive work and reduce errors with secure, auditable workflows.</p></div>
-      <div class="card text-center"><h3 class="text-2xl font-semibold mb-1">Predictive Analytics</h3><p>Forecast demand, risk, and churn with explainable models.</p></div>
-      <div class="card text-center"><h3 class="text-2xl font-semibold mb-1">Multimodal AI</h3><p>Blend text, images, and speech for assistants, copilots, and smart search.</p></div>
-      <div class="card text-center"><h3 class="text-2xl font-semibold mb-1">Productivity Tools</h3><p>Embed AI in your apps to accelerate content, ops, and support.</p></div>
-      <div class="card text-center"><h3 class="text-2xl font-semibold mb-1">Intelligent Insights</h3><p>Real-time analytics with alerts, summaries, and recommendations.</p></div>
-      <div class="card text-center"><h3 class="text-2xl font-semibold mb-1">Custom Solutions</h3><p>Tailored architectures from PoC to production with SLAs.</p></div>
+  <!-- Decorative orb -->
+  <div class="orb" style="top:820px; right:-160px;"></div>
+
+  <!-- SERVICES -->
+  <section id="services" class="max-w-7xl mx-auto my-10 p-6 md:p-10 fade-up">
+    <div class="glass">
+      <h2 class="text-4xl font-bold text-center mb-8">Our Services</h2>
+      <div class="divider"></div>
+      <div class="grid md:grid-cols-3 gap-8 mt-6">
+        <div class="glass text-center"><h3 class="text-2xl font-semibold mb-1">AI Automation</h3><p>Remove repetitive work and reduce errors with secure, auditable workflows.</p></div>
+        <div class="glass text-center"><h3 class="text-2xl font-semibold mb-1">Predictive Analytics</h3><p>Forecast demand, risk, and churn with explainable models.</p></div>
+        <div class="glass text-center"><h3 class="text-2xl font-semibold mb-1">Multimodal AI</h3><p>Blend text, images, and speech for assistants, copilots, and smart search.</p></div>
+        <div class="glass text-center"><h3 class="text-2xl font-semibold mb-1">Productivity Tools</h3><p>Embed AI in your apps to accelerate content, ops, and support.</p></div>
+        <div class="glass text-center"><h3 class="text-2xl font-semibold mb-1">Intelligent Insights</h3><p>Real-time analytics with alerts, summaries, and recommendations.</p></div>
+        <div class="glass text-center"><h3 class="text-2xl font-semibold mb-1">Custom Solutions</h3><p>Tailored architectures from PoC to production with SLAs.</p></div>
+      </div>
     </div>
   </section>
 
-  <!-- Features -->
-  <section id="features" class="max-w-7xl mx_auto my-10 p-10 fade-up">
-    <h2 class="text-4xl font-bold text-center mb-12">Why Choose Avios AI</h2>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="card text-center"><h3 class="text-xl font-semibold mb-2">Scalable</h3><p>Built to grow with business needs.</p></div>
-      <div class="card text-center"><h3 class="text-xl font-semibold mb-2">Expert Team</h3><p>Engineers and researchers with deep experience.</p></div>
-      <div class="card text-center"><h3 class="text-xl font-semibold mb-2">Reliable Support</h3><p>Monitoring, model updates, and on-call assistance.</p></div>
+  <!-- FEATURES -->
+  <section id="features" class="max-w-7xl mx-auto my-10 p-6 md:p-10 fade-up">
+    <div class="glass">
+      <h2 class="text-4xl font-bold text-center mb-8">Why Choose Avios AI</h2>
+      <div class="divider"></div>
+      <div class="grid md:grid-cols-3 gap-8 mt-6">
+        <div class="glass text-center"><h3 class="text-xl font-semibold mb-2">Scalable</h3><p>Built to grow with business needs.</p></div>
+        <div class="glass text-center"><h3 class="text-xl font-semibold mb-2">Expert Team</h3><p>Engineers and researchers with deep experience.</p></div>
+        <div class="glass text-center"><h3 class="text-xl font-semibold mb-2">Reliable Support</h3><p>Monitoring, model updates, and on-call assistance.</p></div>
+      </div>
     </div>
   </section>
 
-  <!-- Testimonials -->
+  <!-- TESTIMONIALS -->
   <section id="testimonials" class="min-h-screen flex items-center justify-center px-4">
     <div class="w-full max-w-4xl">
       <h2 class="text-4xl font-bold text-center mb-10">Testimonials</h2>
@@ -280,58 +337,58 @@
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="max-w-7xl mx-auto my-10 p-10 fade-up">
-    <h2 class="text-4xl font-bold text-center mb-12">FAQ</h2>
-    <div class="max-w-3xl mx-auto">
-      <div class="faq-item">
-        <div class="faq-q">What is Avios AI?</div>
-        <div class="faq-answer">
-          Avios AI builds production-ready AI — automation, NLP, and multimodal systems — that deliver measurable results.
+  <section id="faq" class="max-w-7xl mx-auto my-10 p-6 md:p-10 fade-up">
+    <div class="glass">
+      <h2 class="text-4xl font-bold text-center mb-8">FAQ</h2>
+      <div class="divider"></div>
+      <div class="max-w-3xl mx-auto mt-6">
+        <div class="faq-item">
+          <div class="faq-q">What is Avios AI?</div>
+          <div class="faq-answer">Avios AI builds production-ready AI — automation, NLP, and multimodal systems — that deliver measurable results.</div>
         </div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Can I integrate AI into my business?</div>
-        <div class="faq-answer">
-          Yes — start with one workflow, prove ROI in weeks, then scale across teams.
+        <div class="faq-item">
+          <div class="faq-q">Can I integrate AI into my business?</div>
+          <div class="faq-answer">Yes — start with one workflow, prove ROI in weeks, then scale across teams.</div>
         </div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Do you provide support?</div>
-        <div class="faq-answer">
-          Yes — monitoring, model updates, and SLAs to keep your AI reliable.
+        <div class="faq-item">
+          <div class="faq-q">Do you provide support?</div>
+          <div class="faq-answer">Yes — monitoring, model updates, and SLAs to keep your AI reliable.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="max-w-7xl mx-auto bg-gray-800 rounded-xl my-10 p-10 fade-up">
-    <h2 class="text-4xl font-bold text-center mb-12">Contact Us</h2>
-    <div class="max-w-3xl mx-auto">
-      <form id="contact-form" class="grid gap-6">
-        <input type="text" name="name" placeholder="Your Name" required class="p-4 rounded-lg bg-gray-700 text-white">
-        <input type="email" name="email" placeholder="Your Email" required class="p-4 rounded-lg bg-gray-700 text-white">
-        <textarea name="message" placeholder="Your Message" rows="5" required class="p-4 rounded-lg bg-gray-700 text-white"></textarea>
-        <button id="contact-submit" type="submit" class="btn-primary w-full">Send Message</button>
-        <p id="form-status" class="text-center mt-2"></p>
-      </form>
+  <!-- CONTACT -->
+  <section id="contact" class="max-w-7xl mx-auto my-10 p-6 md:p-10 fade-up">
+    <div class="glass">
+      <h2 class="text-4xl font-bold text-center mb-8">Contact Us</h2>
+      <div class="divider"></div>
+      <div class="max-w-3xl mx-auto mt-6">
+        <form id="contact-form" class="grid gap-6">
+          <input type="text" name="name" placeholder="Your Name" required class="p-4 rounded-lg bg-gray-700 text-white">
+          <input type="email" name="email" placeholder="Your Email" required class="p-4 rounded-lg bg-gray-700 text-white">
+          <textarea name="message" placeholder="Your Message" rows="5" required class="p-4 rounded-lg bg-gray-700 text-white"></textarea>
+          <button id="contact-submit" type="submit" class="btn-primary w-full">Send Message</button>
+          <p id="form-status" class="text-center mt-2"></p>
+        </form>
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="py-10 text-center bg-gray-900 text-white mt-10">
+  <!-- Footer + Back to Top -->
+  <footer class="py-10 text-center text-white mt-10">
     <p>&copy; 2025 Avios AI. All Rights Reserved.</p>
   </footer>
+
+  <button id="toTop" aria-label="Back to top">↑</button>
 
   <!-- JS libs -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
-  <!-- App JS (EmailJS, Swiper, Animations, Theme, Canvas) -->
+  <!-- App JS -->
   <script>
-    /* =========================
-       EmailJS
-       ========================= */
+    /* EmailJS */
     const PUBLIC_KEY="public_gf3Q5jLBYPf1ZOUko";
     const SERVICE_ID="service_4ytq1ph";
     const TEMPLATE_ID="template_71vcpfp";
@@ -349,9 +406,7 @@
         .finally(()=>{ submit.disabled=false; });
     });
 
-    /* =========================
-       Swiper (Testimonials)
-       ========================= */
+    /* Swiper */
     const swiper=new Swiper('.swiper',{
       loop:true, centeredSlides:true, slidesPerView:1,
       autoplay:{delay:3000,disableOnInteraction:false},
@@ -359,18 +414,14 @@
       speed:700, spaceBetween:24
     });
 
-    /* =========================
-       Scroll Fade-In
-       ========================= */
+    /* Fade-in */
     const faders=document.querySelectorAll('.fade-up');
     const io=new IntersectionObserver((entries,obs)=>{
       entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
     },{threshold:.2});
     faders.forEach(el=>io.observe(el));
 
-    /* =========================
-       FAQ Toggle
-       ========================= */
+    /* FAQ */
     document.querySelectorAll('.faq-item').forEach(item=>{
       item.addEventListener('click',()=>{
         const ans=item.querySelector('.faq-answer');
@@ -378,37 +429,26 @@
       });
     });
 
-    /* =========================
-       Theme Toggle (cycle)
-       ========================= */
-    const THEMES = ['emerald','purple','amber'];
-    const root = document.documentElement;
-    const btn = document.getElementById('themeToggle');
-
-    function applyTheme(name){
-      if(!name) return;
-      root.setAttribute('data-theme', name);
-      localStorage.setItem('avios-theme', name);
-    }
-    function nextTheme(){
-      const current = localStorage.getItem('avios-theme') || 'emerald';
-      const idx = THEMES.indexOf(current);
-      const next = THEMES[(idx+1)%THEMES.length];
-      applyTheme(next);
-    }
+    /* Theme toggle */
+    const THEMES=['emerald','purple','amber'];
+    const root=document.documentElement;
+    const btn=document.getElementById('themeToggle');
+    function applyTheme(name){ if(!name) return; root.setAttribute('data-theme',name); localStorage.setItem('avios-theme',name); }
+    function nextTheme(){ const cur=localStorage.getItem('avios-theme')||'emerald'; const idx=THEMES.indexOf(cur); const nxt=THEMES[(idx+1)%THEMES.length]; applyTheme(nxt); }
     btn.addEventListener('click', nextTheme);
-    // init
-    applyTheme(localStorage.getItem('avios-theme') || 'emerald');
+    applyTheme(localStorage.getItem('avios-theme')||'emerald');
 
-    /* =========================
-       Animated AI Background (Canvas)
-       ========================= */
+    /* Back to top */
+    const toTop=document.getElementById('toTop');
+    window.addEventListener('scroll', ()=>{ if(window.scrollY>300){ toTop.classList.add('show'); } else { toTop.classList.remove('show'); } });
+    toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+    /* Animated AI background (Canvas) */
     (function(){
       const canvas=document.getElementById('ai-bg');
       const ctx=canvas.getContext('2d',{alpha:true});
       let w,h,particles=[],raf,mouse={x:null,y:null};
       const DPR=Math.min(window.devicePixelRatio||1,2);
-
       const CFG={ countBase:80, maxSpeed:0.35, linkDist:140, linkWidth:1, dotSize:2, hueA:165, hueB:190 };
 
       function resize(){
@@ -461,11 +501,9 @@
           }
         }
 
-        // Get theme dots dynamically
-        const styles = getComputedStyle(document.documentElement);
-        const dot = styles.getPropertyValue('--dot').trim() || 'rgba(34,211,238,0.9)';
-        const glow = styles.getPropertyValue('--dot-glow').trim() || 'rgba(34,211,238,0.35)';
-
+        const styles=getComputedStyle(document.documentElement);
+        const dot=styles.getPropertyValue('--dot').trim() || 'rgba(34,211,238,0.9)';
+        const glow=styles.getPropertyValue('--dot-glow').trim() || 'rgba(34,211,238,0.35)';
         for(const p of particles){
           ctx.beginPath(); ctx.fillStyle=dot; ctx.arc(p.x,p.y, CFG.dotSize*DPR, 0, Math.PI*2); ctx.fill();
           ctx.beginPath(); ctx.fillStyle=glow; ctx.arc(p.x,p.y, CFG.dotSize*2.2*DPR, 0, Math.PI*2); ctx.fill();
@@ -476,7 +514,7 @@
       function onMouse(e){ const r=canvas.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top; }
       function leave(){ mouse.x=mouse.y=null; }
 
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       function start(){ resize(); if(!reduce){ cancelAnimationFrame(raf); raf=requestAnimationFrame(tick); } }
 
       window.addEventListener('resize', resize);
