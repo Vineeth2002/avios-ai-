@@ -29,16 +29,14 @@
   .fade-up { opacity:0; transform: translateY(16px); transition: all .6s ease-out; }
   .fade-up.visible { opacity:1; transform:none; }
 
-  /* HERO */
+  /* HERO (single foreground image; add ::before later if you use backend-hero) */
   .hero {
     position: relative;
     min-height: 100vh;
     background: url('assets/hero-image_v2.png') center/cover no-repeat;
     display: flex; align-items: center; justify-content: center;
   }
-  .hero::after { /* extra overlay for contrast */
-    content:""; position:absolute; inset:0; background: linear-gradient(90deg, rgba(0,0,0,.65), rgba(0,0,0,.25));
-  }
+  .hero::after { content:""; position:absolute; inset:0; background: linear-gradient(90deg, rgba(0,0,0,.65), rgba(0,0,0,.25)); }
   .hero-content { position: relative; z-index: 1; text-align: center; padding: 0 1rem; }
 
   /* Cards */
@@ -141,7 +139,7 @@
   </div>
 </section>
 
-<!-- Testimonials (centered on screen, auto-scroll) -->
+<!-- Testimonials -->
 <section id="testimonials" class="min-h-screen flex items-center justify-center px-4">
   <div class="w-full max-w-4xl">
     <h2 class="text-4xl font-bold text-center mb-10">Testimonials</h2>
@@ -172,7 +170,7 @@
   </div>
 </section>
 
-<!-- FAQ (improved copy) -->
+<!-- FAQ -->
 <section id="faq" class="max-w-7xl mx-auto my-10 p-10 fade-up">
   <h2 class="text-4xl font-bold text-center mb-12">FAQ</h2>
   <div class="max-w-3xl mx-auto">
@@ -201,11 +199,12 @@
 <section id="contact" class="max-w-7xl mx-auto bg-gray-800 rounded-xl my-10 p-10 fade-up">
   <h2 class="text-4xl font-bold text-center mb-12">Contact Us</h2>
   <div class="max-w-3xl mx-auto">
+    <!-- IMPORTANT: names must match your EmailJS template variables -->
     <form id="contact-form" class="grid gap-6">
-      <input type="text" name="name" placeholder="Your Name" required class="p-4 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
-      <input type="email" name="email" placeholder="Your Email" required class="p-4 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      <input type="text" name="user_name" placeholder="Your Name" required class="p-4 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      <input type="email" name="user_email" placeholder="Your Email" required class="p-4 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
       <textarea name="message" placeholder="Your Message" rows="5" required class="p-4 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"></textarea>
-      <button type="submit" class="btn-primary w-full">Send Message</button>
+      <button id="contact-submit" type="submit" class="btn-primary w-full">Send Message</button>
       <p id="form-status" class="text-center mt-2"></p>
     </form>
   </div>
@@ -225,15 +224,43 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
-  // EmailJS (replace with your real public key/service/template IDs)
-  emailjs.init("user_ABC123XYZ");
-  const form = document.getElementById('contact-form');
+  // === EmailJS SETUP ===
+  // 1) Replace with your Public Key from EmailJS Dashboard
+  emailjs.init("YOUR_PUBLIC_KEY");
+
+  const form   = document.getElementById('contact-form');
   const status = document.getElementById('form-status');
+  const submit = document.getElementById('contact-submit');
+
   form.addEventListener('submit', function(event){
     event.preventDefault();
-    emailjs.sendForm('service_u3yyjeb', 'template_contact', this)
-      .then(() => { status.textContent = "✅ Message sent successfully!"; form.reset(); })
-      .catch((err) => { status.textContent = "❌ Error sending message. Try again."; console.error(err); });
+    status.textContent = "Sending…";
+    submit.disabled = true;
+
+    // 2) Replace with your Service ID and Template ID
+    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+      .then(() => {
+        status.textContent = "✅ Message sent successfully!";
+        form.reset();
+      })
+      .catch((err) => {
+        console.error("EmailJS error:", err);
+        status.textContent = "❌ Error sending message. Using email client…";
+
+        // Fallback: open user's email client with prefilled content
+        const data = new FormData(form);
+        const name = encodeURIComponent(data.get('user_name') || '');
+        const email = encodeURIComponent(data.get('user_email') || '');
+        const msg = encodeURIComponent(data.get('message') || '');
+        const subject = encodeURIComponent("New message from Avios AI website");
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${msg}`);
+
+        // Replace with your receiving email address
+        window.location.href = `mailto:you@example.com?subject=${subject}&body=${body}`;
+      })
+      .finally(() => {
+        submit.disabled = false;
+      });
   });
 
   // Swiper (centered, auto-scrolling testimonials)
