@@ -30,7 +30,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-  <!-- Fonts & CSS -->
+  <!-- Fonts & CSS libs -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
@@ -58,35 +58,29 @@
     :root { color-scheme: dark; }
 
     /* ===============================
-       THEMES (Emerald / Purple / Amber)
+       BLUE THEME (locked)
        =============================== */
-    :root, [data-theme="emerald"]{
-      --bg:#07161a; --text:#ffffff; --muted:#cbd5e1;
-      --panel-1:#0d1f24aa; --panel-2:#0a1418aa; /* with alpha for glass */
-      --glass-border: 1px solid rgba(255,255,255,0.08);
-      --accent-1:#34d399; --accent-2:#22d3ee;
-      --secondary-1:#334155; --secondary-2:#475569;
-      --hero-overlay-a:rgba(0,0,0,.66); --hero-overlay-b:rgba(0,0,0,.25);
-      --line-soft:rgba(52,211,153,0.28);
-      --dot:rgba(34,211,238,0.92); --dot-glow:rgba(34,211,238,0.36);
-    }
-    [data-theme="purple"]{
-      --bg:#0f0a1f; --text:#ffffff; --muted:#d1c4e9;
-      --panel-1:#1a1233aa; --panel-2:#120a26aa; --glass-border:1px solid rgba(255,255,255,0.08);
-      --accent-1:#a78bfa; --accent-2:#f472b6;
-      --secondary-1:#3b2f5c; --secondary-2:#4a3a73;
-      --hero-overlay-a:rgba(0,0,0,.6); --hero-overlay-b:rgba(0,0,0,.2);
-      --line-soft:rgba(167,139,250,0.3);
-      --dot:rgba(244,114,182,0.92); --dot-glow:rgba(244,114,182,0.38);
-    }
-    [data-theme="amber"]{
-      --bg:#0d0f12; --text:#ffffff; --muted:#e5e7eb;
-      --panel-1:#171a20aa; --panel-2:#0d1014aa; --glass-border:1px solid rgba(255,255,255,0.08);
-      --accent-1:#f59e0b; --accent-2:#fbbf24;
-      --secondary-1:#374151; --secondary-2:#4b5563;
-      --hero-overlay-a:rgba(0,0,0,.62); --hero-overlay-b:rgba(0,0,0,.22);
-      --line-soft:rgba(245,158,11,0.3);
-      --dot:rgba(251,191,36,0.92); --dot-glow:rgba(251,191,36,0.38);
+    :root {
+      --bg:#07131f;
+      --text:#ffffff;
+      --muted:#cbd5e1;
+
+      --panel-1:#0d1b2aee; /* glass w/ alpha */
+      --panel-2:#102538ee;
+      --glass-border:1px solid rgba(255,255,255,0.08);
+
+      /* Blue gradient */
+      --accent-1:#3b82f6;  /* blue-500 */
+      --accent-2:#60a5fa;  /* blue-400 */
+
+      --secondary-1:#1e293b; /* slate-800 */
+      --secondary-2:#334155; /* slate-700 */
+
+      --hero-overlay-a:rgba(0,0,0,.66);
+      --hero-overlay-b:rgba(0,0,0,.25);
+
+      --dot:rgba(96,165,250,0.92);     /* blue-400 */
+      --dot-glow:rgba(96,165,250,0.35);
     }
 
     /* ===== Base / Layout ===== */
@@ -112,17 +106,6 @@
     }
     /* anchor offset for fixed header */
     [id]{ scroll-margin-top: 88px; }
-
-    .theme-toggle{
-      display:flex; align-items:center; gap:.5rem;
-      background:linear-gradient(90deg,var(--panel-1),var(--panel-2));
-      padding:.5rem .8rem; border-radius:12px; font-weight:700; cursor:pointer;
-      box-shadow:0 8px 24px rgba(0,0,0,.25); border:var(--glass-border);
-    }
-    .theme-chip{width:.85rem;height:.85rem;border-radius:9999px;box-shadow:0 0 0 2px rgba(255,255,255,.08) inset;}
-    .chip-emerald{background:linear-gradient(90deg,#34d399,#22d3ee);}
-    .chip-purple{background:linear-gradient(90deg,#a78bfa,#f472b6);}
-    .chip-amber{background:linear-gradient(90deg,#f59e0b,#fbbf24);}
 
     /* ===== Hero (animated canvas) ===== */
     .hero{ position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden; }
@@ -160,10 +143,13 @@
     .btn-primary{
       background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
       color:#0b1220; font-weight:700; padding:14px 28px; border-radius:12px; display:inline-block; text-align:center;
+      box-shadow:0 0 18px rgba(59,130,246,0.45);
       transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
-      box-shadow: 0 8px 20px rgba(0,0,0,.25);
     }
-    .btn-primary:hover{ filter:brightness(1.05); transform:translateY(-2px); }
+    .btn-primary:hover{
+      filter:brightness(1.06); transform:translateY(-2px);
+      box-shadow:0 0 26px rgba(59,130,246,0.7);
+    }
     .btn-secondary{
       background: linear-gradient(90deg, var(--secondary-1), var(--secondary-2));
       color:#fff; font-weight:700; padding:14px 28px; border-radius:12px; display:inline-block; text-align:center;
@@ -181,8 +167,12 @@
     /* ===== Testimonials / FAQ ===== */
     .swiper{ width:100%; }
     .swiper-slide{ display:flex; justify-content:center; align-items:center; }
-    .testimonial-card{ composes: glass; }
-    .testimonial-card{ background: linear-gradient(135deg, var(--panel-1), var(--panel-2)); border: var(--glass-border); border-radius:20px; padding:30px; max-width:560px; text-align:center; }
+    .testimonial-card{
+      background: linear-gradient(135deg, var(--panel-1), var(--panel-2));
+      border: var(--glass-border);
+      border-radius:20px; padding:30px; max-width:560px; text-align:center;
+      box-shadow: 0 10px 30px rgba(0,0,0,.28);
+    }
     .testimonial-card p{ font-style: italic; margin-bottom:12px; color:var(--muted); }
 
     .faq-item{ border-bottom:1px solid rgba(148,163,184,.25); padding:16px 0; cursor:pointer; }
@@ -212,20 +202,13 @@
     <div class="max-w-7xl mx-auto flex items-center justify-between px-5 py-4">
       <a href="/Avios-AI/" class="text-xl font-extrabold">Avios AI</a>
       <nav class="hidden md:flex items-center gap-6">
-        <a href="#about" class="hover:text-[var(--accent-1)]">About</a>
-        <a href="#services" class="hover:text-[var(--accent-1)]">Services</a>
-        <a href="#features" class="hover:text-[var(--accent-1)]">Features</a>
-        <a href="#testimonials" class="hover:text-[var(--accent-1)]">Testimonials</a>
-        <a href="#faq" class="hover:text-[var(--accent-1)]">FAQ</a>
-        <a href="#contact" class="hover:text-[var(--accent-1)]">Contact</a>
-        <a href="/Avios-AI/blog/" class="hover:text-[var(--accent-1)]">Blog</a>
-        <!-- Theme toggle -->
-        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
-          <span class="theme-chip chip-emerald" title="Emerald"></span>
-          <span class="theme-chip chip-purple" title="Purple"></span>
-          <span class="theme-chip chip-amber" title="Amber"></span>
-          <span style="font-weight:800">Theme</span>
-        </button>
+        <a href="#about" class="hover:text-[var(--accent-2)]">About</a>
+        <a href="#services" class="hover:text-[var(--accent-2)]">Services</a>
+        <a href="#features" class="hover:text-[var(--accent-2)]">Features</a>
+        <a href="#testimonials" class="hover:text-[var(--accent-2)]">Testimonials</a>
+        <a href="#faq" class="hover:text-[var(--accent-2)]">FAQ</a>
+        <a href="#contact" class="hover:text-[var(--accent-2)]">Contact</a>
+        <a href="/Avios-AI/blog/" class="hover:text-[var(--accent-2)]">Blog</a>
       </nav>
     </div>
   </header>
@@ -429,15 +412,6 @@
       });
     });
 
-    /* Theme toggle */
-    const THEMES=['emerald','purple','amber'];
-    const root=document.documentElement;
-    const btn=document.getElementById('themeToggle');
-    function applyTheme(name){ if(!name) return; root.setAttribute('data-theme',name); localStorage.setItem('avios-theme',name); }
-    function nextTheme(){ const cur=localStorage.getItem('avios-theme')||'emerald'; const idx=THEMES.indexOf(cur); const nxt=THEMES[(idx+1)%THEMES.length]; applyTheme(nxt); }
-    btn.addEventListener('click', nextTheme);
-    applyTheme(localStorage.getItem('avios-theme')||'emerald');
-
     /* Back to top */
     const toTop=document.getElementById('toTop');
     window.addEventListener('scroll', ()=>{ if(window.scrollY>300){ toTop.classList.add('show'); } else { toTop.classList.remove('show'); } });
@@ -449,7 +423,7 @@
       const ctx=canvas.getContext('2d',{alpha:true});
       let w,h,particles=[],raf,mouse={x:null,y:null};
       const DPR=Math.min(window.devicePixelRatio||1,2);
-      const CFG={ countBase:80, maxSpeed:0.35, linkDist:140, linkWidth:1, dotSize:2, hueA:165, hueB:190 };
+      const CFG={ countBase:80, maxSpeed:0.35, linkDist:140, linkWidth:1, dotSize:2, hueA:210, hueB:195 }; // blue hues
 
       function resize(){
         w=canvas.width=canvas.clientWidth*DPR;
@@ -502,8 +476,8 @@
         }
 
         const styles=getComputedStyle(document.documentElement);
-        const dot=styles.getPropertyValue('--dot').trim() || 'rgba(34,211,238,0.9)';
-        const glow=styles.getPropertyValue('--dot-glow').trim() || 'rgba(34,211,238,0.35)';
+        const dot=styles.getPropertyValue('--dot').trim() || 'rgba(96,165,250,0.92)';
+        const glow=styles.getPropertyValue('--dot-glow').trim() || 'rgba(96,165,250,0.35)';
         for(const p of particles){
           ctx.beginPath(); ctx.fillStyle=dot; ctx.arc(p.x,p.y, CFG.dotSize*DPR, 0, Math.PI*2); ctx.fill();
           ctx.beginPath(); ctx.fillStyle=glow; ctx.arc(p.x,p.y, CFG.dotSize*2.2*DPR, 0, Math.PI*2); ctx.fill();
