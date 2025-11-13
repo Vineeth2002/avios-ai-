@@ -23,6 +23,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -79,7 +80,7 @@
 
     .hero-right{width:480px;min-width:260px}
     .visual{border-radius:var(--radius);overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
-    .image-wrap{height:360px;display:flex;align-items:center;justify-content:center}
+    .image-wrap{height:360px;display:flex;align-items:center;justify-content:center;position:relative}
     .image-wrap img{width:100%;height:100%;object-fit:cover;object-position:center right;display:block}
     @media(max-width:980px){ .hero-right{width:100%} .image-wrap{height:220px} }
     @media(max-width:480px){ .image-wrap{height:180px} .hero-left h1{font-size:28px} }
@@ -111,10 +112,16 @@
 
     footer{padding:28px 0;text-align:center;color:var(--muted);font-size:0.95rem;border-top:1px solid rgba(255,255,255,0.02)}
     :focus{outline:3px solid rgba(34,193,255,0.12);outline-offset:3px;border-radius:6px}
+
+    /* Small utilities */
+    .hidden-mobile{display:block}
+    @media (max-width:920px){ .hidden-mobile{display:none} }
+    .center{text-align:center}
   </style>
 </head>
 <body>
   <div class="page">
+    <!-- Header -->
     <header>
       <div class="nav">
         <div class="brand">
@@ -135,6 +142,7 @@
       </div>
     </header>
 
+    <!-- Main -->
     <main>
       <!-- HERO -->
       <section class="hero" aria-label="Hero">
@@ -159,8 +167,16 @@
                        srcset="assets/hero-image.png 1200w, assets/hero-image.png 800w"
                        sizes="(max-width:640px) 90vw, (max-width:1200px) 45vw, 420px"
                        alt="Avios AI futuristic hero visual"
-                       loading="eager">
+                       loading="eager"
+                       style="width:100%;height:100%;object-fit:cover;object-position:center right;display:block">
                 </picture>
+                <!-- diagnostic overlay: hidden unless needed -->
+                <div id="hero-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;border-radius:var(--radius);background:linear-gradient(90deg,#021025,#003243);text-align:center;color:var(--muted);padding:24px;">
+                  <div style="max-width:560px;margin:0 auto">
+                    <div style="font-weight:800;font-size:1.3rem;margin-bottom:8px;color:var(--text)">Avios AI</div>
+                    <div style="color:var(--muted)">Hero visual not available — please check assets/hero-image.png</div>
+                  </div>
+                </div>
               </div>
             </div>
           </aside>
@@ -169,7 +185,7 @@
 
       <!-- ABOUT -->
       <section id="about">
-        <h2 class="section-heading">About Avios AI</h2>
+        <h2 class="section-heading center">About Avios AI</h2>
         <div class="two-col">
           <div class="card">
             <p class="muted">Avios AI helps teams replace manual work with reliable AI systems. Practical automation, domain-aware assistants and multimodal tools that deliver measurable ROI — not demos.</p>
@@ -194,7 +210,7 @@
 
       <!-- SERVICES -->
       <section id="services">
-        <h2 class="section-heading">Services</h2>
+        <h2 class="section-heading center">Services</h2>
         <div class="grid-3">
           <div class="service-card"><h3>AI Automation</h3><p class="muted">Automate workflows, document processing and reporting with auditable pipelines.</p></div>
           <div class="service-card"><h3>NLP Copilots</h3><p class="muted">Domain-aware assistants for support, summarization and knowledge work.</p></div>
@@ -204,7 +220,7 @@
 
       <!-- CASE STUDIES -->
       <section id="case-studies">
-        <h2 class="section-heading">Case studies</h2>
+        <h2 class="section-heading center">Case studies</h2>
         <div class="grid-3">
           <div class="card"><h3>Support Copilot — FinTech</h3><p class="muted">35% faster triage and 30% fewer escalations.</p></div>
           <div class="card"><h3>Reporting Automation — Logistics</h3><p class="muted">Saved 20+ hours/week using scheduled ETL + reporting.</p></div>
@@ -212,7 +228,7 @@
         </div>
       </section>
 
-      <!-- CTA -->
+      <!-- MICRO CTA -->
       <section>
         <div class="card micro" style="display:flex;justify-content:space-between;align-items:center">
           <div><strong>Curious how AI fits your workflow?</strong><div class="muted">Tell us one pain point — we'll propose a focused experiment.</div></div>
@@ -222,7 +238,7 @@
 
       <!-- TESTIMONIALS -->
       <section id="testimonials">
-        <h2 class="section-heading">What clients say</h2>
+        <h2 class="section-heading center">What clients say</h2>
         <div style="max-width:920px;margin:0 auto">
           <div class="swiper">
             <div class="swiper-wrapper">
@@ -235,43 +251,54 @@
         </div>
       </section>
 
-      <!-- FAQ -->
+      <!-- FAQ (polished typography & accessible accordion) -->
       <section id="faq" aria-labelledby="faq-heading" style="padding:48px 0;">
         <div style="max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)">
-          <h2 id="faq-heading" class="section-heading" style="margin-bottom:18px;">FAQ</h2>
+          <h2 id="faq-heading" class="section-heading" style="margin-bottom:20px;font-size:1.7rem;font-weight:800;color:var(--text);text-align:center;">
+            FAQ
+          </h2>
 
-          <p style="text-align:center;color:var(--muted);max-width:72ch;margin:0 auto 22px;">
-            Common questions we get from teams evaluating AI. Click a question to reveal a concise answer.
+          <p style="text-align:center;color:var(--muted);max-width:70ch;margin:0 auto 26px;font-size:1rem;line-height:1.6;">
+            Answers to the most common questions teams ask when evaluating AI solutions.
           </p>
 
-          <div style="max-width:980px;margin:0 auto;display:grid;gap:12px;">
-            <div class="faq-item card" style="padding:16px;border-radius:12px;">
-              <button class="faq-toggle" aria-expanded="true" aria-controls="faq-1" id="faq-btn-1" style="display:flex;align-items:center;justify-content:space-between;width:100%;background:transparent;border:0;padding:0;cursor:pointer;">
-                <span style="font-weight:700;font-size:1rem">How quickly can we see results?</span>
-                <span aria-hidden="true" style="color:var(--muted);font-weight:700">▾</span>
+          <div style="max-width:900px;margin:0 auto;display:grid;gap:14px;">
+            <!-- FAQ 1 -->
+            <div class="card" style="padding:18px;border-radius:14px;">
+              <button class="faq-toggle" aria-expanded="false" aria-controls="faq-1" id="faq-btn-1"
+                      style="display:flex;align-items:center;justify-content:space-between;width:100%;background:transparent;border:0;padding:0;cursor:pointer;">
+                <span style="font-weight:700;font-size:1.05rem;color:var(--text);">How quickly can we see results?</span>
+                <span aria-hidden="true" style="color:var(--muted);font-weight:700;font-size:1.2rem;">▸</span>
               </button>
-              <div id="faq-1" class="faq-body" role="region" aria-labelledby="faq-btn-1" style="margin-top:12px;color:var(--muted);line-height:1.6;display:block;">
-                Most teams see measurable results from a focused PoC within <strong>1–2 weeks</strong>. We design the PoC to target one high-impact metric so you can measure value quickly.
+              <div id="faq-1" class="faq-body" role="region" aria-labelledby="faq-btn-1"
+                   style="margin-top:14px;color:var(--muted);line-height:1.7;font-size:0.98rem;display:none;">
+                Most teams see meaningful improvements within <strong style="color:var(--text)">1–2 weeks</strong> through a focused proof-of-concept designed around a measurable business outcome.
               </div>
             </div>
 
-            <div class="faq-item card" style="padding:16px;border-radius:12px;">
-              <button class="faq-toggle" aria-expanded="false" aria-controls="faq-2" id="faq-btn-2" style="display:flex;align-items:center;justify-content:space-between;width:100%;background:transparent;border:0;padding:0;cursor:pointer;">
-                <span style="font-weight:700;font-size:1rem">Which deployment options do you support?</span>
-                <span aria-hidden="true" style="color:var(--muted);font-weight:700">▸</span>
+            <!-- FAQ 2 -->
+            <div class="card" style="padding:18px;border-radius:14px;">
+              <button class="faq-toggle" aria-expanded="false" aria-controls="faq-2" id="faq-btn-2"
+                      style="display:flex;align-items:center;justify-content:space-between;width:100%;background:transparent;border:0;padding:0;cursor:pointer;">
+                <span style="font-weight:700;font-size:1.05rem;color:var(--text);">Which deployment options do you support?</span>
+                <span aria-hidden="true" style="color:var(--muted);font-weight:700;font-size:1.2rem;">▸</span>
               </button>
-              <div id="faq-2" class="faq-body" role="region" aria-labelledby="faq-btn-2" style="margin-top:12px;color:var(--muted);line-height:1.6;display:none;">
-                We support cloud and on-prem deployments, secure connectors to your systems, and privacy-first architectures. We help choose the deployment pattern that meets your security, latency and compliance needs.
+              <div id="faq-2" class="faq-body" role="region" aria-labelledby="faq-btn-2"
+                   style="margin-top:14px;color:var(--muted);line-height:1.7;font-size:0.98rem;display:none;">
+                We support <strong style="color:var(--text)">cloud, hybrid, and on-prem deployments</strong>, along with secure connectors and privacy-first data pipelines that meet your organization’s compliance needs.
               </div>
             </div>
 
-            <div class="faq-item card" style="padding:16px;border-radius:12px;">
-              <button class="faq-toggle" aria-expanded="false" aria-controls="faq-3" id="faq-btn-3" style="display:flex;align-items:center;justify-content:space-between;width:100%;background:transparent;border:0;padding:0;cursor:pointer;">
-                <span style="font-weight:700;font-size:1rem">How do you ensure reliability?</span>
-                <span aria-hidden="true" style="color:var(--muted);font-weight:700">▸</span>
+            <!-- FAQ 3 -->
+            <div class="card" style="padding:18px;border-radius:14px;">
+              <button class="faq-toggle" aria-expanded="false" aria-controls="faq-3" id="faq-btn-3"
+                      style="display:flex;align-items:center;justify-content:space-between;width:100%;background:transparent;border:0;padding:0;cursor:pointer;">
+                <span style="font-weight:700;font-size:1.05rem;color:var(--text);">How do you ensure reliability?</span>
+                <span aria-hidden="true" style="color:var(--muted);font-weight:700;font-size:1.2rem;">▸</span>
               </button>
-              <div id="faq-3" class="faq-body" role="region" aria-labelledby="faq-btn-3" style="margin-top:12px;color:var(--muted);line-height:1.6;display:none;">
-                Monitoring, human-in-loop validation, and model performance tracking. We set up alerting and dashboards so model drift and regressions are detected early and fixed before they impact users.
+              <div id="faq-3" class="faq-body" role="region" aria-labelledby="faq-btn-3"
+                   style="margin-top:14px;color:var(--muted);line-height:1.7;font-size:0.98rem;display:none;">
+                We combine <strong style="color:var(--text)">continuous monitoring</strong>, <strong style="color:var(--text)">human-in-the-loop validation</strong>, and automated performance checks to identify drift early and keep your AI stable, predictable, and production-ready.
               </div>
             </div>
           </div>
@@ -280,7 +307,7 @@
 
       <!-- CONTACT -->
       <section id="contact">
-        <h2 class="section-heading">Request a free consultation</h2>
+        <h2 class="section-heading center">Request a free consultation</h2>
         <div class="contact-grid">
           <div class="card">
             <form id="contact-form" novalidate>
@@ -324,6 +351,7 @@
     </footer>
   </div>
 
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
   <script>
@@ -333,7 +361,7 @@
       pagination:{el:'.swiper-pagination',clickable:true}, speed:700
     });
 
-    // FAQ accordion behavior
+    // FAQ accordion behavior (accessible)
     (function(){
       const toggles = document.querySelectorAll('.faq-toggle');
       toggles.forEach(btn => {
@@ -358,6 +386,7 @@
           }
         });
 
+        // keyboard support
         btn.addEventListener('keydown', (e) => {
           if(e.key === 'Enter' || e.key === ' '){
             e.preventDefault();
@@ -412,6 +441,27 @@
         }
         submitBtn.disabled = false;
       });
+
+      // Hero image diagnostic: if image fails, show fallback overlay
+      (function(){
+        const img = document.querySelector('.image-wrap img');
+        const fallbackOverlay = document.getElementById('hero-fallback');
+        if(!img) return;
+        img.addEventListener('error', () => {
+          if(fallbackOverlay) fallbackOverlay.style.display = 'flex';
+        });
+        img.addEventListener('load', () => {
+          if(img.naturalWidth === 0 && fallbackOverlay) fallbackOverlay.style.display = 'flex';
+        });
+        // timeout fallback
+        setTimeout(()=> {
+          if(!img.complete || img.naturalWidth === 0){
+            if(fallbackOverlay) fallbackOverlay.style.display = 'flex';
+            console.warn('Hero image may not have loaded - check assets path and filenames.');
+          }
+        }, 4500);
+      })();
+
     })();
   </script>
 </body>
