@@ -92,6 +92,30 @@
       .bg-hero { height:320px; }
       .hero-head{ font-size: clamp(22px,8vw,30px); }
     }
+
+    /* ---------- SECTION / HEADER FIXES ---------- */
+    /* ensure anchored sections don't get hidden by fixed header */
+    section { scroll-margin-top:120px; } /* safe for most devices; adjust if header height changes */
+
+    /* specifically add spacing above contact so it doesn't visually merge */
+    #contact { margin-top:48px; padding-top:18px; }
+
+    /* smaller spacing tweak for FAQ if needed */
+    #faq { margin-top:28px; }
+
+    /* ---------- HERO PARTICLE LAYER (only visible in hero) ---------- */
+    #hero { position:relative; overflow:visible; } /* ensure hero can host absolute layer */
+    #particles-hero { position:absolute; inset:0; z-index:0; pointer-events:none; }
+    #hero > .wrap { position:relative; z-index:2; } /* keep content above particles */
+
+    /* tune particle area height for hero (keeps it visually limited) */
+    @media (min-width: 980px) {
+      #particles-hero canvas { height:420px !important; width:100% !important; }
+    }
+    @media (max-width: 980px) {
+      #particles-hero canvas { height:320px !important; width:100% !important; }
+    }
+
   </style>
 </head>
 <body>
@@ -119,7 +143,7 @@
 
   <main style="position:relative; z-index:10;">
 
-    <!-- HERO (with hero-only animated background) -->
+    <!-- HERO (with hero-only background) -->
     <section id="hero" aria-label="Hero" style="padding-bottom:60px;">
       <!-- HERO background: only inside hero -->
       <div class="bg-hero" aria-hidden="true">
@@ -151,6 +175,9 @@
           <div class="node" style="left:62%; top:40%; animation:floatA 11s ease-in-out infinite;"></div>
         </div>
       </div>
+
+      <!-- PARTICLE / CONNECT LAYER (ADDED) -->
+      <div id="particles-hero" aria-hidden="true"></div>
 
       <!-- HERO content -->
       <div class="wrap">
@@ -432,5 +459,130 @@
       }
     })();
   </script>
+
+  <!-- PARTICLE / CONNECTED NODES (hero-only) -->
+  <script>
+  // Lightweight particle + connect effect that draws moving nodes and connecting lines
+  (function(){
+    const container = document.getElementById('particles-hero');
+    if(!container) return;
+
+    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+    const canvas = document.createElement('canvas');
+    canvas.style.display = 'block';
+    container.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+
+    let width = 0, height = 0;
+    function resize(){
+      width = container.clientWidth;
+      height = container.clientHeight || 420;
+      canvas.width = Math.round(width * DPR);
+      canvas.height = Math.round(height * DPR);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(DPR,0,0,DPR,0,0);
+    }
+    window.addEventListener('resize', resize, {passive:true});
+    resize();
+
+    // particles
+    const N = Math.round(Math.max(12, Math.min(28, width/80))); // scale with width
+    const nodes = [];
+    for(let i=0;i<N;i++){
+      nodes.push({
+        x: Math.random()*width,
+        y: Math.random()*height,
+        r: 1.8 + Math.random()*2.6,
+        vx: (Math.random()-0.5) * 0.6,
+        vy: (Math.random()-0.5) * 0.6,
+        phase: Math.random()*Math.PI*2
+      });
+    }
+
+    function step(){
+      ctx.clearRect(0,0,width,height);
+
+      // subtle background gradient overlay (keeps hero color)
+      const g = ctx.createLinearGradient(0,0,width,0);
+      g.addColorStop(0,'rgba(20,40,55,0.06)');
+      g.addColorStop(1,'rgba(10,30,45,0.06)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0,0,width,height);
+
+      // update positions
+      for(const p of nodes){
+        p.x += p.vx;
+        p.y += p.vy;
+        p.phase += 0.01;
+        // gentle oscillation
+        p.x += Math.sin(p.phase)*0.15;
+        p.y += Math.cos(p.phase)*0.12;
+
+        // keep inside bounds softly
+        if(p.x < -40) p.x = width + 40;
+        if(p.x > width + 40) p.x = -40;
+        if(p.y < -40) p.y = height + 40;
+        if(p.y > height + 40) p.y = -40;
+      }
+
+      // draw connections (only near each other)
+      ctx.lineWidth = 0.9;
+      for(let i=0;i<nodes.length;i++){
+        for(let j=i+1;j<nodes.length;j++){
+          const a = nodes[i], b = nodes[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d2 = dx*dx + dy*dy;
+          const maxD = Math.min(160 * (width/1200), 200);
+          if(d2 < maxD*maxD){
+            const alpha = 0.18 * (1 - d2/(maxD*maxD));
+            ctx.strokeStyle = `rgba(47,176,255,${(alpha*0.85).toFixed(3)})`;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // draw nodes
+      for(const p of nodes){
+        const rad = p.r;
+        const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad*6);
+        glow.addColorStop(0, 'rgba(109,219,255,0.95)');
+        glow.addColorStop(0.08, 'rgba(47,176,255,0.65)');
+        glow.addColorStop(1, 'rgba(10,30,45,0)');
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, rad*4.1, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.fillStyle = 'rgba(180,240,255,0.95)';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, rad, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      requestAnimationFrame(step);
+    }
+    // start only when visible to reduce CPU if user scrolled away
+    let started=false;
+    function onVisible(){
+      if(started) return;
+      started=true;
+      step();
+    }
+    // if hero initially visible -> start; otherwise use IntersectionObserver
+    const heroRect = container.getBoundingClientRect();
+    if(heroRect.top < window.innerHeight) onVisible();
+    else {
+      const obs = new IntersectionObserver((entries)=>{
+        if(entries[0].isIntersecting){ onVisible(); obs.disconnect(); }
+      }, {threshold:0.15});
+      obs.observe(container);
+    }
+  })();
+  </script>
+
 </body>
 </html>
