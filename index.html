@@ -12,17 +12,17 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 
 <style>
-  /* --------- Blue / neural gradient theme --------- */
+  /* --------- Blue / neural gradient theme (balanced hero) --------- */
   :root{
-    --bg-outer: #071029;         /* very dark navy page outer */
-    --bg-inner: linear-gradient(180deg,#041628 0%, #062836 45%, #08344a 100%); /* main gradient */
-    --panel: rgba(255,255,255,0.03); /* translucent panels */
-    --muted: #9fb3c1;            /* muted light-blue */
-    --text: #e6f7ff;             /* light text */
-    --accent: #3db2ff;           /* bright blue accent */
+    --bg-outer: #071029;
+    --bg-inner: linear-gradient(180deg,#041628 0%, #062836 45%, #08344a 100%);
+    --panel: rgba(255,255,255,0.03);
+    --muted: #9fb3c1;
+    --text: #e6f7ff;
+    --accent: #3db2ff;
     --accent-2: #1d8cff;
     --gutter: 20px;
-    --page-max:1150px;
+    --page-max:1200px;
     --radius:14px;
     --section-gap:48px;
     --header-h:72px;
@@ -33,7 +33,7 @@
   a{color:inherit;text-decoration:none}
   .page{max-width:var(--page-max);margin:0 auto;padding:0 var(--gutter)}
 
-  /* Header */
+  /* header */
   header{position:sticky;top:0;z-index:80;background:linear-gradient(180deg, rgba(4,8,15,0.6), rgba(4,8,15,0.2));border-bottom:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px)}
   .nav{height:var(--header-h);display:flex;align-items:center;justify-content:space-between;gap:12px}
   .brand{display:flex;align-items:center;gap:12px}
@@ -42,66 +42,72 @@
   .nav-links a{color:var(--muted);font-weight:600}
   .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:10px 14px;border-radius:12px;color:#001525;font-weight:800;box-shadow:0 10px 30px rgba(29,140,204,0.12)}
 
-  /* Sections */
+  /* sections */
   section{padding:var(--section-gap) 0}
   h2{font-size:1.6rem;margin:0 0 12px;color:var(--text);text-align:center}
   p{margin:0 0 12px;color:var(--muted);line-height:1.6}
 
-  /* HERO */
-  .hero { position:relative; min-height:88vh; display:grid; grid-template-columns:1fr 460px; gap:32px; align-items:center; padding-top:20px; background: var(--bg-inner); }
-  @media (max-width:980px){ .hero{ grid-template-columns:1fr; text-align:center } .hero .visual{ order:-1 } }
-  .neural-canvas { position:absolute; inset:0; z-index:0; pointer-events:none; opacity:0.62 }
-  .hero-inner{position:relative;z-index:2;width:100%;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
-  @media (max-width:980px){ .hero-inner{grid-template-columns:1fr} }
-  .hero-left h1{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0 0 12px;font-weight:800;color:#eaf8ff}
-  .hero-left p{max-width:60ch;margin-bottom:16px;color:var(--muted)}
-  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
-  .kpis{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
-  .kpi{background:rgba(255,255,255,0.03);border-radius:10px;padding:8px 12px;border:1px solid rgba(255,255,255,0.02);min-width:120px;text-align:center;color:var(--text);backdrop-filter:blur(4px)}
-  .kpi strong{display:block;color:#e9f9ff}
+  /* HERO (balanced) */
+  .hero { position:relative; min-height:78vh; display:flex; align-items:center; justify-content:center; background:var(--bg-inner); overflow:hidden; }
+  .hero-inner { width:100%; max-width:1200px; display:flex; gap:36px; padding:32px var(--gutter); align-items:center; z-index:2; }
+  @media (max-width:1100px){ .hero-inner { gap:22px; padding:28px 18px } }
+  @media (max-width:880px){ .hero-inner { flex-direction:column-reverse; padding:22px 14px } }
 
-  .visual{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 18px 48px rgba(3,12,20,0.45)}
-  .visual img{width:100%;height:260px;object-fit:cover;border-radius:8px}
+  /* LEFT: constrain width so headline doesn't run wild */
+  .hero-left { flex:1 1 56%; max-width: 620px; min-width:320px; }
+  .hero-left h1 {
+    font-weight:800;
+    line-height:1.02;
+    margin:0 0 16px;
+    color:#eaf8ff;
+    /* safer headline scale so it doesn't take entire screen */
+    font-size: clamp(28px, 4.2vw, 44px);
+  }
+  .hero-left p { color:var(--muted); margin-bottom:18px; max-width:54ch; }
 
-  /* two-column about/why */
+  .hero-ctas { display:flex; gap:12px; flex-wrap:wrap; margin-top:6px; }
+
+  /* KPI mini chips */
+  .kpis { display:flex; gap:12px; margin-top:18px; flex-wrap:wrap; }
+  .kpi { background:rgba(255,255,255,0.03); border-radius:10px; padding:8px 12px; border:1px solid rgba(255,255,255,0.02); color:#dff6ff; min-width:110px; text-align:center; font-weight:600; font-size:0.95rem; }
+
+  /* RIGHT: visual card - fixed size, center inside column and never overflow */
+  .hero-right { flex:0 0 420px; display:flex; align-items:center; justify-content:center; }
+  .visual { width:100%; max-width:420px; border-radius:14px; padding:12px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); box-shadow:0 22px 60px rgba(0,0,0,0.6); display:flex; flex-direction:column; gap:12px; }
+  .visual .image-wrap { width:100%; height:260px; border-radius:10px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#2b0f4e,#0ea9d1); }
+  .visual img { width:100%; height:100%; object-fit:cover; display:block; }
+
+  @media (max-width:880px){
+    .hero-right { width:100%; max-width:640px; margin-bottom:8px; }
+    .visual .image-wrap { height:200px; }
+    .hero-left { max-width:760px; }
+  }
+
+  /* Neural canvas sits on top but behind hero content */
+  .neural-canvas { position:absolute; inset:0; z-index:1; pointer-events:none; opacity:0.6; filter:blur(0.2px); }
+
+  /* rest of page (kept compact) */
   .two-col{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
   @media (max-width:980px){ .two-col{grid-template-columns:1fr} }
   .card{background:rgba(255,255,255,0.02);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 28px rgba(0,0,0,0.35)}
-
-  /* Services, case, testimonials */
   .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   @media (max-width:980px){ .grid-3{grid-template-columns:1fr} }
-  .service-card, .case-card, .testimonial{padding:20px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
-
-  /* micro CTA */
+  .service-card,.case-card,.testimonial{padding:20px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
   .micro{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
   @media (max-width:720px){ .micro{flex-direction:column;align-items:flex-start} }
-
-  /* faq and contact */
   .faq-list{max-width:900px;margin:0 auto}
   .faq-item{padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.03);cursor:pointer;color:var(--muted)}
   .faq-question{font-weight:700;color:#eaf8ff}
   .faq-answer{display:none;padding-top:8px;color:var(--muted)}
-
   .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:22px}
   @media (max-width:980px){ .contact-grid{grid-template-columns:1fr} }
   label{display:block;margin-bottom:8px;font-weight:700;color:#eaf8ff}
   input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(0,0,0,0.12);color:var(--text);outline:none}
   textarea{min-height:140px;background:rgba(0,0,0,0.12);color:#eaf8ff}
-
   footer{padding:28px 0;text-align:center;color:var(--muted);font-size:0.95rem;border-top:1px solid rgba(255,255,255,0.02)}
-
-  /* small adjustments */
   .muted{color:var(--muted)}
   .center{text-align:center}
   .small{font-size:0.95rem}
-
-  /* mobile tweaks */
-  @media (max-width:720px){
-    :root{ --section-gap:32px }
-    .hero-left h1{font-size:28px}
-    .visual img{height:180px}
-  }
 </style>
 </head>
 <body>
@@ -131,11 +137,11 @@
 
   <!-- HERO -->
   <main>
-    <section class="hero" aria-label="Hero" role="region">
+    <section class="hero" aria-label="Hero">
       <!-- neural-lines canvas -->
       <canvas class="neural-canvas" id="neuralCanvas" aria-hidden="true"></canvas>
 
-      <div class="page hero-inner">
+      <div class="hero-inner">
         <div class="hero-left">
           <h1>Intelligent AI solutions for real-world outcomes</h1>
           <p>Focused automation, practical NLP copilots and multimodal systems that reduce manual work and deliver measurable impact — start with a short PoC.</p>
@@ -152,13 +158,17 @@
           </div>
         </div>
 
-        <aside class="visual" aria-hidden="false">
-          <img src="assets/backend-hero.png" alt="Avios AI visual" onerror="this.onerror=null; this.src='assets/hero-image.png'">
-          <div style="margin-top:10px">
-            <strong style="display:block;color:#eaf8ff">Approach that converts</strong>
-            <div class="muted small">Measure impact with a focused PoC, then ship production with monitoring and support.</div>
+        <div class="hero-right">
+          <div class="visual" role="img" aria-label="Avios visual">
+            <div class="image-wrap">
+              <img src="assets/backend-hero.png" alt="Avios visual" onerror="this.onerror=null;this.src='assets/hero-image.png'">
+            </div>
+            <div style="padding:4px 6px">
+              <strong style="display:block;color:#eaf8ff">Approach that converts</strong>
+              <div class="muted small">Measure impact with a focused PoC, then ship production with monitoring and support.</div>
+            </div>
           </div>
-        </aside>
+        </div>
       </div>
     </section>
 
@@ -322,146 +332,133 @@
     </div>
   </footer>
 
-  <!-- Scripts: Swiper, neural background, contact handler -->
+  <!-- scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
   <script>
-  // Neural-lines background for the hero (canvas)
+  // Neural-lines background (canvas) — same effect but sized to hero container
   (function(){
     const canvas = document.getElementById('neuralCanvas');
     if(!canvas) return;
-    const parent = canvas.parentElement || document.body;
     function resize(){
-      canvas.width = parent.clientWidth;
-      canvas.height = Math.max(parent.clientHeight * 0.62, 420);
+      // match hero size
+      const hero = document.querySelector('.hero');
+      if(!hero) return;
+      canvas.width = hero.clientWidth;
+      canvas.height = hero.clientHeight;
     }
     window.addEventListener('resize', resize);
     resize();
     const ctx = canvas.getContext('2d');
     const nodes = [];
-    const N = 40;
+    const N = 36;
     for(let i=0;i<N;i++){
-      nodes.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        vx: (Math.random()-0.5)*0.4,
-        vy: (Math.random()-0.5)*0.4,
-        r: Math.random()*1.6+0.8
-      });
+      nodes.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, vx:(Math.random()-0.5)*0.35, vy:(Math.random()-0.5)*0.35, r: Math.random()*1.6+0.6 });
     }
     function draw(){
       ctx.clearRect(0,0,canvas.width,canvas.height);
-      // lines
       for(let i=0;i<N;i++){
         for(let j=i+1;j<N;j++){
           const a = nodes[i], b = nodes[j];
-          const dx = a.x-b.x, dy = a.y-b.y;
-          const d = Math.sqrt(dx*dx+dy*dy);
+          const dx=a.x-b.x, dy=a.y-b.y, d=Math.hypot(dx,dy);
           if(d<140){
-            const alpha = 0.12*(1 - d/140);
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(61,178,255,${alpha})`;
+            ctx.strokeStyle = `rgba(61,178,255,${0.08*(1-d/140)})`;
             ctx.lineWidth = 1;
-            ctx.moveTo(a.x,a.y);
-            ctx.lineTo(b.x,b.y);
-            ctx.stroke();
+            ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
           }
         }
       }
-      // nodes
       for(const p of nodes){
         ctx.beginPath();
         ctx.fillStyle = 'rgba(61,178,255,0.9)';
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fill();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
         p.x += p.vx; p.y += p.vy;
-        if(p.x < -10) p.x = canvas.width+10;
-        if(p.x > canvas.width+10) p.x = -10;
-        if(p.y < -10) p.y = canvas.height+10;
-        if(p.y > canvas.height+10) p.y = -10;
+        if(p.x < -10) p.x = canvas.width+10; if(p.x > canvas.width+10) p.x = -10;
+        if(p.y < -10) p.y = canvas.height+10; if(p.y > canvas.height+10) p.y = -10;
       }
       requestAnimationFrame(draw);
     }
+    // ensure nodes adapt to size changes
+    window.addEventListener('resize', ()=>{ nodes.length=0; for(let i=0;i<N;i++) nodes.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, vx:(Math.random()-0.5)*0.35, vy:(Math.random()-0.5)*0.35, r: Math.random()*1.6+0.6 }); });
     draw();
   })();
   </script>
 
   <script>
-  // Swiper initialization for testimonials
-  new Swiper('.swiper', {
-    loop: true,
-    centeredSlides: true,
-    slidesPerView: 1,
-    autoplay: { delay: 4200, disableOnInteraction: false },
-    pagination: { el: '.swiper-pagination', clickable: true },
-    speed: 700
-  });
-
-  // FAQ toggle
-  document.querySelectorAll('.faq-item').forEach(item=>{
-    item.addEventListener('click', ()=> {
-      const ans = item.querySelector('.faq-answer');
-      if(!ans) return;
-      ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
+    // Swiper testimonials
+    new Swiper('.swiper', {
+      loop: true,
+      centeredSlides: true,
+      slidesPerView: 1,
+      autoplay: { delay: 4200, disableOnInteraction: false },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      speed: 700
     });
-  });
 
-  // Contact form (Apps Script)
-  (function(){
-    const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbye6WBe-sERGIk_PvApsCFrS46Dq0t0s2rvic0mduAn1iZY_q5J49jinkaHPneqXxY18Q/exec";
-    const form = document.getElementById('contact-form');
-    const status = document.getElementById('form-status');
-    const fallback = document.getElementById('fallback-mailto');
-    const submitBtn = document.getElementById('contact-submit');
+    // FAQ toggle
+    document.querySelectorAll('.faq-item').forEach(item=>{
+      item.addEventListener('click', ()=> {
+        const ans = item.querySelector('.faq-answer');
+        if(!ans) return;
+        ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
+      });
+    });
 
-    function setStatus(msg, isErr=false){
-      status.textContent = msg;
-      status.style.color = isErr ? '#ff8b8b' : '#8ff5d8';
-    }
+    // Contact form (Apps Script) — same handler you used
+    (function(){
+      const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbye6WBe-sERGIk_PvApsCFrS46Dq0t0s2rvic0mduAn1iZY_q5J49jinkaHPneqXxY18Q/exec";
+      const form = document.getElementById('contact-form');
+      const status = document.getElementById('form-status');
+      const fallback = document.getElementById('fallback-mailto');
+      const submitBtn = document.getElementById('contact-submit');
 
-    form.addEventListener('submit', async function(e){
-      e.preventDefault();
-      submitBtn.disabled = true;
-      setStatus('Sending...');
-      const payload = {
-        name: form.name.value.trim(),
-        email: form.email.value.trim(),
-        company: form.company.value.trim(),
-        message: form.message.value.trim()
-      };
-      if(!payload.name || !payload.email || !payload.message){
-        setStatus('Please complete name, email, and message.', true);
-        submitBtn.disabled = false;
-        return;
+      function setStatus(msg, isErr=false){
+        status.textContent = msg;
+        status.style.color = isErr ? '#ff8b8b' : '#8ff5d8';
       }
-      try {
-        const res = await fetch(WEBAPP_URL, {
-          method: 'POST',
-          headers: {'Content-Type':'application/json'},
-          body: JSON.stringify(payload),
-          mode: 'cors'
-        });
-        let json = null;
-        try { json = await res.json(); } catch(e){}
-        if(res.ok && json && json.success){
-          setStatus('✅ Message sent — we will reply within one business day.');
-          form.reset();
-          fallback.style.display = 'none';
-        } else {
-          setStatus('❌ Unable to send. Try again or email directly.', true);
+
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        submitBtn.disabled = true;
+        setStatus('Sending...');
+        const payload = {
+          name: form.name.value.trim(),
+          email: form.email.value.trim(),
+          company: form.company.value.trim(),
+          message: form.message.value.trim()
+        };
+        if(!payload.name || !payload.email || !payload.message){
+          setStatus('Please complete name, email, and message.', true);
+          submitBtn.disabled = false;
+          return;
+        }
+        try {
+          const res = await fetch(WEBAPP_URL, {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(payload),
+            mode: 'cors'
+          });
+          let json = null;
+          try { json = await res.json(); } catch(e){}
+          if(res.ok && json && json.success){
+            setStatus('✅ Message sent — we will reply within one business day.');
+            form.reset();
+            fallback.style.display = 'none';
+          } else {
+            setStatus('❌ Unable to send. Try again or email directly.', true);
+            fallback.style.display = 'block';
+            fallback.innerHTML = 'Or email: <a href="mailto:aviosplatform@gmail.com" style="color:var(--accent)">aviosplatform@gmail.com</a>';
+          }
+        } catch(err){
+          console.error(err);
+          setStatus('❌ Network error. Try again later.', true);
           fallback.style.display = 'block';
           fallback.innerHTML = 'Or email: <a href="mailto:aviosplatform@gmail.com" style="color:var(--accent)">aviosplatform@gmail.com</a>';
-        }
-      } catch(err){
-        console.error(err);
-        setStatus('❌ Network error. Try again later.', true);
-        fallback.style.display = 'block';
-        fallback.innerHTML = 'Or email: <a href="mailto:aviosplatform@gmail.com" style="color:var(--accent)">aviosplatform@gmail.com</a>';
-      } finally {
-        submitBtn.disabled = false;
-      }
-    });
-  })();
+        } finally { submitBtn.disabled = false; }
+      });
+    })();
   </script>
 </body>
 </html>
