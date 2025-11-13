@@ -3,163 +3,207 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Avios AI — Practical, Production-ready AI</title>
-<meta name="description" content="Avios AI builds production-ready automation, NLP copilots and multimodal systems that reduce manual work and deliver measurable ROI." />
+<title>Avios AI — Production AI, simply delivered</title>
+<meta name="description" content="Avios AI delivers production-ready automation, NLP copilots and multimodal systems that replace manual work and deliver measurable ROI." />
+<meta name="keywords" content="AI, automation, NLP, multimodal, machine learning, Avios AI, AI consulting" />
 <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 
+<!-- Open Graph -->
+<meta property="og:title" content="Avios AI — Production AI, simply delivered" />
+<meta property="og:description" content="Production-ready automation, NLP copilots and multimodal systems that deliver measurable ROI." />
+<meta property="og:image" content="assets/hero-image.png" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+
 <!-- Fonts & Swiper -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 
 <style>
+  /* ========== THEME & ACCESSIBLE CONTRAST ========== */
   :root{
-    --bg-outer: #071029;
-    --bg-inner: linear-gradient(180deg,#041628 0%, #062836 45%, #08344a 100%);
+    --bg-outer:#041022;        /* deep navy */
+    --bg-inner: linear-gradient(180deg,#031223 0%, #05293a 55%, #053f4a 100%);
     --panel: rgba(255,255,255,0.03);
-    --muted: #9fb3c1;
-    --text: #e6f7ff;
-    --accent: #3db2ff;
-    --accent-2: #1d8cff;
-    --gutter: 20px;
-    --page-max:1200px;
+    --muted:#9fb7c4;
+    --text:#eaf6ff;            /* bright heading / body */
+    --accent-1:#22c1ff;       /* vivid cyan */
+    --accent-2:#1a8cff;       /* deeper blue */
+    --cta-text:#002230;
+    --gutter:20px;
+    --max-width:1200px;
     --radius:14px;
-    --section-gap:48px;
-    --section-heading-gap:18px;
+    --section-gap:56px;
+    --heading-gap:18px;
     --header-h:72px;
+
+    /* Typography scale */
+    --base:16px;
+    --heading-1: clamp(28px, 5.0vw, 48px);
+    --heading-2: 1.6rem;
+    --lead: 1.05rem;
   }
 
+  /* Reset */
   *{box-sizing:border-box}
   html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:var(--bg-outer);color:var(--text);-webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration:none}
-  .page{max-width:var(--page-max);margin:0 auto;padding:0 var(--gutter)}
+  a{color:inherit}
+  img{max-width:100%;display:block}
+
+  /* Page container */
+  .page{max-width:var(--max-width);margin:0 auto;padding:0 var(--gutter)}
+
+  /* Accessibility: skip link */
+  .skip{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+  .skip:focus{left:12px;top:12px;width:auto;height:auto;padding:8px 12px;background:#fff;color:#002;z-index:9999;border-radius:6px;text-decoration:none}
 
   /* Header */
-  header{position:sticky;top:0;z-index:80;background:linear-gradient(180deg, rgba(4,8,15,0.6), rgba(4,8,15,0.2));border-bottom:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px)}
-  .nav{height:var(--header-h);display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .brand{display:flex;align-items:center;gap:12px}
-  .brand .title{font-weight:800;font-size:1rem;color:var(--text)}
-  .nav-links{display:flex;gap:18px;align-items:center}
-  .nav-links a{color:var(--muted);font-weight:600}
-  .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:10px 14px;border-radius:12px;color:#001525;font-weight:800;box-shadow:0 10px 30px rgba(29,140,204,0.12)}
+  header{position:sticky;top:0;z-index:90;background:linear-gradient(180deg, rgba(2,6,12,0.72), rgba(2,6,12,0.38));backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.03)}
+  .nav{height:var(--header-h);display:flex;align-items:center;justify-content:space-between;padding:0 var(--gutter)}
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand .logo{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));box-shadow:0 8px 24px rgba(10,40,60,.18)}
+  .brand .logo strong{color:#001; font-size:22px; font-weight:800}
+  .brand .title{font-weight:800;font-size:1rem}
+  .brand .subtitle{font-size:.88rem;color:var(--muted);margin-top:2px}
 
-  /* Section headings centralized */
-  .section-heading {
-    margin-top: var(--section-heading-gap);
-    margin-bottom: var(--section-heading-gap);
-    text-align: center;
-    color: var(--text);
-    font-size: 1.6rem;
-    line-height:1;
-    font-weight:800;
-  }
+  .nav-links{display:flex;gap:20px;align-items:center}
+  .nav-links a{color:var(--muted);font-weight:600;padding:8px;border-radius:8px}
+  .nav-links a:hover, .nav-links a:focus{color:var(--text);background:rgba(255,255,255,0.02);outline:none}
+  .cta-primary{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:var(--cta-text);padding:10px 14px;border-radius:12px;font-weight:800;box-shadow:0 12px 36px rgba(18,110,160,0.14);border:none;cursor:pointer}
 
-  section{padding:calc(var(--section-gap) - var(--section-heading-gap)) 0}
-  p{margin:0 0 12px;color:var(--muted);line-height:1.6}
+  /* Section headings (centered & consistent) */
+  .section-heading{margin-top:var(--heading-gap);margin-bottom:var(--heading-gap);text-align:center;font-weight:800;font-size:var(--heading-2);color:var(--text)}
 
   /* HERO */
-  .hero { position:relative; min-height:78vh; display:flex; align-items:center; justify-content:center; background:var(--bg-inner); overflow:hidden; }
-  .hero-inner { width:100%; max-width:1200px; display:flex; gap:36px; padding:32px var(--gutter); align-items:center; z-index:2; }
-  @media (max-width:1100px){ .hero-inner { gap:22px; padding:28px 18px } }
-  @media (max-width:880px){ .hero-inner { flex-direction:column-reverse; padding:22px 14px } }
+  .hero{position:relative;min-height:78vh;display:flex;align-items:center;justify-content:center;background:var(--bg-inner);overflow:hidden;padding:18px}
+  .hero-inner{width:100%;max-width:var(--max-width);display:flex;gap:36px;align-items:center;padding:28px}
+  @media (max-width:980px){.hero-inner{flex-direction:column-reverse;gap:18px;padding:18px}}
 
-  .hero-left { flex:1 1 56%; max-width: 620px; min-width:320px; }
-  .hero-left h1 { font-weight:800; line-height:1.02; margin:0 0 16px; color:#eaf8ff; font-size: clamp(28px, 4.2vw, 44px); }
-  .hero-left p { color:var(--muted); margin-bottom:18px; max-width:54ch; }
+  .hero-left{flex:1 1 58%;min-width:280px}
+  h1{font-size:var(--heading-1);line-height:1.02;margin:0 0 14px;font-weight:800;color:var(--text);letter-spacing:-0.02em}
+  .lead{font-size:var(--lead);color:var(--muted);max-width:62ch;margin-bottom:16px}
 
-  .hero-ctas { display:flex; gap:12px; flex-wrap:wrap; margin-top:6px; }
-  .kpis { display:flex; gap:12px; margin-top:18px; flex-wrap:wrap; }
-  .kpi { background:rgba(255,255,255,0.03); border-radius:10px; padding:8px 12px; border:1px solid rgba(255,255,255,0.02); color:#dff6ff; min-width:110px; text-align:center; font-weight:600; font-size:0.95rem; }
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 12px;border-radius:10px;color:var(--text);font-weight:700}
 
-  .hero-right { flex:0 0 420px; display:flex; align-items:center; justify-content:center; }
-  .visual { width:100%; max-width:420px; border-radius:14px; padding:12px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); box-shadow:0 22px 60px rgba(0,0,0,0.6); display:flex; flex-direction:column; gap:12px; }
-  .visual .image-wrap { width:100%; height:260px; border-radius:10px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#2b0f4e,#0ea9d1); }
-  .visual img { width:100%; height:100%; object-fit:cover; display:block; }
+  .kpis{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+  .kpi{background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.028);min-width:110px;color:var(--text);font-weight:700}
 
-  .neural-canvas { position:absolute; inset:0; z-index:1; pointer-events:none; opacity:0.6; filter:blur(0.2px); }
+  .hero-right{flex:0 0 420px;display:flex;align-items:center;justify-content:center}
+  .visual{width:100%;max-width:420px;border-radius:16px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);box-shadow:0 28px 70px rgba(0,0,0,0.6)}
+  .image-wrap{height:280px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#2f0d51,#0bb7e0)}
+  .image-wrap img{width:100%;height:100%;object-fit:cover}
 
-  /* content cards and grids */
-  .two-col{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
-  @media (max-width:980px){ .two-col{grid-template-columns:1fr} }
-  .card{background:rgba(255,255,255,0.02);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 28px rgba(0,0,0,0.35)}
+  /* Neural canvas (subtle motion) */
+  .neural-canvas{position:absolute;inset:0;z-index:1;opacity:0.6;pointer-events:none;filter:blur(.3px)}
+
+  /* Content sections */
+  section{padding:44px 0}
+  .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--gutter)}
+
+  .two-col{display:grid;grid-template-columns:1fr 360px;gap:22px;align-items:start}
+  @media (max-width:980px){.two-col{grid-template-columns:1fr}}
+
+  .card{background:rgba(255,255,255,0.02);border-radius:12px;padding:20px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(0,0,0,0.35)}
+  .card h3{margin:0 0 8px;color:var(--text);font-size:1.05rem}
+  .card p{margin:0;color:var(--muted)}
+
   .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  @media (max-width:980px){ .grid-3{grid-template-columns:1fr} }
-  .service-card, .case-card, .testimonial{padding:20px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
-  .service-card h3, .case-card h3{color:#eaf8ff;margin-bottom:10px}
+  @media (max-width:980px){.grid-3{grid-template-columns:1fr}}
 
-  .micro{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
-  @media (max-width:720px){ .micro{flex-direction:column;align-items:flex-start} }
+  .service-card{padding:18px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
+  .service-card p{color:var(--muted);font-size:1rem}
 
+  .case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:12px}
+  @media (max-width:980px){.case-grid{grid-template-columns:1fr}}
+
+  /* Micro CTA */
+  .micro{display:flex;align-items:center;justify-content:space-between;padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);gap:16px;margin-top:12px}
+  @media (max-width:720px){.micro{flex-direction:column;align-items:flex-start}}
+
+  /* Testimonials */
+  .testimonial{padding:18px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
+  .testimonial p{font-style:italic;color:var(--muted);margin:0 0 8px}
+  .testimonial cite{color:var(--muted)}
+
+  /* FAQ */
   .faq-list{max-width:900px;margin:0 auto}
-  .faq-item{padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.03);cursor:pointer;color:var(--muted)}
-  .faq-question{font-weight:700;color:#eaf8ff}
-  .faq-answer{display:none;padding-top:8px;color:var(--muted)}
+  .faq-item{padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.03);cursor:pointer}
+  .faq-question{font-weight:700;color:var(--text)}
+  .faq-answer{display:none;color:var(--muted);padding-top:6px}
+
+  /* Contact form */
   .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:22px}
-  @media (max-width:980px){ .contact-grid{grid-template-columns:1fr} }
-  label{display:block;margin-bottom:8px;font-weight:700;color:#eaf8ff}
+  @media (max-width:980px){.contact-grid{grid-template-columns:1fr}}
+  label{display:block;margin-bottom:8px;font-weight:700;color:var(--text)}
   input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(0,0,0,0.12);color:var(--text);outline:none}
-  textarea{min-height:140px;background:rgba(0,0,0,0.12);color:#eaf8ff}
+  textarea{min-height:140px}
+
+  /* Footer */
   footer{padding:28px 0;text-align:center;color:var(--muted);font-size:0.95rem;border-top:1px solid rgba(255,255,255,0.02)}
-  .muted{color:var(--muted)}
-  .center{text-align:center}
-  .small{font-size:0.95rem}
+
+  /* Buttons hover & focus */
+  .cta-primary:hover{transform:translateY(-3px);box-shadow:0 18px 42px rgba(18,110,160,0.18)}
+  button:focus, a:focus{outline:3px solid rgba(34,193,255,0.14);outline-offset:3px;border-radius:8px}
+
+  /* Smooth scroll */
+  html{scroll-behavior:smooth}
 </style>
 </head>
 <body>
-  <!-- header -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- HEADER -->
   <header>
-    <div class="page nav">
+    <div class="nav page" role="navigation" aria-label="Top navigation">
       <div class="brand">
-        <svg width="44" height="44" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="border-radius:10px">
-          <defs><linearGradient id="lgB" x1="0" x2="1"><stop offset="0" stop-color="#4fd1ff"/><stop offset="1" stop-color="#1d8cff"/></linearGradient></defs>
-          <rect rx="18" width="100" height="100" fill="url(#lgB)"/>
-          <text x="50" y="60" text-anchor="middle" font-family="Inter,Arial" font-weight="700" font-size="44" fill="#02101a">A</text>
-        </svg>
+        <div class="logo" aria-hidden="true"><strong>A</strong></div>
         <div>
           <div class="title">Avios AI</div>
-          <div class="small muted">Production AI, simply delivered</div>
+          <div class="subtitle">Production AI, simply delivered</div>
         </div>
       </div>
 
-      <nav class="nav-links" aria-label="Main navigation">
+      <nav class="nav-links" aria-label="Main links">
         <a href="#about">About</a>
         <a href="#services">Services</a>
         <a href="#testimonials">Testimonials</a>
         <a href="#faq">FAQ</a>
-        <a href="#contact" class="btn-primary">Contact</a>
+        <a href="#contact" class="cta-primary">Contact</a>
       </nav>
     </div>
   </header>
 
   <!-- HERO -->
-  <main>
+  <main id="main">
     <section class="hero" aria-label="Hero">
       <canvas class="neural-canvas" id="neuralCanvas" aria-hidden="true"></canvas>
 
-      <div class="hero-inner">
-        <div class="hero-left">
+      <div class="hero-inner page" role="region" aria-label="Intro">
+        <div class="hero-left" style="z-index:2">
           <h1>Intelligent AI solutions for real-world outcomes</h1>
-          <p>Focused automation, practical NLP copilots and multimodal systems that reduce manual work and deliver measurable impact — start with a short PoC.</p>
+          <p class="lead">We build production-ready automation, NLP copilots and multimodal systems that reduce manual work and deliver measurable impact — start with a focused PoC.</p>
 
           <div class="hero-ctas">
-            <a href="#contact" class="btn-primary">Request consult</a>
-            <a class="card small" style="display:inline-flex;align-items:center;padding:8px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.02);">View case studies</a>
+            <a class="cta-primary" href="#contact" role="button">Request consult</a>
+            <a class="btn-ghost" href="#case-studies" role="button">View case studies</a>
           </div>
 
           <div class="kpis" aria-hidden="true">
-            <div class="kpi"><strong>1–2 weeks</strong><div class="small muted">PoC</div></div>
-            <div class="kpi"><strong>Production</strong><div class="small muted">Deployable</div></div>
-            <div class="kpi"><strong>Secure</strong><div class="small muted">Monitored</div></div>
+            <div class="kpi"><div>1–2 weeks</div><small style="color:var(--muted);font-weight:600">PoC</small></div>
+            <div class="kpi"><div>Production</div><small style="color:var(--muted);font-weight:600">Deployable</small></div>
+            <div class="kpi"><div>Secure</div><small style="color:var(--muted);font-weight:600">Monitored</small></div>
           </div>
         </div>
 
-        <div class="hero-right">
-          <div class="visual" role="img" aria-label="Avios visual">
+        <div class="hero-right" style="z-index:2">
+          <div class="visual" aria-hidden="true">
             <div class="image-wrap">
-              <img src="assets/backend-hero.png" alt="Avios visual" onerror="this.onerror=null;this.src='assets/hero-image.png'">
+              <img src="assets/backend-hero.png" alt="Avios product visual" onerror="this.onerror=null;this.src='assets/hero-image.png'">
             </div>
-            <div style="padding:4px 6px">
-              <strong style="display:block;color:#eaf8ff">Approach that converts</strong>
-              <div class="muted small">Measure impact with a focused PoC, then ship production with monitoring and support.</div>
+            <div style="padding:6px 8px">
+              <strong style="display:block;color:var(--text)">Approach that converts</strong>
+              <div class="muted" style="font-size:.95rem">Measure impact with a focused PoC, then ship production with monitoring and support.</div>
             </div>
           </div>
         </div>
@@ -167,13 +211,13 @@
     </section>
 
     <!-- ABOUT -->
-    <section id="about" class="page">
-      <div class="section-heading">About Avios AI</div>
-      <div style="margin-top:10px" class="two-col page">
+    <section id="about" aria-labelledby="about-heading">
+      <div class="section-heading" id="about-heading">About Avios AI</div>
+      <div class="container two-col">
         <div class="card">
-          <p>Avios AI helps teams replace manual work with reliable AI systems. Practical automation, domain-aware assistants and multimodal tools that deliver measurable ROI — not demos.</p>
+          <p>Avios AI helps teams replace manual work with reliable AI systems. We focus on practical automation, domain-aware assistants and multimodal tools that deliver measurable ROI — not demos.</p>
 
-          <h3 style="margin-top:12px;color:#eaf8ff">How we work</h3>
+          <h3 style="margin-top:12px">How we work</h3>
           <ul style="margin-left:18px;color:var(--muted)">
             <li>Discovery — define a measurable metric</li>
             <li>Prototype — focused PoC with clear outcomes</li>
@@ -181,8 +225,8 @@
           </ul>
         </div>
 
-        <aside class="card">
-          <h3 style="margin-top:0;color:#eaf8ff">Why Avios</h3>
+        <aside class="card" aria-label="Why Avios">
+          <h3 style="margin-top:0">Why Avios</h3>
           <ul style="margin-left:18px;color:var(--muted)">
             <li>Business-first: measurable KPIs</li>
             <li>Production-ready: reliable & monitored systems</li>
@@ -193,75 +237,74 @@
     </section>
 
     <!-- SERVICES -->
-    <section id="services" class="page">
-      <div class="section-heading">Services</div>
+    <section id="services" aria-labelledby="services-heading">
+      <div class="section-heading" id="services-heading">Services</div>
+      <div class="container grid-3" style="margin-top:12px">
+        <article class="service-card" aria-labelledby="s1">
+          <h3 id="s1">AI Automation</h3>
+          <p class="muted">Automate workflows, document processing and reporting with auditable pipelines and robust error handling.</p>
+        </article>
 
-      <div class="grid-3" style="margin-top:12px">
-        <div class="service-card">
-          <h3>AI Automation</h3>
-          <p class="muted">Automate workflows, document processing and reporting with auditable pipelines.</p>
-        </div>
-        <div class="service-card">
-          <h3>NLP Copilots</h3>
-          <p class="muted">Assistants for support, summarization, and knowledge work tailored to your data.</p>
-        </div>
-        <div class="service-card">
-          <h3>Multimodal Systems</h3>
-          <p class="muted">Combine text, images and documents to build smarter experiences.</p>
-        </div>
+        <article class="service-card" aria-labelledby="s2">
+          <h3 id="s2">NLP Copilots</h3>
+          <p class="muted">Domain-aware assistants for support, summarization and knowledge work tailored to your data and privacy needs.</p>
+        </article>
+
+        <article class="service-card" aria-labelledby="s3">
+          <h3 id="s3">Multimodal Systems</h3>
+          <p class="muted">Combine text, image and audio inputs to build smarter search, classification and assistant experiences.</p>
+        </article>
       </div>
     </section>
 
     <!-- CASE STUDIES -->
-    <section id="case-studies" class="page">
-      <div class="section-heading">Case studies</div>
-
-      <div class="case-grid" style="margin-top:12px">
+    <section id="case-studies" aria-labelledby="cases-heading">
+      <div class="section-heading" id="cases-heading">Case studies</div>
+      <div class="container case-grid">
         <article class="case-card">
           <h3>Support Copilot — FinTech</h3>
-          <p class="muted">Result: 35% faster triage and 30% fewer escalations through a domain-aware assistant integrated into the support flow.</p>
+          <p class="muted">Result: 35% faster triage and 30% fewer escalations via a domain-aware assistant integrated into support workflows.</p>
         </article>
 
         <article class="case-card">
           <h3>Reporting Automation — Logistics</h3>
-          <p class="muted">Result: saved 20+ hours/week using ETL + scheduled reporting and alerts.</p>
+          <p class="muted">Result: saved 20+ hours/week using scheduled ETL, automated reporting and alerts.</p>
         </article>
 
         <article class="case-card">
           <h3>Document Extraction — Enterprise</h3>
-          <p class="muted">Result: 96% accurate extraction with human-in-loop validation for high-value docs.</p>
+          <p class="muted">Result: 96% accurate extraction with human-in-loop validation for critical documents.</p>
         </article>
       </div>
     </section>
 
     <!-- MICRO CTA -->
-    <section class="page">
+    <section class="container" style="margin-top:8px">
       <div class="micro">
         <div>
-          <strong style="color:#eaf8ff">Curious how AI fits your workflow?</strong>
-          <div class="muted small" style="margin-top:6px">Tell us one pain point — we'll propose a focused experiment.</div>
+          <strong>Curious how AI fits your workflow?</strong>
+          <div class="muted small">Tell us one pain point — we'll propose a focused experiment.</div>
         </div>
-        <div><a href="#contact" class="btn-primary">Start conversation</a></div>
+        <div><a class="cta-primary" href="#contact">Start conversation</a></div>
       </div>
     </section>
 
     <!-- TESTIMONIALS -->
-    <section id="testimonials" class="page">
-      <div class="section-heading">What clients say</div>
-
-      <div style="max-width:860px;margin:14px auto 0">
+    <section id="testimonials" aria-labelledby="testimonials-heading">
+      <div class="section-heading" id="testimonials-heading">What clients say</div>
+      <div class="container" style="max-width:920px;margin-top:14px">
         <div class="swiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide testimonial">
-              <p style="font-style:italic">"Avios delivered a production-ready NLP assistant in 2 weeks — saved our team hours every day."</p>
+              <p>"Avios delivered a production-ready NLP assistant in 2 weeks — saved our team hours every day."</p>
               <cite class="muted">— Product Lead, FinTech</cite>
             </div>
             <div class="swiper-slide testimonial">
-              <p style="font-style:italic">"They automated reporting workflows and reduced manual effort by 40%."</p>
+              <p>"They automated reporting workflows and reduced manual effort by 40%."</p>
               <cite class="muted">— Head of Ops, Logistics</cite>
             </div>
             <div class="swiper-slide testimonial">
-              <p style="font-style:italic">"Clear communication, fast delivery and production-grade reliability."</p>
+              <p>"Clear communication, fast delivery and production-grade reliability."</p>
               <cite class="muted">— CTO, SaaS</cite>
             </div>
           </div>
@@ -271,22 +314,21 @@
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="page">
-      <div class="section-heading">FAQ</div>
-      <div style="margin-top:10px" class="faq-list">
+    <section id="faq" aria-labelledby="faq-heading">
+      <div class="section-heading" id="faq-heading">FAQ</div>
+      <div class="container faq-list" style="margin-top:10px">
         <div class="card">
-          <div class="faq-item"><div class="faq-question">How long does a PoC take?</div><div class="faq-answer">Typically 1–2 weeks — focused experiment with measurable KPI.</div></div>
-          <div class="faq-item"><div class="faq-question">Is my data secure?</div><div class="faq-answer">Yes — privacy-first practices, can deploy on your cloud with strict controls.</div></div>
-          <div class="faq-item"><div class="faq-question">What industries do you work with?</div><div class="faq-answer">Finance, logistics, SaaS and other enterprise teams focusing on measurable problems.</div></div>
+          <div class="faq-item"><div class="faq-question">How long does a PoC take?</div><div class="faq-answer">Typically 1–2 weeks — a focused experiment with measurable KPI.</div></div>
+          <div class="faq-item"><div class="faq-question">Is my data secure?</div><div class="faq-answer">Yes — we follow privacy-first practices and can deploy on your cloud with access controls.</div></div>
+          <div class="faq-item"><div class="faq-question">What industries do you work with?</div><div class="faq-answer">Finance, logistics, SaaS and other enterprise teams focused on measurable problems.</div></div>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="page">
-      <div class="section-heading">Request a free consultation</div>
-
-      <div class="contact-grid" style="margin-top:12px">
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="section-heading" id="contact-heading">Request a free consultation</div>
+      <div class="container contact-grid" style="margin-top:12px">
         <div class="card">
           <form id="contact-form" novalidate>
             <label for="name">Name</label>
@@ -302,8 +344,8 @@
             <textarea id="message" name="message" placeholder="Brief description, goals and timeline" required></textarea>
 
             <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
-              <button id="contact-submit" class="btn-primary" type="submit">Request consultation</button>
-              <div class="muted small">Or email: <a href="mailto:aviosplatform@gmail.com" style="color:var(--accent)">aviosplatform@gmail.com</a></div>
+              <button id="contact-submit" class="cta-primary" type="submit">Request consultation</button>
+              <div class="muted small">Or email: <a href="mailto:aviosplatform@gmail.com" style="color:var(--accent-1)">aviosplatform@gmail.com</a></div>
             </div>
 
             <p id="form-status" style="margin-top:12px;color:var(--muted)"></p>
@@ -312,9 +354,9 @@
         </div>
 
         <aside class="card">
-          <h3 style="margin-top:0;color:#eaf8ff">What happens next</h3>
+          <h3 style="margin-top:0">What happens next</h3>
           <ul style="margin-left:18px;color:var(--muted)">
-            <li>We review details and schedule a 15-min call</li>
+            <li>We review details and schedule a 15-minute call</li>
             <li>We propose a focused PoC with measurable KPIs</li>
             <li>We deliver a production-ready path & timeline</li>
           </ul>
@@ -329,135 +371,122 @@
     </div>
   </footer>
 
-  <!-- scripts -->
+  <!-- SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
   <script>
-  // Neural-lines background (canvas)
+  /* ====== Neural-lines canvas (subtle, performant) ====== */
   (function(){
     const canvas = document.getElementById('neuralCanvas');
     if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const N = 34;
+    let nodes = [];
     function resize(){
       const hero = document.querySelector('.hero');
       if(!hero) return;
       canvas.width = hero.clientWidth;
       canvas.height = hero.clientHeight;
+      nodes = [];
+      for(let i=0;i<N;i++){
+        nodes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-0.5)*0.4,vy:(Math.random()-0.5)*0.4,r:Math.random()*1.8+0.6});
+      }
     }
     window.addEventListener('resize', resize);
     resize();
-    const ctx = canvas.getContext('2d');
-    const nodes = [];
-    const N = 36;
-    function initNodes(){
-      nodes.length = 0;
-      for(let i=0;i<N;i++){
-        nodes.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, vx:(Math.random()-0.5)*0.35, vy:(Math.random()-0.5)*0.35, r: Math.random()*1.6+0.6 });
-      }
-    }
-    initNodes();
-    function draw(){
+    function frame(){
       ctx.clearRect(0,0,canvas.width,canvas.height);
+      // lines
       for(let i=0;i<N;i++){
         for(let j=i+1;j<N;j++){
-          const a = nodes[i], b = nodes[j];
+          const a=nodes[i], b=nodes[j];
           const dx=a.x-b.x, dy=a.y-b.y, d=Math.hypot(dx,dy);
           if(d<140){
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(61,178,255,${0.08*(1-d/140)})`;
+            ctx.strokeStyle = `rgba(34,193,255,${0.06*(1-d/140)})`;
             ctx.lineWidth = 1;
             ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
           }
         }
       }
+      // dots
       for(const p of nodes){
         ctx.beginPath();
-        ctx.fillStyle = 'rgba(61,178,255,0.9)';
+        ctx.fillStyle='rgba(34,193,255,0.9)';
         ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
-        p.x += p.vx; p.y += p.vy;
-        if(p.x < -10) p.x = canvas.width+10; if(p.x > canvas.width+10) p.x = -10;
-        if(p.y < -10) p.y = canvas.height+10; if(p.y > canvas.height+10) p.y = -10;
+        p.x+=p.vx; p.y+=p.vy;
+        if(p.x<-10)p.x=canvas.width+10; if(p.x>canvas.width+10)p.x=-10;
+        if(p.y<-10)p.y=canvas.height+10; if(p.y>canvas.height+10)p.y=-10;
       }
-      requestAnimationFrame(draw);
+      requestAnimationFrame(frame);
     }
-    window.addEventListener('resize', ()=>{ resize(); initNodes(); });
-    draw();
+    frame();
   })();
-  </script>
 
-  <script>
-    // Swiper testimonials
-    new Swiper('.swiper', {
-      loop: true,
-      centeredSlides: true,
-      slidesPerView: 1,
-      autoplay: { delay: 4200, disableOnInteraction: false },
-      pagination: { el: '.swiper-pagination', clickable: true },
-      speed: 700
+  /* Swiper for testimonials */
+  new Swiper('.swiper', {
+    loop:true,
+    centeredSlides:true,
+    slidesPerView:1,
+    autoplay:{delay:4200,disableOnInteraction:false},
+    pagination:{el:'.swiper-pagination',clickable:true},
+    speed:700
+  });
+
+  /* FAQ toggle */
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.addEventListener('click', ()=>{
+      const a = item.querySelector('.faq-answer');
+      if(!a) return;
+      a.style.display = a.style.display === 'block' ? 'none' : 'block';
     });
+  });
 
-    // FAQ toggle
-    document.querySelectorAll('.faq-item').forEach(item=>{
-      item.addEventListener('click', ()=> {
-        const ans = item.querySelector('.faq-answer');
-        if(!ans) return;
-        ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
-      });
-    });
+  /* Contact form -> Apps Script (your webapp) */
+  (function(){
+    const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbye6WBe-sERGIk_PvApsCFrS46Dq0t0s2rvic0mduAn1iZY_q5J49jinkaHPneqXxY18Q/exec";
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    const fallback = document.getElementById('fallback-mailto');
+    const submitBtn = document.getElementById('contact-submit');
 
-    // Contact form (Apps Script)
-    (function(){
-      const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbye6WBe-sERGIk_PvApsCFrS46Dq0t0s2rvic0mduAn1iZY_q5J49jinkaHPneqXxY18Q/exec";
-      const form = document.getElementById('contact-form');
-      const status = document.getElementById('form-status');
-      const fallback = document.getElementById('fallback-mailto');
-      const submitBtn = document.getElementById('contact-submit');
+    function setStatus(msg, err=false){
+      status.textContent = msg;
+      status.style.color = err ? '#ff9b9b' : '#9fffe0';
+    }
 
-      function setStatus(msg, isErr=false){
-        status.textContent = msg;
-        status.style.color = isErr ? '#ff8b8b' : '#8ff5d8';
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      submitBtn.disabled = true;
+      setStatus('Sending...');
+      const payload = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        company: form.company.value.trim(),
+        message: form.message.value.trim()
+      };
+      if(!payload.name || !payload.email || !payload.message){
+        setStatus('Please fill name, email and message.', true);
+        submitBtn.disabled = false; return;
       }
-
-      form.addEventListener('submit', async function(e){
-        e.preventDefault();
-        submitBtn.disabled = true;
-        setStatus('Sending...');
-        const payload = {
-          name: form.name.value.trim(),
-          email: form.email.value.trim(),
-          company: form.company.value.trim(),
-          message: form.message.value.trim()
-        };
-        if(!payload.name || !payload.email || !payload.message){
-          setStatus('Please complete name, email, and message.', true);
-          submitBtn.disabled = false;
-          return;
+      try{
+        const res = await fetch(WEBAPP_URL, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),mode:'cors'});
+        let data = null;
+        try{ data = await res.json(); }catch(e){}
+        if(res.ok && data && data.success){
+          setStatus('✅ Message sent — we will reply within one business day.');
+          form.reset(); fallback.style.display='none';
+        } else {
+          setStatus('❌ Unable to send. Use the fallback email below.', true);
+          fallback.style.display='block'; fallback.innerHTML = 'Or email: <a href="mailto:aviosplatform@gmail.com" style="color:var(--accent-1)">aviosplatform@gmail.com</a>';
         }
-        try {
-          const res = await fetch(WEBAPP_URL, {
-            method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify(payload),
-            mode: 'cors'
-          });
-          let json = null;
-          try { json = await res.json(); } catch(e){}
-          if(res.ok && json && json.success){
-            setStatus('✅ Message sent — we will reply within one business day.');
-            form.reset();
-            fallback.style.display = 'none';
-          } else {
-            setStatus('❌ Unable to send. Try again or email directly.', true);
-            fallback.style.display = 'block';
-            fallback.innerHTML = 'Or email: <a href="mailto:aviosplatform@gmail.com" style="color:var(--accent)">aviosplatform@gmail.com</a>';
-          }
-        } catch(err){
-          console.error(err);
-          setStatus('❌ Network error. Try again later.', true);
-          fallback.style.display = 'block';
-          fallback.innerHTML = 'Or email: <a href="mailto:aviosplatform@gmail.com" style="color:var(--accent)">aviosplatform@gmail.com</a>';
-        } finally { submitBtn.disabled = false; }
-      });
-    })();
+      }catch(err){
+        console.error(err);
+        setStatus('❌ Network error. Try again later.', true);
+        fallback.style.display='block'; fallback.innerHTML = 'Or email: <a href="mailto:aviosplatform@gmail.com" style="color:var(--accent-1)">aviosplatform@gmail.com</a>';
+      }finally{ submitBtn.disabled=false; }
+    });
+  })();
   </script>
 </body>
 </html>
