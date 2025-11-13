@@ -7,7 +7,7 @@
   <meta name="description" content="Avios AI builds production-ready automation, NLP copilots and multimodal AI systems that reduce manual work and deliver measurable outcomes." />
   <link rel="icon" href="assets/favicon.ico" />
 
-  <!-- Google font -->
+  <!-- Fonts & Tailwind -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -30,7 +30,7 @@
     a{text-decoration:none;color:inherit}
 
     /* header */
-    header.site { position:fixed; top:0; left:0; right:0; z-index:30; background:linear-gradient(180deg, rgba(2,6,12,0.86), rgba(2,6,12,0.6)); backdrop-filter: blur(8px); border-bottom:1px solid rgba(255,255,255,0.03); }
+    header.site { position:fixed; top:0; left:0; right:0; z-index:40; background:linear-gradient(180deg, rgba(2,6,12,0.86), rgba(2,6,12,0.6)); backdrop-filter: blur(8px); border-bottom:1px solid rgba(255,255,255,0.03); }
     header .container { max-width:var(--maxw); margin:0 auto; padding:12px 20px; display:flex; justify-content:space-between; align-items:center; gap:12px; }
     .brand { display:flex; align-items:center; gap:10px; }
     .logo { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-weight:800; background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); color:#021a22; }
@@ -41,18 +41,13 @@
     /* container */
     .wrap { max-width:var(--maxw); margin:0 auto; padding:18px; position:relative; z-index:10; }
 
-    /* HERO (with hero-only background) */
-    #hero { position:relative; padding-top:86px; padding-bottom:60px; overflow:visible; } /* increased bottom padding */
+    /* HERO */
+    #hero { position:relative; padding-top:86px; padding-bottom:64px; overflow:visible; }
     .bg-hero { position:absolute; left:0; right:0; top:0; height:420px; z-index:0; pointer-events:none; overflow:hidden; mix-blend-mode:screen; opacity:1; }
-    .network-svg { width:100%; height:100%; display:block; opacity:0.36; }
-    .node { position:absolute; width:8px; height:8px; border-radius:50%; background:radial-gradient(circle,#9fe8ff 0%, #2fb0ff 70%); box-shadow:0 0 10px rgba(47,176,255,0.95); }
-    @keyframes floatA { 0%{transform:translateY(0) translateX(0)} 50%{transform:translateY(-16px) translateX(10px)} 100%{transform:translateY(0) translateX(0)} }
-    @keyframes floatB { 0%{transform:translateY(0) translateX(0)} 50%{transform:translateY(12px) translateX(-8px)} 100%{transform:translateY(0) translateX(0)} }
-
     .hero-grid { display:grid; grid-template-columns:1fr 480px; gap:28px; align-items:center; position:relative; z-index:5; }
     @media(max-width:980px){ .hero-grid{ grid-template-columns:1fr; } .hero-image{ order:-1 } }
 
-    .hero-head { font-weight:800; margin:0; line-height:1; color:#ffffff; font-size:clamp(28px,5.8vw,44px); }
+    .hero-head { font-weight:800; margin:0; line-height:0.98; color:#ffffff; font-size:clamp(28px,5.8vw,48px); }
     .hero-sub { color:var(--muted); margin-top:12px; max-width:60ch; font-size:15px; }
 
     .btn-primary { background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); color:#021a22; font-weight:800; padding:10px 16px; border-radius:12px; display:inline-block; }
@@ -60,7 +55,7 @@
 
     .glass { background:var(--panel); border:var(--glass-border); border-radius:12px; padding:16px; box-shadow:0 8px 30px rgba(0,0,0,0.45); }
 
-    /* compact spacing across sections */
+    /* spacing & sections */
     section { padding:36px 0; }
     section h2 { text-align:center; font-size:22px; margin-bottom:12px; color:#eaf6ff; font-weight:800; }
 
@@ -79,36 +74,17 @@
     input,textarea{ width:100%; padding:10px 12px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); color:inherit; }
     label{ font-weight:700; color:#eaf6ff; font-size:14px; margin-bottom:6px; display:block; }
 
-    footer { padding:24px 0; color:var(--muted); text-align:center; }
+    footer { padding:40px 0 80px 0; color:var(--muted); text-align:center; }
 
-    /* === Force hero-only background: prevents leakage below hero === */
-    #hero { position:relative; }
-    main > section:not(#hero) .bg-hero { display:none !important; }
-    #hero + section { margin-top: 0; } /* we'll add spacing on about explicitly */
+    /* anchor spacing so fixed header doesn't hide anchors */
+    section { scroll-margin-top:120px; }
+    /* specific tweak: keep contact separated from previous sections */
+    #contact { margin-top:64px; padding-top:32px; }
 
-    @media(max-width:600px){
-      .wrap{ padding:12px; }
-      header .container{ padding:10px 12px; }
-      .bg-hero { height:320px; }
-      .hero-head{ font-size: clamp(22px,8vw,30px); }
-    }
-
-    /* ---------- SECTION / HEADER FIXES ---------- */
-    /* ensure anchored sections don't get hidden by fixed header */
-    section { scroll-margin-top:120px; } /* safe for most devices; adjust if header height changes */
-
-    /* specifically add spacing above contact so it doesn't visually merge */
-    #contact { margin-top:48px; padding-top:18px; }
-
-    /* smaller spacing tweak for FAQ if needed */
-    #faq { margin-top:28px; }
-
-    /* ---------- HERO PARTICLE LAYER (only visible in hero) ---------- */
-    #hero { position:relative; overflow:visible; } /* ensure hero can host absolute layer */
+    /* PARTICLE canvas: hero-only and limited height */
     #particles-hero { position:absolute; inset:0; z-index:0; pointer-events:none; }
-    #hero > .wrap { position:relative; z-index:2; } /* keep content above particles */
+    #hero > .wrap { position:relative; z-index:2; }
 
-    /* tune particle area height for hero (keeps it visually limited) */
     @media (min-width: 980px) {
       #particles-hero canvas { height:420px !important; width:100% !important; }
     }
@@ -116,6 +92,12 @@
       #particles-hero canvas { height:320px !important; width:100% !important; }
     }
 
+    @media(max-width:600px){
+      .wrap{ padding:12px; }
+      header .container{ padding:10px 12px; }
+      .bg-hero { height:320px; }
+      .hero-head{ font-size: clamp(22px,8vw,30px); }
+    }
   </style>
 </head>
 <body>
@@ -143,43 +125,39 @@
 
   <main style="position:relative; z-index:10;">
 
-    <!-- HERO (with hero-only background) -->
-    <section id="hero" aria-label="Hero" style="padding-bottom:60px;">
-      <!-- HERO background: only inside hero -->
+    <!-- HERO -->
+    <section id="hero" aria-label="Hero">
+      <!-- decorative vector lines / small nodes (kept subtle and top-only) -->
       <div class="bg-hero" aria-hidden="true">
         <svg class="network-svg" viewBox="0 0 1920 420" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="presentation">
           <defs>
             <linearGradient id="ng2" x1="0" x2="1">
-              <stop offset="0" stop-color="#2fb0ff" stop-opacity="0.95"/>
-              <stop offset="1" stop-color="#16a3d8" stop-opacity="0.7"/>
+              <stop offset="0" stop-color="#2fb0ff" stop-opacity="0.9"/>
+              <stop offset="1" stop-color="#16a3d8" stop-opacity="0.6"/>
             </linearGradient>
           </defs>
 
-          <g stroke="url(#ng2)" stroke-width="1.4" fill="none" opacity="0.95">
+          <!-- a few static connecting paths, very faint -->
+          <g stroke="url(#ng2)" stroke-width="1.2" fill="none" opacity="0.32">
             <path d="M60 160 L240 130 L360 190 L540 160" />
             <path d="M320 80 L460 120 L700 100 L980 140" />
             <path d="M120 300 L420 340 L760 310 L1120 340" />
           </g>
 
-          <g fill="#2fb0ff" opacity="0.98">
-            <circle cx="240" cy="130" r="3.6"/>
-            <circle cx="360" cy="190" r="3.6"/>
-            <circle cx="460" cy="120" r="3.6"/>
-            <circle cx="760" cy="310" r="3.6"/>
+          <!-- subtle nodes -->
+          <g fill="#2fb0ff" opacity="0.86">
+            <circle cx="240" cy="130" r="3.2"/>
+            <circle cx="360" cy="190" r="3.2"/>
+            <circle cx="460" cy="120" r="3.2"/>
+            <circle cx="760" cy="310" r="3.2"/>
           </g>
         </svg>
-
-        <div style="position:absolute; inset:0; pointer-events:none;">
-          <div class="node" style="left:6%; top:22%; animation:floatA 9s ease-in-out infinite;"></div>
-          <div class="node" style="left:30%; top:58%; animation:floatB 10s ease-in-out infinite;"></div>
-          <div class="node" style="left:62%; top:40%; animation:floatA 11s ease-in-out infinite;"></div>
-        </div>
       </div>
 
-      <!-- PARTICLE / CONNECT LAYER (ADDED) -->
+      <!-- particles / neural network canvas (hero-only) -->
       <div id="particles-hero" aria-hidden="true"></div>
 
-      <!-- HERO content -->
+      <!-- hero content -->
       <div class="wrap">
         <div class="hero-grid">
           <div>
@@ -189,12 +167,9 @@
             <div style="margin-top:18px; display:flex; gap:12px; align-items:center; flex-wrap:wrap">
               <a href="#contact" class="btn-primary">Request consult</a>
 
-              <!-- Replaced btn-ghost with a proper button-style that matches look -->
-              <a href="#case-studies" class="btn-primary" 
-                 style="background:rgba(255,255,255,0.08);
-                        color:#eaf6ff;
-                        border:1px solid rgba(255,255,255,0.15);
-                        font-weight:700;">
+              <!-- make 'View case studies' visually a button like Request consult -->
+              <a href="#case-studies" class="btn-primary"
+                 style="background:rgba(255,255,255,0.08); color:#eaf6ff; border:1px solid rgba(255,255,255,0.15); font-weight:700;">
                 View case studies
               </a>
             </div>
@@ -210,13 +185,13 @@
       </div>
     </section>
 
-    <!-- ABOUT (moved slightly down so it doesn't merge into hero) -->
-    <section id="about" style="margin-top:50px;">
+    <!-- ABOUT -->
+    <section id="about" style="margin-top:42px;">
       <div class="wrap">
         <h2>About Avios AI</h2>
         <div style="display:grid; grid-template-columns:1fr 320px; gap:18px; align-items:start;">
           <div class="glass">
-            <p class="muted">Avios AI helps teams replace manual work with reliable AI systems. Practical automation, domain-aware assistants and multimodal tools that deliver measurable ROI — not demos.</p>
+            <p style="color:var(--muted); margin:0 0 12px 0;">Avios AI helps teams replace manual work with reliable AI systems. Practical automation, domain-aware assistants and multimodal tools that deliver measurable ROI — not demos.</p>
 
             <h4 style="margin-top:12px; color:#eaf6ff">How we work</h4>
             <ul style="color:var(--muted); margin-top:8px; line-height:1.6;">
@@ -245,15 +220,15 @@
         <div class="grid-3">
           <div class="glass">
             <h4>AI Automation</h4>
-            <p class="muted">Automate workflows, document processing and reporting with auditable pipelines.</p>
+            <p style="color:var(--muted)">Automate workflows, document processing and reporting with auditable pipelines.</p>
           </div>
           <div class="glass">
             <h4>NLP Copilots</h4>
-            <p class="muted">Assistants for support, summarization and knowledge work — tailored to your data.</p>
+            <p style="color:var(--muted)">Assistants for support, summarization and knowledge work — tailored to your data.</p>
           </div>
           <div class="glass">
             <h4>Multimodal Systems</h4>
-            <p class="muted">Combine text, images and audio to build smarter experiences.</p>
+            <p style="color:var(--muted)">Combine text, images and audio to build smarter experiences.</p>
           </div>
         </div>
       </div>
@@ -264,9 +239,9 @@
       <div class="wrap">
         <h2>Case studies</h2>
         <div class="grid-3" style="margin-top:8px;">
-          <div class="glass"><h4>Support Copilot — FinTech</h4><p class="muted">35% faster triage and 30% fewer escalations.</p></div>
-          <div class="glass"><h4>Reporting Automation — Logistics</h4><p class="muted">Saved 20+ hours/week using scheduled ETL + reporting.</p></div>
-          <div class="glass"><h4>Document Extraction — Enterprise</h4><p class="muted">96% accurate extraction with human-in-loop validation.</p></div>
+          <div class="glass"><h4>Support Copilot — FinTech</h4><p style="color:var(--muted)">35% faster triage and 30% fewer escalations.</p></div>
+          <div class="glass"><h4>Reporting Automation — Logistics</h4><p style="color:var(--muted)">Saved 20+ hours/week using scheduled ETL + reporting.</p></div>
+          <div class="glass"><h4>Document Extraction — Enterprise</h4><p style="color:var(--muted)">96% accurate extraction with human-in-loop validation.</p></div>
         </div>
       </div>
     </section>
@@ -301,27 +276,27 @@
         <div style="max-width:920px;margin:12px auto;display:grid;gap:10px;">
           <div class="faq-item" data-open="false" tabindex="0" role="button" aria-expanded="false">
             <div class="faq-q"><div>How quickly can we see results?</div><div class="faq-toggle">▸</div></div>
-            <div class="faq-a">Most teams see measurable impact from a focused PoC in 1–2 weeks when the scope and KPI are agreed up front.</div>
+            <div class="faq-a">Most teams see measurable impact from a focused PoC in 1–2 weeks when scope and KPI are agreed up front.</div>
           </div>
 
           <div class="faq-item" data-open="false" tabindex="0" role="button" aria-expanded="false">
             <div class="faq-q"><div>Which deployment options do you support?</div><div class="faq-toggle">▸</div></div>
-            <div class="faq-a">Cloud, hybrid and on-prem — all with secure connectors and privacy-first data pipelines to meet compliance needs.</div>
+            <div class="faq-a">Cloud, hybrid and on-prem — all with secure connectors and a privacy-first approach to data handling.</div>
           </div>
 
           <div class="faq-item" data-open="false" tabindex="0" role="button" aria-expanded="false">
-            <div class="faq-q"><div>How do you ensure reliability in production?</div><div class="faq-toggle">▸</div></div>
-            <div class="faq-a">Continuous monitoring, human-in-loop validation, performance tracking and alerting to detect drift and maintain accuracy.</div>
+            <div class="faq-q"><div>How do you ensure reliability?</div><div class="faq-toggle">▸</div></div>
+            <div class="faq-a">We use monitoring, human-in-loop validation, performance tracking, and automated alerts to detect drift and keep models accurate in production.</div>
           </div>
 
           <div class="faq-item" data-open="false" tabindex="0" role="button" aria-expanded="false">
             <div class="faq-q"><div>What industries do you serve?</div><div class="faq-toggle">▸</div></div>
-            <div class="faq-a">We focus on workflows. Typical clients include FinTech, logistics, enterprise SaaS and regulated domains where reliability matters.</div>
+            <div class="faq-a">We help FinTech, logistics, enterprise SaaS and regulated domains where reliability and compliance are critical.</div>
           </div>
 
           <div class="faq-item" data-open="false" tabindex="0" role="button" aria-expanded="false">
             <div class="faq-q"><div>How do you measure success?</div><div class="faq-toggle">▸</div></div>
-            <div class="faq-a">We agree on a single KPI for the PoC (time saved, accuracy lift, throughput), measure ROI, and then scale what works.</div>
+            <div class="faq-a">We define a single KPI for the PoC (time saved, accuracy lift, throughput), measure ROI, and scale what works.</div>
           </div>
         </div>
       </div>
@@ -375,7 +350,7 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
   <script>
-    // Init Swiper for testimonials
+    // Swiper
     new Swiper('.swiper-testimonials', {
       loop: true,
       centeredSlides: true,
@@ -393,32 +368,24 @@
         const q = item.querySelector('.faq-q');
         const a = item.querySelector('.faq-a');
         const toggle = item.querySelector('.faq-toggle');
-
-        function open(){
-          a.style.display = 'block';
-          item.setAttribute('data-open','true');
-          item.setAttribute('aria-expanded','true');
-          toggle.textContent = '▾';
-        }
-        function close(){
-          a.style.display = 'none';
-          item.setAttribute('data-open','false');
-          item.setAttribute('aria-expanded','false');
-          toggle.textContent = '▸';
-        }
+        function open(){ a.style.display='block'; item.setAttribute('data-open','true'); item.setAttribute('aria-expanded','true'); toggle.textContent='▾'; }
+        function close(){ a.style.display='none'; item.setAttribute('data-open','false'); item.setAttribute('aria-expanded','false'); toggle.textContent='▸'; }
         close();
         item.addEventListener('click', () => { if(item.getAttribute('data-open')==='true') close(); else open(); });
         item.addEventListener('keydown', (e) => { if(e.key==='Enter' || e.key===' ') { e.preventDefault(); item.click(); } });
       });
     })();
+  </script>
 
-    // Contact form: Apps Script + mailto fallback
+  <!-- Contact form (Google Apps Script fallback & mailto fallback) -->
+  <script>
     (function(){
       const form = document.getElementById('contact-form');
       const statusEl = document.getElementById('form-status');
       const fallback = document.getElementById('mailto-fallback');
       const mailtoLink = document.getElementById('mailto-link');
 
+      // Replace with your Apps Script URL (the one you posted earlier)
       const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbye6WBe-sERGIk_PvApsCFrS46Dq0t0s2rvic0mduAn1iZY_q5J49jinkaHPneqXxY18Q/exec";
 
       form.addEventListener('submit', async function(e){
@@ -436,10 +403,11 @@
           const res = await fetch(SCRIPT_URL, { method:'POST', mode:'cors', headers:{ 'Content-Type':'application/x-www-form-urlencoded' }, body: body.toString() });
           let json = null;
           try { json = await res.json(); } catch(err){ json = null; }
-          const ok = res.ok && json && (json.success === true || json.result === 'success');
+          // success detection: script may return {success:true} or standard success HTTP; we accept either
+          const ok = res.ok && ( (json && json.success===true) || res.status === 200 );
           if(ok){ statusEl.textContent = '✅ Message sent — we will reply within one business day.'; form.reset(); }
           else {
-            statusEl.textContent = '❌ Error sending message — using mail client.';
+            statusEl.textContent = '❌ Error sending — using mail client.';
             prepareMailto(data); fallback.style.display = 'block';
             console.error('Apps Script response:', res.status, json);
           }
@@ -460,128 +428,163 @@
     })();
   </script>
 
-  <!-- PARTICLE / CONNECTED NODES (hero-only) -->
+  <!-- HERO: Neural-network-style canvas (subtle, hero-only) -->
   <script>
-  // Lightweight particle + connect effect that draws moving nodes and connecting lines
-  (function(){
-    const container = document.getElementById('particles-hero');
-    if(!container) return;
+    (function(){
+      const container = document.getElementById('particles-hero');
+      if(!container) return;
+      const DPR = Math.min(window.devicePixelRatio || 1, 2);
+      const canvas = document.createElement('canvas');
+      canvas.style.display = 'block';
+      container.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
 
-    const DPR = Math.min(window.devicePixelRatio || 1, 2);
-    const canvas = document.createElement('canvas');
-    canvas.style.display = 'block';
-    container.appendChild(canvas);
-    const ctx = canvas.getContext('2d');
+      let W = 0, H = 0;
+      function resize(){
+        W = container.clientWidth || document.documentElement.clientWidth;
+        H = container.clientHeight || 420;
+        canvas.width = Math.round(W * DPR);
+        canvas.height = Math.round(H * DPR);
+        canvas.style.width = W + 'px';
+        canvas.style.height = H + 'px';
+        ctx.setTransform(DPR,0,0,DPR,0,0);
+      }
+      window.addEventListener('resize', resize, {passive:true});
+      resize();
 
-    let width = 0, height = 0;
-    function resize(){
-      width = container.clientWidth;
-      height = container.clientHeight || 420;
-      canvas.width = Math.round(width * DPR);
-      canvas.height = Math.round(height * DPR);
-      canvas.style.width = width + 'px';
-      canvas.style.height = height + 'px';
-      ctx.setTransform(DPR,0,0,DPR,0,0);
-    }
-    window.addEventListener('resize', resize, {passive:true});
-    resize();
-
-    // particles
-    const N = Math.round(Math.max(12, Math.min(28, width/80))); // scale with width
-    const nodes = [];
-    for(let i=0;i<N;i++){
-      nodes.push({
-        x: Math.random()*width,
-        y: Math.random()*height,
-        r: 1.8 + Math.random()*2.6,
-        vx: (Math.random()-0.5) * 0.6,
-        vy: (Math.random()-0.5) * 0.6,
-        phase: Math.random()*Math.PI*2
-      });
-    }
-
-    function step(){
-      ctx.clearRect(0,0,width,height);
-
-      // subtle background gradient overlay (keeps hero color)
-      const g = ctx.createLinearGradient(0,0,width,0);
-      g.addColorStop(0,'rgba(20,40,55,0.06)');
-      g.addColorStop(1,'rgba(10,30,45,0.06)');
-      ctx.fillStyle = g;
-      ctx.fillRect(0,0,width,height);
-
-      // update positions
-      for(const p of nodes){
-        p.x += p.vx;
-        p.y += p.vy;
-        p.phase += 0.01;
-        // gentle oscillation
-        p.x += Math.sin(p.phase)*0.15;
-        p.y += Math.cos(p.phase)*0.12;
-
-        // keep inside bounds softly
-        if(p.x < -40) p.x = width + 40;
-        if(p.x > width + 40) p.x = -40;
-        if(p.y < -40) p.y = height + 40;
-        if(p.y > height + 40) p.y = -40;
+      // nodes and edges forming network shapes
+      const nodeCount = Math.max(12, Math.round(Math.min(28, W / 70))); // scale with width
+      const nodes = [];
+      for(let i=0;i<nodeCount;i++){
+        nodes.push({
+          x: Math.random()*W,
+          y: Math.random()*(H*0.85) + (H*0.05),
+          r: 1.6 + Math.random()*2.4,
+          vx: (Math.random()-0.5) * 0.6,
+          vy: (Math.random()-0.5) * 0.45,
+          wob: Math.random()*Math.PI*2
+        });
       }
 
-      // draw connections (only near each other)
-      ctx.lineWidth = 0.9;
-      for(let i=0;i<nodes.length;i++){
-        for(let j=i+1;j<nodes.length;j++){
-          const a = nodes[i], b = nodes[j];
-          const dx = a.x - b.x, dy = a.y - b.y;
-          const d2 = dx*dx + dy*dy;
-          const maxD = Math.min(160 * (width/1200), 200);
-          if(d2 < maxD*maxD){
-            const alpha = 0.18 * (1 - d2/(maxD*maxD));
-            ctx.strokeStyle = `rgba(47,176,255,${(alpha*0.85).toFixed(3)})`;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
+      // build adjacency by linking each node to its k nearest neighbors (k = 2..4)
+      function rebuildLinks(){
+        const links = [];
+        for(let i=0;i<nodes.length;i++){
+          // compute distances
+          const arr = [];
+          for(let j=0;j<nodes.length;j++){
+            if(i===j) continue;
+            const dx = nodes[i].x - nodes[j].x;
+            const dy = nodes[i].y - nodes[j].y;
+            arr.push({ j, d2: dx*dx + dy*dy });
+          }
+          arr.sort((a,b) => a.d2 - b.d2);
+          const k = 2 + Math.floor(Math.random()*2); // 2 or 3
+          for(let m=0;m<k && m < arr.length; m++){
+            const j = arr[m].j;
+            // avoid duplicate pair
+            if(!links.some(L => (L.a===j && L.b===i) || (L.a===i && L.b===j))){
+              links.push({ a:i, b:j });
+            }
           }
         }
+        return links;
+      }
+      let links = rebuildLinks();
+
+      // redraw links occasionally to keep organic shapes
+      setInterval(()=>{ links = rebuildLinks(); }, 8000 + Math.random()*7000);
+
+      // draw loop (subtle neural-network look with curved links)
+      let started=false;
+      function step(){
+        ctx.clearRect(0,0,W,H);
+
+        // faint dark overlay to keep contrast stable
+        const gOverlay = ctx.createLinearGradient(0,0,W,0);
+        gOverlay.addColorStop(0, 'rgba(5,12,22,0.06)');
+        gOverlay.addColorStop(1, 'rgba(4,9,18,0.06)');
+        ctx.fillStyle = gOverlay;
+        ctx.fillRect(0,0,W,H);
+
+        // update nodes
+        for(const n of nodes){
+          n.x += n.vx + Math.sin(n.wob)*0.08;
+          n.y += n.vy + Math.cos(n.wob)*0.06;
+          n.wob += 0.01;
+          // wrap
+          if(n.x < -50) n.x = W + 50;
+          if(n.x > W + 50) n.x = -50;
+          if(n.y < -50) n.y = H + 50;
+          if(n.y > H + 50) n.y = -50;
+        }
+
+        // draw curved links with gradient & glow (subtle)
+        for(const L of links){
+          const a = nodes[L.a], b = nodes[L.b];
+          const midx = (a.x + b.x)/2 + (Math.sin((a.wob+b.wob))*18);
+          const midy = (a.y + b.y)/2 + (Math.cos((a.wob+b.wob))*8);
+
+          // thickness and alpha vary with distance
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          const maxDist = Math.max(120, W / 6);
+          const alpha = Math.max(0, 0.22 * (1 - dist / maxDist));
+
+          // gradient color
+          const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+          grad.addColorStop(0, 'rgba(47,176,255,' + (alpha*0.85).toFixed(3) + ')');
+          grad.addColorStop(1, 'rgba(20,150,220,' + (alpha*0.65).toFixed(3) + ')');
+
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 0.9 + (0.9 * (1 - Math.min(dist / maxDist, 1)));
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          // use quadratic curve for gentle arched lines
+          ctx.quadraticCurveTo(midx, midy, b.x, b.y);
+          ctx.stroke();
+        }
+
+        // soft glow for nodes
+        for(const n of nodes){
+          const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r*6);
+          glow.addColorStop(0, 'rgba(109,219,255,0.11)');
+          glow.addColorStop(0.12, 'rgba(47,176,255,0.08)');
+          glow.addColorStop(1, 'rgba(10,30,45,0)');
+          ctx.fillStyle = glow;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r*5.2, 0, Math.PI*2);
+          ctx.fill();
+
+          // core dot
+          ctx.fillStyle = 'rgba(180,240,255,0.95)';
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+          ctx.fill();
+        }
+
+        requestAnimationFrame(step);
       }
 
-      // draw nodes
-      for(const p of nodes){
-        const rad = p.r;
-        const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad*6);
-        glow.addColorStop(0, 'rgba(109,219,255,0.95)');
-        glow.addColorStop(0.08, 'rgba(47,176,255,0.65)');
-        glow.addColorStop(1, 'rgba(10,30,45,0)');
-        ctx.fillStyle = glow;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, rad*4.1, 0, Math.PI*2);
-        ctx.fill();
-
-        ctx.fillStyle = 'rgba(180,240,255,0.95)';
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, rad, 0, Math.PI*2);
-        ctx.fill();
+      function startIfVisible(){
+        if(started) return;
+        started = true;
+        step();
       }
 
-      requestAnimationFrame(step);
-    }
-    // start only when visible to reduce CPU if user scrolled away
-    let started=false;
-    function onVisible(){
-      if(started) return;
-      started=true;
-      step();
-    }
-    // if hero initially visible -> start; otherwise use IntersectionObserver
-    const heroRect = container.getBoundingClientRect();
-    if(heroRect.top < window.innerHeight) onVisible();
-    else {
+      // start only when hero area is in view
       const obs = new IntersectionObserver((entries)=>{
-        if(entries[0].isIntersecting){ onVisible(); obs.disconnect(); }
-      }, {threshold:0.15});
+        if(entries[0].isIntersecting) { startIfVisible(); obs.disconnect(); }
+      }, {threshold: 0.12});
       obs.observe(container);
-    }
-  })();
+
+      // handle resize
+      window.addEventListener('resize', () => {
+        resize();
+        // rebuild nodes count if drastically different width
+        // (for simplicity we won't destroy old nodes — this keeps the animation smooth)
+      }, {passive:true});
+    })();
   </script>
 
 </body>
