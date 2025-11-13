@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -40,15 +40,9 @@
 
   <style>
     :root{
-      --bg:#041022;
-      --muted:#9fb7c4;
-      --text:#eaf6ff;
-      --accent-1:#22c1ff;
-      --accent-2:#1a8cff;
-      --panel: rgba(255,255,255,0.03);
-      --maxw:1200px;
-      --pad:20px;
-      --radius:12px;
+      --bg:#041022; --muted:#9fb7c4; --text:#eaf6ff;
+      --accent-1:#22c1ff; --accent-2:#1a8cff; --panel: rgba(255,255,255,0.03);
+      --maxw:1200px; --pad:20px; --radius:12px;
     }
     *{box-sizing:border-box}
     html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
@@ -112,7 +106,6 @@
     footer{padding:28px 0;text-align:center;color:var(--muted);font-size:0.95rem;border-top:1px solid rgba(255,255,255,0.02)}
     :focus{outline:3px solid rgba(34,193,255,0.12);outline-offset:3px;border-radius:6px}
 
-    /* Small utilities */
     .hidden-mobile{display:block}
     @media (max-width:920px){ .hidden-mobile{display:none} }
     .center{text-align:center}
@@ -158,23 +151,24 @@
 
           <aside class="hero-right" aria-hidden="false">
             <div class="visual">
-              <div class="image-wrap" role="img" aria-label="Avios AI futuristic hero visual">
-                <!-- primary uses hero-image.png (you confirmed this exists). cache-bust to force refresh -->
+              <!-- HERO IMAGE BLOCK: uses local PNG first, webp sources if present, and robust fallback -->
+              <div class="image-wrap" role="img" aria-label="Avios AI futuristic hero visual" style="position:relative;">
                 <picture>
                   <source srcset="assets/hero-avios-visual-1600.webp?v=1" type="image/webp">
                   <source srcset="assets/hero-avios-visual-1200.webp?v=1" type="image/webp">
+                  <!-- Primary: local PNG (you confirmed this exists) -->
                   <img id="hero-img" src="assets/hero-image.png?v=3"
                        srcset="assets/hero-image.png 1200w, assets/hero-image.png 800w"
                        sizes="(max-width:640px) 90vw, (max-width:1200px) 45vw, 420px"
                        alt="Avios AI futuristic hero visual"
                        loading="eager"
-                       style="width:100%;height:100%;object-fit:cover;object-position:center right;display:block">
+                       style="width:100%;height:100%;object-fit:cover;object-position:center right;display:block;border:0;">
                 </picture>
 
                 <div id="hero-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;border-radius:var(--radius);background:linear-gradient(90deg,#021025,#003243);text-align:center;color:var(--muted);padding:24px;">
                   <div style="max-width:560px;margin:0 auto">
                     <div style="font-weight:800;font-size:1.3rem;margin-bottom:8px;color:var(--text)">Avios AI</div>
-                    <div style="color:var(--muted)">Hero visual not available — please check assets/hero-image.png</div>
+                    <div id="hero-fallback-text" style="color:var(--muted)">Hero visual not available — using fallback.</div>
                   </div>
                 </div>
               </div>
@@ -361,13 +355,12 @@
       pagination:{el:'.swiper-pagination',clickable:true}, speed:700
     });
 
-    // FAQ accordion behavior (accessible)
+    // FAQ accordion (accessible)
     (function(){
       const toggles = document.querySelectorAll('.faq-toggle');
       toggles.forEach(btn => {
         btn.addEventListener('click', () => {
           const expanded = btn.getAttribute('aria-expanded') === 'true';
-          // close all
           toggles.forEach(b => {
             b.setAttribute('aria-expanded','false');
             const body = document.getElementById(b.getAttribute('aria-controls'));
@@ -375,7 +368,6 @@
             const icon = b.querySelector('span[aria-hidden="true"]');
             if(icon) icon.textContent = '▸';
           });
-          // open clicked if it was closed
           if(!expanded){
             btn.setAttribute('aria-expanded','true');
             const id = btn.getAttribute('aria-controls');
@@ -385,8 +377,6 @@
             if(icon) icon.textContent = '▾';
           }
         });
-
-        // keyboard support
         btn.addEventListener('keydown', (e) => {
           if(e.key === 'Enter' || e.key === ' '){
             e.preventDefault();
@@ -394,7 +384,6 @@
           }
         });
       });
-
       // open first by default
       const first = document.querySelector('.faq-toggle');
       if(first){
@@ -407,7 +396,7 @@
       }
     })();
 
-    // Contact form -> Apps Script endpoint with mailto fallback
+    // Contact form -> Apps Script endpoint (with mailto fallback)
     (function(){
       const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbye6WBe-sERGIk_PvApsCFrS46Dq0t0s2rvic0mduAn1iZY_q5J49jinkaHPneqXxY18Q/exec";
       const form = document.getElementById('contact-form');
@@ -425,7 +414,7 @@
         try{
           const res = await fetch(WEBAPP_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload), mode:'cors' });
           const json = await res.json().catch(()=>null);
-          if(res.ok && json && (json.success === true || json.ok === true)){
+          if(res.ok && json && (json.success === true || json.ok === true || json.result === "success")){
             setStatus('✅ Message sent. We will reply within one business day.');
             form.reset(); fallback.style.display='none';
           } else {
@@ -441,27 +430,52 @@
         }
         submitBtn.disabled = false;
       });
+    })();
 
-      // Hero image diagnostic: if image fails, show fallback overlay
-      (function(){
-        const img = document.getElementById('hero-img');
-        const fallbackOverlay = document.getElementById('hero-fallback');
-        if(!img) return;
-        img.addEventListener('error', () => {
-          if(fallbackOverlay) fallbackOverlay.style.display = 'flex';
-        });
-        img.addEventListener('load', () => {
-          if(img.naturalWidth === 0 && fallbackOverlay) fallbackOverlay.style.display = 'flex';
-        });
-        // timeout fallback
-        setTimeout(()=> {
-          if(!img.complete || img.naturalWidth === 0){
-            if(fallbackOverlay) fallbackOverlay.style.display = 'flex';
-            console.warn('Hero image may not have loaded - check assets path and filenames.');
+    // Hero loader + fallback (tries local PNG, then raw GitHub, then inline SVG)
+    (function(){
+      const img = document.getElementById('hero-img');
+      const fallbackOverlay = document.getElementById('hero-fallback');
+      if(!img) return;
+      const RAW = 'https://raw.githubusercontent.com/vineeth2002/Avios-AI/main/assets/hero-image.png';
+      const SVG_FALLBACK = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900"><rect width="100%" height="100%" fill="#041022"/><text x="60" y="160" fill="#22c1ff" font-size="48" font-family="Inter,Arial, sans-serif" font-weight="700">Avios AI</text></svg>'
+      );
+
+      function show(msg){
+        if(fallbackOverlay){ fallbackOverlay.style.display='flex'; const txt = document.getElementById('hero-fallback-text'); if(txt) txt.textContent = msg; }
+        console.warn('Hero:', msg);
+      }
+      function hide(){ if(fallbackOverlay) fallbackOverlay.style.display='none'; }
+
+      img.addEventListener('load', () => {
+        if(img.naturalWidth > 0) hide();
+        else show('Loaded but image is empty; using fallback.');
+      });
+
+      img.addEventListener('error', async () => {
+        show('Local asset failed — trying GitHub raw asset...');
+        try {
+          const res = await fetch(RAW, { method:'HEAD', mode:'cors' });
+          if(res.ok){
+            img.src = RAW + '?v=' + Date.now();
+            console.log('Switched to raw asset:', img.src);
+          } else {
+            console.warn('Raw HEAD returned', res.status);
+            img.src = SVG_FALLBACK; show('Using inline fallback visual.');
           }
-        }, 4500);
-      })();
+        } catch(err){
+          console.error('Raw fetch error', err);
+          img.src = SVG_FALLBACK; show('Using inline fallback visual.');
+        }
+      });
 
+      // safety timeout to trigger fallback chain
+      setTimeout(()=> {
+        if(!img.complete || img.naturalWidth === 0){
+          img.dispatchEvent(new Event('error'));
+        }
+      }, 4000);
     })();
   </script>
 </body>
