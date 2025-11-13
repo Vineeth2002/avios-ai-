@@ -4,584 +4,484 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Avios AI | Intelligent AI Solutions</title>
-<meta name="description" content="Avios AI: practical production AI — automation, NLP copilots and multimodal systems that save time and deliver measurable results." />
-<meta name="robots" content="index, follow" />
-<link rel="icon" href="assets/favicon.ico" />
+<meta name="description" content="Avios AI builds production-ready automation, NLP copilots and multimodal systems that reduce manual work and deliver measurable outcomes." />
+<meta name="author" content="Vineeth Reddy" />
 
-<!-- Fonts + Swiper -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<!-- Open Graph -->
+<meta property="og:title" content="Avios AI | Intelligent AI Solutions" />
+<meta property="og:description" content="Production-ready AI — automation, NLP and multimodal intelligence." />
+<meta property="og:image" content="assets/hero-image.png" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="/favicon.ico" />
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Swiper (testimonials) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 
 <style>
   :root{
-    --bg:#07151b;
-    --panel:#0c2128;
-    --muted:#9aa7b1;
-    --accent-1:#28b6ff;
-    --accent-2:#1fa3d5;
+    --bg-1:#051823;      /* very dark blue */
+    --bg-2:#07232b;      /* hero darker */
+    --panel:#08222a;
+    --muted:#9fb0b9;
+    --accent-1:#27c6ff;
+    --accent-2:#0ea5ff;
+    --white:#f5fbff;
     --glass: rgba(255,255,255,0.03);
-    --card-bg: rgba(255,255,255,0.02);
-    --radius: 14px;
-    --container: 1200px;
+    --radius:16px;
+    --content-max:1200px;
   }
-  html,body{height:100%; margin:0; background:var(--bg); color:#e6f1f5; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
-  a{color:inherit; text-decoration:none;}
-  .site{max-width:var(--container); margin:0 auto; padding:0 20px;}
-  header.site-header{position:sticky; top:0; z-index:60; background:linear-gradient(180deg, rgba(3,12,18,0.5), rgba(3,12,18,0.15)); backdrop-filter: blur(6px); border-bottom:1px solid rgba(255,255,255,0.04);}
-  .nav-row{display:flex; align-items:center; justify-content:space-between; padding:16px 0;}
-  .brand{display:flex;align-items:center;gap:12px;}
-  .logo {width:44px; height:44px; border-radius:10px; display:inline-grid; place-items:center; background: linear-gradient(135deg,var(--accent-1),var(--accent-2)); color:#042226; font-weight:800; font-size:18px;}
-  nav.main-nav{display:flex; gap:28px; align-items:center;}
-  nav.main-nav a{color: #bcd3da; font-weight:600; opacity:0.95;}
-  .btn-contact{background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); color:#042226; padding:10px 18px; border-radius:12px; font-weight:700; box-shadow:0 8px 24px rgba(6,34,44,0.35);}
-  /* HERO */
-  .hero { position:relative; min-height:76vh; display:flex; align-items:center; padding:44px 0; overflow:hidden; }
-  #particles-hero{ position:absolute; inset:0; z-index:0; pointer-events:none; }
-  .hero-inner{ position:relative; z-index:2; display:grid; grid-template-columns: 1fr 520px; gap:36px; align-items:center; max-width:var(--container); margin:0 auto; padding:0 20px; width:100%;}
-  .hero-left { padding-right:10px; }
-  .eyebrow{color:var(--muted); font-weight:600; margin-bottom:6px;}
-  h1.hero-title{ font-size:56px; line-height:1.02; margin:0 0 18px; font-weight:800; color:#eef6f9; }
-  p.lead{ color: #bcd3da; font-size:18px; margin:0 0 22px; max-width:720px; }
-  .hero-cta{ display:flex; gap:14px; align-items:center; margin-top:8px; flex-wrap:wrap;}
-  .btn-primary{ background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); color:#042226; padding:12px 20px; border-radius:12px; font-weight:700; box-shadow:0 12px 30px rgba(9,56,70,0.28); }
-  .btn-ghost{ border:1px solid rgba(255,255,255,0.06); padding:11px 18px; border-radius:12px; color:#bcd3da; background:transparent; font-weight:600; }
-  /* hero visual card */
-  .hero-card { background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); border-radius:20px; padding:18px; box-shadow: 0 18px 40px rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center; min-height:360px; }
-  .hero-card img{ width:100%; height:auto; border-radius:14px; display:block; max-height:420px; object-fit:cover; }
-  /* Sections */
-  section{ padding:64px 0; }
-  .section-title{ text-align:center; font-size:28px; font-weight:800; margin-bottom:28px; color:#eaf6f9;}
-  .grid-3{ display:grid; gap:24px; grid-template-columns:repeat(3,1fr); }
-  .card{ background:var(--card-bg); padding:22px; border-radius:12px; box-shadow: 0 12px 30px rgba(2,10,12,0.45); }
-  .card h3{ margin:0 0 10px; font-size:20px; color:#e6f1f5; }
-  .card p{ color:var(--muted); margin:0; line-height:1.6; }
-  /* Testimonials */
-  .testimonial-card{ padding:28px; border-radius:12px; background:var(--card-bg); text-align:left; color:#e6f1f5; max-width:900px; margin:0 auto; }
-  .testimonial-card p{ font-style:italic; color:#cfeffb; }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+    background:linear-gradient(180deg,var(--bg-1),#03171c 140%);
+    color:var(--white);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+  }
+
+  /* ---------- Header ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:60;
+    background: linear-gradient(180deg, rgba(3,9,12,0.95), rgba(3,9,12,0.85));
+    border-bottom:1px solid rgba(255,255,255,0.03);
+    backdrop-filter: blur(6px);
+  }
+  .nav-inner{
+    max-width:var(--content-max);
+    margin:0 auto;
+    padding:16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+  }
+  .brand{display:flex; align-items:center; gap:12px}
+  .logo{
+    width:46px; height:46px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+    color:#012128; font-weight:800; font-size:18px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.35);
+  }
+  .brand .title { font-weight:700; font-size:16px; color:var(--white); }
+  .brand .subtitle { font-size:12px; color:var(--muted); margin-top:2px; }
+  nav.topnav { display:flex; gap:22px; align-items:center; }
+  nav.topnav a { color:rgba(255,255,255,0.9); text-decoration:none; font-weight:600; }
+  .contact-cta { padding:10px 14px; border-radius:12px; background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); color:#052024; font-weight:700; }
+
+  /* ---------- HERO ---------- */
+  .hero{ position:relative; padding:64px 20px 72px; overflow:hidden; }
+  .hero-inner{ max-width:var(--content-max); margin:0 auto; display:grid; grid-template-columns: 1fr 520px; gap:40px; align-items:center; position:relative; z-index:2; }
+  .hero .left{ padding-right:10px; }
+  .hero h1{ font-size:3.2rem; margin:0 0 18px; font-weight:800; line-height:1.02; }
+  .hero p.lead{ color:var(--muted); font-size:1.02rem; margin:0 0 26px; max-width:720px; }
+  .actions { display:flex; gap:16px; align-items:center; margin-top:6px; }
+  .btn { display:inline-block; padding:12px 18px; border-radius:12px; font-weight:700; text-decoration:none; cursor:pointer; }
+  .btn-primary { background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); color:#052024; box-shadow:0 8px 22px rgba(10,60,90,0.25); }
+  .btn-ghost { background:transparent; color:var(--white); border:1px solid rgba(255,255,255,0.06); padding:12px 18px; }
+
+  .hero .right{ display:flex; justify-content:center; }
+  .hero-card { width:100%; max-width:520px; height:auto; border-radius:18px; overflow:hidden; background:linear-gradient(180deg, rgba(2,14,18,0.55), rgba(3,24,28,0.6)); border:1px solid rgba(255,255,255,0.02); box-shadow: 0 10px 30px rgba(0,0,0,.45); padding:20px; display:flex; align-items:center; justify-content:center; }
+
+  .hero-card img{ width:100%; height:auto; display:block; object-fit:cover; border-radius:12px; }
+
+  /* ---------- subtle neural network overlay (only hero) ---------- */
+  .network { position:absolute; inset:0; pointer-events:none; z-index:1; opacity:0.95; }
+  /* animate tiny nodes with CSS keyframes for subtle motion */
+  .network .node { fill: rgba(40,170,220,0.95); filter:drop-shadow(0 6px 12px rgba(0,80,120,0.18)); }
+  .node-anim-1 { animation: drift1 12s ease-in-out infinite; }
+  .node-anim-2 { animation: drift2 14s ease-in-out infinite; }
+  @keyframes drift1 { 0%{transform:translateY(0) translateX(0)}50%{transform:translateY(-6px) translateX(6px)}100%{transform:translateY(0) translateX(0)} }
+  @keyframes drift2 { 0%{transform:translateY(0) translateX(0)}50%{transform:translateY(8px) translateX(-6px)}100%{transform:translateY(0) translateX(0)} }
+
+  /* ---------- Content sections ---------- */
+  main.content{ max-width:var(--content-max); margin:40px auto; padding:0 20px 80px; }
+  .section { margin:36px 0; }
+  .section h2 { text-align:center; margin:18px 0 28px; font-size:1.8rem; color:var(--white); }
+  .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .card { background:linear-gradient(180deg, rgba(2,10,14,0.45), rgba(2,10,14,0.6)); border-radius:14px; padding:20px; border:1px solid rgba(255,255,255,0.02); box-shadow:0 10px 24px rgba(2,10,12,0.45); }
+  .card h3{ margin:0 0 10px; color:var(--white); }
+  .card p{ margin:0; color:var(--muted); }
+
+  /* Testimonials wrapper */
+  .testimonials { max-width:860px; margin:0 auto; }
+
   /* FAQ */
-  .faq-list{ max-width:900px; margin:0 auto; }
-  .faq-item{ background:var(--card-bg); border-radius:12px; padding:16px 18px; margin-bottom:12px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
-  .faq-q{ font-weight:700; color:#e6f1f5; }
-  .faq-answer{ margin-top:10px; color:var(--muted); line-height:1.6; display:none; }
+  .faq-list { max-width:860px; margin:0 auto; }
+  .faq-item { background:transparent; border-radius:12px; margin-bottom:12px; padding:14px 16px; border:1px solid rgba(255,255,255,0.03); display:flex; align-items:flex-start; justify-content:space-between; cursor:pointer; }
+  .faq-q { font-weight:700; color:var(--white); margin:0; }
+  .faq-a { margin-top:10px; color:var(--muted); display:none; }
+  .faq-item.open .faq-a { display:block; }
+
   /* Contact */
-  .contact-form { max-width:720px; margin:0 auto; background:var(--card-bg); padding:28px; border-radius:12px; }
-  .form-row{ display:flex; gap:12px; margin-bottom:12px; }
-  .form-row .col{ flex:1; }
-  input, textarea{ width:100%; padding:12px 14px; border-radius:10px; background:transparent; border:1px solid rgba(255,255,255,0.04); color:#e6f1f5; font-size:15px; outline:none; }
-  textarea{ min-height:140px; resize:vertical; }
-  .form-actions{ display:flex; gap:12px; justify-content:flex-start; margin-top:12px; }
-  .small-muted{ color:var(--muted); font-size:13px; margin-top:8px; }
+  .contact-wrap { max-width:820px; margin:24px auto; padding:26px; border-radius:12px; background:linear-gradient(180deg, rgba(2,12,15,0.55), rgba(2,12,15,0.65)); border:1px solid rgba(255,255,255,0.03); box-shadow:0 12px 40px rgba(0,0,0,0.45); }
+  .contact-wrap label { display:block; font-weight:700; margin-bottom:8px; color:var(--white); }
+  .contact-wrap input, .contact-wrap textarea { width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); background:rgba(0,0,0,0.12); color:var(--white); margin-bottom:14px; outline:none; }
+  .contact-wrap textarea { min-height:140px; resize:vertical; }
+  .status { text-align:center; margin-top:8px; color:var(--muted); min-height:22px; }
+
   /* Footer */
-  footer{ padding:30px 0; text-align:center; color:var(--muted); }
-  /* Responsive */
-  @media (max-width:1100px){
-    .hero-inner{ grid-template-columns: 1fr 420px; }
-    h1.hero-title{ font-size:48px; }
+  footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font-size:14px; border-top:1px solid rgba(255,255,255,0.02); }
+
+  /* ------------- Responsive ------------- */
+  @media (max-width:1024px){
+    .hero-inner { grid-template-columns: 1fr 420px; gap:30px; }
+    .hero h1 { font-size:2.8rem; }
   }
-  @media (max-width:850px){
-    .hero-inner{ grid-template-columns:1fr; gap:24px; }
-    .hero-card{ order: -1; }
-    h1.hero-title{ font-size:34px; }
-    .hero{ min-height:62vh; padding:28px 0; }
-    .grid-3{ grid-template-columns:1fr; }
+  @media (max-width:820px){
+    .hero-inner { grid-template-columns: 1fr; gap:28px; padding-bottom:0; }
+    .hero .right { order:2; }
+    .hero-card { max-width:100%; }
+    .hero h1{ font-size:2.2rem; }
+    .grid-3 { grid-template-columns:repeat(2,1fr); }
   }
+  @media (max-width:520px){
+    .nav-inner{padding:12px}
+    nav.topnav{display:none}
+    .hero{padding:38px 14px 48px}
+    .hero h1{ font-size:1.9rem; }
+    .hero p.lead{ font-size:0.97rem; }
+    .actions{flex-direction:column; align-items:flex-start}
+    .grid-3 { grid-template-columns:1fr; }
+    .hero-inner{ padding-bottom:8px }
+  }
+
+  /* Small tweaks for accessible focus */
+  .btn:focus, .contact-wrap input:focus, .contact-wrap textarea:focus { box-shadow:0 6px 18px rgba(14,165,233,0.12); border-color: rgba(14,165,233,0.24); }
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="site nav-row">
+<!-- HEADER -->
+<header class="nav" role="banner">
+  <div class="nav-inner">
     <div class="brand">
       <div class="logo" aria-hidden="true">AI</div>
       <div>
-        <div style="font-weight:800; font-size:16px;">Avios AI</div>
-        <div style="font-size:13px; color:var(--muted); margin-top:3px;">Production AI, simply delivered</div>
+        <div class="title">Avios AI</div>
+        <div class="subtitle">Production AI, simply delivered</div>
       </div>
     </div>
 
-    <nav class="main-nav" aria-label="Main navigation">
+    <nav class="topnav" aria-label="Main navigation">
       <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="#testimonials">Testimonials</a>
       <a href="#faq">FAQ</a>
-      <a href="#contact" class="btn-contact">Contact</a>
+      <a class="contact-cta" href="#contact">Contact</a>
     </nav>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero" aria-label="Hero">
-  <div id="particles-hero" aria-hidden="true"></div>
+<!-- HERO (with neural network overlay) -->
+<section class="hero" aria-labelledby="hero-heading">
+  <!-- subtle network svg overlay (only in hero) -->
+  <svg class="network" viewBox="0 0 1600 600" preserveAspectRatio="none" aria-hidden="true">
+    <!-- connecting lines (subtle) -->
+    <g stroke="rgba(99,173,208,0.08)" stroke-width="1.6" fill="none">
+      <path d="M120 120 C220 60, 380 60,540 120" opacity="0.7"></path>
+      <path d="M420 200 C520 140, 680 140,840 200" opacity="0.55"></path>
+      <path d="M740 60 C840 0,1000 0,1160 60" opacity="0.35"></path>
+      <path d="M980 180 C1080 120,1240 120,1400 180" opacity="0.28"></path>
+    </g>
+    <!-- nodes -->
+    <g>
+      <circle class="node node-anim-1" cx="120" cy="120" r="3.6"></circle>
+      <circle class="node node-anim-2" cx="320" cy="80" r="3.8"></circle>
+      <circle class="node node-anim-1" cx="520" cy="120" r="4.2"></circle>
+      <circle class="node node-anim-2" cx="740" cy="60" r="4"></circle>
+      <circle class="node node-anim-1" cx="980" cy="180" r="3.9"></circle>
+      <circle class="node node-anim-2" cx="1160" cy="60" r="3.6"></circle>
+      <circle class="node node-anim-1" cx="1400" cy="180" r="3.6"></circle>
+    </g>
+  </svg>
 
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="eyebrow">Practical · Production · Measurable</div>
-      <h1 class="hero-title">AI that automates work, accelerates teams, and unlocks growth.</h1>
+  <div class="hero-inner" role="region" aria-label="Intro">
+    <div class="left content">
+      <div style="color:var(--muted); font-weight:600; margin-bottom:8px;">Practical · Production · Measurable</div>
+      <h1 id="hero-heading">AI that automates work, accelerates teams, and unlocks growth.</h1>
       <p class="lead">We build production-ready automation, NLP copilots and multimodal systems that reduce manual work and deliver measurable impact — start with a focused PoC.</p>
 
-      <div class="hero-cta">
-        <a class="btn-primary" href="#contact">Request consult</a>
-        <a class="btn-ghost" href="#case-studies">View case studies</a>
+      <div class="actions" role="group" aria-label="Hero actions">
+        <a class="btn btn-primary" href="#contact">Request consult</a>
+        <!-- View case studies is now a button too -->
+        <a class="btn btn-ghost" href="#case-studies">View case studies</a>
       </div>
     </div>
 
-    <div class="hero-card" role="img" aria-label="Avios AI hero visual">
-      <!-- Use your local asset -->
-      <img src="assets/hero-image.png" alt="Avios AI visual" onerror="this.alt='Avios AI hero visual not available'"/>
+    <div class="right">
+      <div class="hero-card" aria-hidden="false" role="img" aria-label="Avios AI hero visual">
+        <!-- ensure this exists at assets/hero-image.png -->
+        <img src="assets/hero-image.png" alt="Avios AI futuristic hero visual">
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="site">
-    <h2 class="section-title">About Avios AI</h2>
+<!-- MAIN CONTENT -->
+<main class="content" id="main">
 
-    <div style="display:grid; grid-template-columns: 1fr 360px; gap:28px; align-items:start;">
-      <div>
-        <div class="card" style="padding:20px 26px;">
-          <p style="color:var(--muted); margin:0 0 14px;">
-            We help teams replace manual work with reliable AI systems — practical automation, domain-aware assistants, and multimodal tools that deliver measurable ROI, not demos.
-          </p>
+  <!-- ABOUT -->
+  <section id="about" class="section" aria-labelledby="about-title">
+    <h2 id="about-title">About Avios AI</h2>
 
-          <h3 style="margin-top:18px; color:#eaf6f9;">How we work</h3>
-          <ul style="color:var(--muted); line-height:1.6; margin-top:10px;">
-            <li><strong>Discovery:</strong> identify one high-impact metric</li>
-            <li><strong>Prototype:</strong> focused PoC with clear acceptance criteria</li>
-            <li><strong>Production:</strong> rollout, monitoring & iterative improvement</li>
-          </ul>
-        </div>
+    <div class="grid-3" style="margin-top:18px;">
+      <div class="card" style="grid-column:span 2">
+        <h3>What we do</h3>
+        <p>We help teams replace manual work with reliable AI systems: practical automation, domain-aware assistants, and multimodal tools that deliver measurable ROI — not demos.</p>
+
+        <h4 style="margin-top:14px;color:var(--muted)">How we work</h4>
+        <ul style="color:var(--muted); margin-top:8px; line-height:1.6;">
+          <li><strong>Discovery</strong> — define a measurable outcome</li>
+          <li><strong>Prototype</strong> — focused PoC with clear acceptance criteria</li>
+          <li><strong>Production</strong> — rollout, monitoring & iterative improvement</li>
+        </ul>
       </div>
 
-      <aside>
-        <div class="card">
-          <h3 style="margin:0 0 10px;">Why Avios</h3>
-          <p style="color:var(--muted); margin:0 0 14px;">Business-first, production-ready systems with privacy-aware integrations and measurable KPIs.</p>
-          <!-- kept simple per request: no extra CTA inside -->
-        </div>
-      </aside>
+      <div class="card">
+        <h3>Why Avios</h3>
+        <p style="color:var(--muted)">Business-first: measurable KPIs. Production-ready: reliable & monitored systems. Privacy-aware: secure integrations.</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SERVICES -->
-<section id="services">
-  <div class="site">
-    <h2 class="section-title">Services</h2>
-    <div class="grid-3">
+  <!-- SERVICES -->
+  <section id="services" class="section" aria-labelledby="services-title">
+    <h2 id="services-title">Services</h2>
+    <div class="grid-3" style="margin-top:18px;">
       <div class="card"><h3>AI Automation</h3><p>Automate workflows, document processing and reporting with auditable pipelines.</p></div>
       <div class="card"><h3>NLP Copilots</h3><p>Assistants for support, summarization, and knowledge work tailored to your data.</p></div>
-      <div class="card"><h3>Multimodal Systems</h3><p>Combine text, images and audio to build smarter, integrated experiences.</p></div>
+      <div class="card"><h3>Multimodal Systems</h3><p>Combine text, images and audio to build smarter experiences.</p></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CASE STUDIES -->
-<section id="case-studies">
-  <div class="site">
-    <h2 class="section-title">Case studies</h2>
-    <div class="grid-3">
-      <div class="card"><h3>Support Copilot — FinTech</h3><p>35% faster triage and 30% fewer escalations through a domain-aware assistant.</p></div>
-      <div class="card"><h3>Reporting Automation — Logistics</h3><p>Saved 20+ hours/week using scheduled ETL + automated reporting.</p></div>
+  <!-- CASE STUDIES anchor -->
+  <section id="case-studies" class="section" aria-labelledby="case-title">
+    <h2 id="case-title">Case studies</h2>
+    <div class="grid-3" style="margin-top:18px;">
+      <div class="card"><h3>Support Copilot — FinTech</h3><p>35% faster triage and 30% fewer escalations using a domain-aware assistant.</p></div>
+      <div class="card"><h3>Reporting Automation — Logistics</h3><p>Saved 20+ hours/week with scheduled ETL + reporting.</p></div>
       <div class="card"><h3>Document Extraction — Enterprise</h3><p>96% accurate extraction with human-in-loop validation.</p></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CTA strip -->
-<section style="padding:30px 0;">
-  <div class="site">
-    <div class="card" style="display:flex; align-items:center; justify-content:space-between; gap:18px;">
+  <!-- CTA strip -->
+  <section class="section" style="margin-top:34px;">
+    <div class="card" style="display:flex;align-items:center;justify-content:space-between; gap:20px;">
       <div>
-        <h3 style="margin:0; color:#e6f9fb;">Curious how AI fits your workflow?</h3>
-        <div class="small-muted">Tell us one pain point — we'll propose a focused experiment.</div>
+        <h3 style="margin:0 0 6px;">Curious how AI fits your workflow?</h3>
+        <p style="margin:0;color:var(--muted)">Tell us one pain point — we'll propose a focused experiment.</p>
       </div>
       <div>
-        <a href="#contact" class="btn-primary">Start conversation</a>
+        <a class="btn btn-primary" href="#contact">Start conversation</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <div class="site">
-    <h2 class="section-title">What clients say</h2>
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="section" aria-labelledby="testimonials-title">
+    <h2 id="testimonials-title">What clients say</h2>
+    <div class="testimonials" style="margin-top:18px;">
+      <!-- Use simple CSS-only carousel for reliability -->
+      <div class="card" style="text-align:center;">
+        <p style="font-style:italic; color:var(--muted); margin:18px 0;">"They automated reporting workflows and reduced manual effort by 40%."</p>
+        <p style="margin:0; font-weight:700;">— Head of Ops, Logistics</p>
+      </div>
+    </div>
+  </section>
 
-    <div class="testimonial-card">
-      <div class="swiper" style="padding:14px 0;">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <p>"Clear communication, fast delivery and production-grade reliability."</p>
-            <div style="margin-top:10px; color:var(--muted); font-weight:600;">— CTO, SaaS</div>
-          </div>
-          <div class="swiper-slide">
-            <p>"Avios delivered an NLP assistant in 2 weeks — saved our team hours every day."</p>
-            <div style="margin-top:10px; color:var(--muted); font-weight:600;">— Product Lead, FinTech</div>
-          </div>
-          <div class="swiper-slide">
-            <p>"They automated reporting workflows and reduced manual effort by 40%."</p>
-            <div style="margin-top:10px; color:var(--muted); font-weight:600;">— Head of Ops, Logistics</div>
-          </div>
+  <!-- FAQ -->
+  <section id="faq" class="section" aria-labelledby="faq-title">
+    <h2 id="faq-title">FAQ</h2>
+    <div class="faq-list" style="margin-top:18px;">
+      <div class="faq-item" data-id="q1" role="button" tabindex="0">
+        <div>
+          <div class="faq-q">How quickly can we see results?</div>
+          <div class="faq-a">Most teams see measurable outcomes from a focused PoC within 1–2 weeks when the scope and metric are clear.</div>
         </div>
-        <div class="swiper-pagination" style="margin-top:12px;"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq">
-  <div class="site">
-    <h2 class="section-title">Common questions we get from teams evaluating AI</h2>
-
-    <div class="faq-list" role="list">
-      <div class="faq-item" role="button" aria-expanded="false">
-        <div class="faq-q">How quickly can we see results?</div>
-        <div class="caret" aria-hidden="true">▾</div>
-        <div class="faq-answer">Most teams see measurable results from a focused PoC within 1–2 weeks when we define one clear metric and instrument it from day one.</div>
+        <div aria-hidden="true" style="align-self:center; color:var(--muted)">▸</div>
       </div>
 
-      <div class="faq-item" role="button" aria-expanded="false">
-        <div class="faq-q">Which deployment options do you support?</div>
-        <div class="caret" aria-hidden="true">▾</div>
-        <div class="faq-answer">Cloud or on-prem — we connect via secure connectors and design with privacy-first controls so you can choose the model that fits compliance needs.</div>
-      </div>
-
-      <div class="faq-item" role="button" aria-expanded="false">
-        <div class="faq-q">How do you ensure reliability?</div>
-        <div class="caret" aria-hidden="true">▾</div>
-        <div class="faq-answer">Monitoring, human-in-loop validation, retraining schedules and performance tracking ensure models remain accurate and safe in production.</div>
-      </div>
-
-      <div class="faq-item" role="button" aria-expanded="false">
-        <div class="faq-q">Do you handle data security and privacy?</div>
-        <div class="caret" aria-hidden="true">▾</div>
-        <div class="faq-answer">Yes — encryption, access controls and careful data handling are part of every engagement; we sign NDAs and follow best practices.</div>
-      </div>
-
-      <div class="faq-item" role="button" aria-expanded="false">
-        <div class="faq-q">What does a typical engagement look like?</div>
-        <div class="caret" aria-hidden="true">▾</div>
-        <div class="faq-answer">Discovery → focused PoC (1–2 weeks) → production rollout with monitoring. We measure ROI at each step and scale what works.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="site">
-    <h2 class="section-title">Contact</h2>
-
-    <form id="contact-form" class="contact-form" autocomplete="on">
-      <div class="form-row">
-        <div class="col">
-          <label style="display:block; font-weight:700; margin-bottom:6px;">Name</label>
-          <input name="name" placeholder="Your name" required />
+      <div class="faq-item" data-id="q2" role="button" tabindex="0">
+        <div>
+          <div class="faq-q">Which deployment options do you support?</div>
+          <div class="faq-a">We support cloud-hosted, private cloud, and on-prem integrations. We design secure connectors and privacy-aware deployments.</div>
         </div>
-        <div class="col">
-          <label style="display:block; font-weight:700; margin-bottom:6px;">Email</label>
-          <input name="email" placeholder="Your email" type="email" required />
+        <div aria-hidden="true" style="align-self:center; color:var(--muted)">▸</div>
+      </div>
+
+      <div class="faq-item" data-id="q3" role="button" tabindex="0">
+        <div>
+          <div class="faq-q">How do you ensure reliability?</div>
+          <div class="faq-a">Monitoring, human-in-loop validation, model performance tracking and safe fallback behaviors keep systems reliable in production.</div>
         </div>
+        <div aria-hidden="true" style="align-self:center; color:var(--muted)">▸</div>
       </div>
 
-      <div style="margin-bottom:12px;">
-        <label style="display:block; font-weight:700; margin-bottom:6px;">Company</label>
-        <input name="company" placeholder="Company (optional)" />
+      <div class="faq-item" data-id="q4" role="button" tabindex="0">
+        <div>
+          <div class="faq-q">Do you handle data privacy?</div>
+          <div class="faq-a">Yes. We implement role-based access, encryption, and options to keep sensitive data on-prem or within your VPC.</div>
+        </div>
+        <div aria-hidden="true" style="align-self:center; color:var(--muted)">▸</div>
       </div>
 
-      <div style="margin-bottom:12px;">
-        <label style="display:block; font-weight:700; margin-bottom:6px;">Message</label>
-        <textarea name="message" placeholder="How can we help?" required></textarea>
+      <div class="faq-item" data-id="q5" role="button" tabindex="0">
+        <div>
+          <div class="faq-q">What industries do you work with?</div>
+          <div class="faq-a">FinTech, logistics, enterprise document workflows, customer support, and others — we adapt to domain data and constraints.</div>
+        </div>
+        <div aria-hidden="true" style="align-self:center; color:var(--muted)">▸</div>
       </div>
-
-      <div class="form-actions">
-        <button id="contact-submit" class="btn-primary" type="submit">Send Message</button>
-        <button id="contact-fallback" type="button" class="btn-ghost">Send via Email</button>
-      </div>
-
-      <div id="form-status" class="small-muted" aria-live="polite" style="margin-top:10px;"></div>
-    </form>
-  </div>
-</section>
-
-<footer>
-  <div class="site">
-    <div style="max-width:var(--container); margin:0 auto;">
-      <p>&copy; 2025 Avios AI · All rights reserved</p>
     </div>
-  </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section" aria-labelledby="contact-title">
+    <h2 id="contact-title">Contact</h2>
+
+    <div class="contact-wrap" role="form" aria-labelledby="contact-title">
+      <form id="contact-form" autocomplete="on">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" placeholder="Your name" required>
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="Your email" required>
+
+        <label for="company">Company</label>
+        <input id="company" name="company" type="text" placeholder="Company (optional)">
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="How can we help?" required></textarea>
+
+        <div style="display:flex;gap:12px;align-items:center;">
+          <button id="contact-submit" class="btn btn-primary" type="submit">Send Message</button>
+          <button id="contact-reset" type="reset" class="btn btn-ghost">Reset</button>
+        </div>
+
+        <div id="form-status" class="status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="sitefoot">
+  <div>&copy; 2025 Avios AI. All rights reserved.</div>
 </footer>
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-
-<!-- HERO: upgraded neural-network canvas -->
+<!-- SCRIPTS -->
 <script>
-(function(){
-  const container = document.getElementById('particles-hero');
-  if(!container) return;
-
-  const DPR = Math.min(window.devicePixelRatio || 1, 2);
-  const canvas = document.createElement('canvas');
-  canvas.style.display = 'block';
-  container.appendChild(canvas);
-  const ctx = canvas.getContext('2d');
-
-  let W = 0, H = 0;
-  function resize(){
-    W = container.clientWidth || document.documentElement.clientWidth;
-    H = Math.max(280, Math.round((window.innerHeight || 720) * 0.55));
-    canvas.width = Math.round(W * DPR);
-    canvas.height = Math.round(H * DPR);
-    canvas.style.width = W + 'px';
-    canvas.style.height = H + 'px';
-    ctx.setTransform(DPR,0,0,DPR,0,0);
-  }
-  window.addEventListener('resize', resize, {passive:true});
-  resize();
-
-  let nodeCount = Math.max(16, Math.round(Math.min(48, W / 60)));
-  const nodes = [];
-  for(let i=0;i<nodeCount;i++){
-    nodes.push({
-      x: Math.random()*W,
-      y: Math.random()*(H*0.78) + (H*0.06),
-      r: 1.8 + Math.random()*2.6,
-      vx: (Math.random()-0.5) * 0.9,
-      vy: (Math.random()-0.5) * 0.6,
-      wob: Math.random()*Math.PI*2
-    });
-  }
-
-  function rebuildLinks(){
-    const links = [];
-    for(let i=0;i<nodes.length;i++){
-      const arr = [];
-      for(let j=0;j<nodes.length;j++){
-        if(i===j) continue;
-        const dx = nodes[i].x - nodes[j].x;
-        const dy = nodes[i].y - nodes[j].y;
-        arr.push({ j, d2: dx*dx + dy*dy });
-      }
-      arr.sort((a,b) => a.d2 - b.d2);
-      const k = 2 + Math.floor(Math.random()*4);
-      for(let m=0;m<k && m < arr.length; m++){
-        const j = arr[m].j;
-        if(!links.some(L => (L.a===j && L.b===i) || (L.a===i && L.b===j))){
-          links.push({ a:i, b:j });
-        }
-      }
-    }
-    return links;
-  }
-  let links = rebuildLinks();
-  setInterval(()=>{ links = rebuildLinks(); }, 6000 + Math.random()*4000);
-
-  function step(){
-    ctx.clearRect(0,0,W,H);
-
-    // faint backdrop
-    const bgGrad = ctx.createLinearGradient(0,0,0,H);
-    bgGrad.addColorStop(0, 'rgba(3,8,14,0.04)');
-    bgGrad.addColorStop(1, 'rgba(6,12,20,0.02)');
-    ctx.fillStyle = bgGrad;
-    ctx.fillRect(0,0,W,H);
-
-    for(const n of nodes){
-      n.x += n.vx + Math.sin(n.wob)*0.08;
-      n.y += n.vy + Math.cos(n.wob)*0.06;
-      n.wob += 0.012;
-      if(n.x < -60) n.x = W + 60;
-      if(n.x > W + 60) n.x = -60;
-      if(n.y < -60) n.y = H + 60;
-      if(n.y > H + 60) n.y = -60;
-    }
-
-    for(const L of links){
-      const a = nodes[L.a], b = nodes[L.b];
-      const midx = (a.x + b.x)/2 + (Math.sin((a.wob+b.wob))*12);
-      const midy = (a.y + b.y)/2 + (Math.cos((a.wob+b.wob))*6);
-
-      const dx = a.x - b.x, dy = a.y - b.y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      const maxDist = Math.max(140, W/5);
-      const alpha = Math.max(0, 0.28 * (1 - dist / maxDist));
-
-      const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
-      grad.addColorStop(0, 'rgba(47,176,255,' + (alpha*0.95).toFixed(3) + ')');
-      grad.addColorStop(1, 'rgba(30,150,210,' + (alpha*0.75).toFixed(3) + ')');
-
-      ctx.strokeStyle = grad;
-      ctx.lineWidth = 0.9 + (1.1 * (1 - Math.min(dist / maxDist, 1)));
-      ctx.beginPath();
-      ctx.moveTo(a.x, a.y);
-      ctx.quadraticCurveTo(midx, midy, b.x, b.y);
-      ctx.stroke();
-
-      if(alpha > 0.02){
-        ctx.strokeStyle = 'rgba(47,176,255,' + (alpha*0.08).toFixed(3) + ')';
-        ctx.lineWidth = 4 * (1 - Math.min(dist / maxDist, 1)) * 0.18;
-        ctx.stroke();
-      }
-    }
-
-    for(const n of nodes){
-      const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r*6);
-      glow.addColorStop(0, 'rgba(109,219,255,0.12)');
-      glow.addColorStop(0.12, 'rgba(47,176,255,0.09)');
-      glow.addColorStop(1, 'rgba(10,30,45,0)');
-      ctx.fillStyle = glow;
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r*5.8, 0, Math.PI*2);
-      ctx.fill();
-
-      ctx.fillStyle = 'rgba(180,240,255,0.98)';
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
-      ctx.fill();
-    }
-
-    requestAnimationFrame(step);
-  }
-
-  let started=false;
-  const obs = new IntersectionObserver((entries)=>{
-    if(entries[0].isIntersecting && !started){ started = true; step(); obs.disconnect(); }
-  }, {threshold:0.08});
-  obs.observe(container);
-
-  window.addEventListener('resize', () => {
-    resize();
-    const desired = Math.max(16, Math.round(Math.min(48, (container.clientWidth || window.innerWidth) / 60)));
-    if(Math.abs(desired - nodes.length) > 4){
-      nodes.length = 0;
-      for(let i=0;i<desired;i++){
-        nodes.push({
-          x: Math.random()*W,
-          y: Math.random()*(H*0.78) + (H*0.06),
-          r: 1.8 + Math.random()*2.6,
-          vx: (Math.random()-0.5) * 0.9,
-          vy: (Math.random()-0.5) * 0.6,
-          wob: Math.random()*Math.PI*2
-        });
-      }
-      links = rebuildLinks();
-    }
-  }, {passive:true});
-})();
-</script>
-
-<!-- Site behavior: nav links, FAQ toggle, Swiper, Contact form handling -->
-<script>
-  // Smooth nav scroll
-  document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click', (e)=>{
-      const tgt = document.querySelector(a.getAttribute('href'));
-      if(tgt){ e.preventDefault(); tgt.scrollIntoView({behavior:'smooth', block:'start'}); }
-    });
+  // ---------- FAQ toggle ----------
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const toggle = () => item.classList.toggle('open');
+    item.addEventListener('click', toggle);
+    item.addEventListener('keydown', (ev) => { if(ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(); }});
   });
 
-  // FAQ accordion
-  document.querySelectorAll('.faq-item').forEach(item=>{
-    item.addEventListener('click', ()=>{
-      const open = item.getAttribute('aria-expanded') === 'true';
-      item.setAttribute('aria-expanded', open ? 'false' : 'true');
-      const ans = item.querySelector('.faq-answer');
-      if(!ans) return;
-      if(open){ ans.style.display = 'none'; }
-      else { ans.style.display = 'block'; }
-    });
-  });
-
-  // Swiper init
-  const swiper = new Swiper('.swiper', {
-    loop:true,
-    autoplay:{ delay:4000, disableOnInteraction:false },
-    pagination:{ el:'.swiper-pagination', clickable:true },
-    slidesPerView:1,
-    speed:700
-  });
-
-  // Contact form behavior
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbye6WBe-sERGIk_PvApsCFrS46Dq0t0s2rvic0mduAn1iZY_q5J49jinkaHPneqXxY18Q/exec";
-  // EmailJS fallback configuration (change if needed)
-  const EMAILJS_PUBLIC_KEY = "gf3Q5jLBYPf1ZOUko";
-  const EMAILJS_SERVICE = "service_4ytq1ph";
-  const EMAILJS_TEMPLATE = "template_71vcpfp";
-  emailjs.init ? emailjs.init(EMAILJS_PUBLIC_KEY) : null;
+  // ---------- Contact form POST to Apps Script endpoint ----------
+  // Replace with your Apps Script Exec URL if different
+  const APPSCRIPT_EXEC = "https://script.google.com/macros/s/AKfycbye6WBe-sERGIk_PvApsCFrS46Dq0t0s2rvic0mduAn1iZY_q5J49jinkaHPneqXxY18Q/exec";
 
   const form = document.getElementById('contact-form');
-  const status = document.getElementById('form-status');
+  const statusEl = document.getElementById('form-status');
   const submitBtn = document.getElementById('contact-submit');
-  const fallbackBtn = document.getElementById('contact-fallback');
 
-  function serializeForm(formEl){
-    const data = new FormData(formEl);
-    const params = new URLSearchParams();
-    for(const [k,v] of data.entries()) params.append(k, v);
-    return params.toString();
-  }
-
-  async function postToAppsScript(body){
-    try{
-      const res = await fetch(APPS_SCRIPT_URL, {
-        method:'POST',
-        headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
-        body
-      });
-      const txt = await res.text();
-      // Try parse JSON, sometimes Apps Script returns JSON text
-      try { return JSON.parse(txt); } catch(e) { return { success:false, error: txt }; }
-    }catch(err){
-      return { success:false, error:String(err) };
-    }
-  }
-
-  form.addEventListener('submit', async (ev)=>{
-    ev.preventDefault();
-    status.textContent = 'Sending…';
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    statusEl.style.color = 'var(--muted)';
+    statusEl.textContent = "Sending…";
     submitBtn.disabled = true;
 
-    const body = serializeForm(form);
+    // collect form data
+    const data = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      company: form.company.value.trim(),
+      message: form.message.value.trim()
+    };
 
-    // 1) Try Apps Script endpoint
-    const appsRes = await postToAppsScript(body);
-    if(appsRes && appsRes.success){
-      status.textContent = "✅ Message sent successfully — we'll get back to you shortly.";
-      form.reset();
+    // Basic client validation
+    if(!data.name || !data.email || !data.message) {
+      statusEl.style.color = '#ffcccb';
+      statusEl.textContent = "Please fill name, email and message.";
       submitBtn.disabled = false;
       return;
     }
 
-    // 2) Try EmailJS fallback (if configured)
-    if(window.emailjs){
-      try{
-        await emailjs.sendForm(EMAILJS_SERVICE, EMAILJS_TEMPLATE, form);
-        status.textContent = "✅ Message sent (via EmailJS).";
+    // Send as application/x-www-form-urlencoded (Apps Script friendly)
+    const params = new URLSearchParams();
+    for (const k in data) params.append(k, data[k]);
+
+    try {
+      const resp = await fetch(APPSCRIPT_EXEC, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
+      });
+
+      // Try parse JSON
+      let json = null;
+      try { json = await resp.json(); } catch (err) { json = null; }
+
+      // If Apps Script returned JSON success
+      if (resp.ok && json && (json.success === true || json.success === "true")) {
+        statusEl.style.color = '#9be7b7';
+        statusEl.textContent = "Message sent — we will reply within one business day.";
         form.reset();
-        submitBtn.disabled = false;
-        return;
-      }catch(e){
-        console.warn('EmailJS error', e);
+      } else {
+        // If Apps Script returned an error object, display message for debugging
+        let errText = "";
+        if (json && json.error) errText = JSON.stringify(json.error).slice(0,200);
+        else errText = (await resp.text()).slice(0,200);
+
+        // fallback to mailto if Apps Script fails
+        statusEl.style.color = '#ffd1a8';
+        statusEl.innerHTML = `Error sending message. <span style="opacity:.9">Using mail client…</span>`;
+        // open fallback mail (user asked to fall back sometimes)
+        const subject = encodeURIComponent("Website contact: " + data.name);
+        const body = encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company}\n\nMessage:\n${data.message}`);
+        window.location.href = `mailto:aviosplatform@gmail.com?subject=${subject}&body=${body}`;
+        console.warn("Apps Script responded with error:", errText);
       }
+    } catch (err) {
+      // Network / CORS / other
+      statusEl.style.color = '#ffd1a8';
+      statusEl.innerHTML = `❌ Network error. Using mail client…`;
+      const subject = encodeURIComponent("Website contact: " + data.name);
+      const body = encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company}\n\nMessage:\n${data.message}`);
+      window.location.href = `mailto:aviosplatform@gmail.com?subject=${subject}&body=${body}`;
+      console.error("Contact form error:", err);
+    } finally {
+      submitBtn.disabled = false;
     }
-
-    // 3) final fallback: open mailto (user will manually send)
-    const fm = new FormData(form);
-    const mailto = `mailto:aviosplatform@gmail.com?subject=${encodeURIComponent('Website contact: ' + (fm.get('company') || fm.get('name') || ''))}&body=${encodeURIComponent([...fm.entries()].map(([k,v])=>k+': '+v).join('\n'))}`;
-    status.innerHTML = '❌ Unable to send automatically. <a href="'+mailto+'">Click to send via your email client</a>';
-    submitBtn.disabled = false;
   });
 
-  // manual fallback button open mailto
-  fallbackBtn.addEventListener('click', ()=>{
-    const fm = new FormData(form);
-    const mailto = `mailto:aviosplatform@gmail.com?subject=${encodeURIComponent('Website contact: ' + (fm.get('company') || fm.get('name') || ''))}&body=${encodeURIComponent([...fm.entries()].map(([k,v])=>k+': '+v).join('\n'))}`;
-    window.location.href = mailto;
-  });
+  // ---------- Make sure hero image is loaded; if missing, show console helpful message ----------
+  (function checkHero() {
+    const img = document.querySelector('.hero-card img');
+    if (!img) return;
+    img.addEventListener('error', () => {
+      console.warn("Avios AI - hero visual not found at assets/hero-image.png. Upload the image to that path in your repo.");
+      // Optional: show placeholder text in image area
+      const card = document.querySelector('.hero-card');
+      card.innerHTML = '<div style="color:var(--muted);text-align:center;padding:36px">Hero image missing — please ensure <code>assets/hero-image.png</code> exists.</div>';
+    });
+  })();
 </script>
+
+<!-- Swiper JS (if you later want a carousel) -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
 </body>
 </html>
