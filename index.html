@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 
 <style>
-  /* --------- Blue / neural gradient theme (balanced hero) --------- */
   :root{
     --bg-outer: #071029;
     --bg-inner: linear-gradient(180deg,#041628 0%, #062836 45%, #08344a 100%);
@@ -25,7 +24,7 @@
     --page-max:1200px;
     --radius:14px;
     --section-gap:48px;
-    --section-heading-gap:18px; /* small top/bottom spacing requested */
+    --section-heading-gap:18px;
     --header-h:72px;
   }
 
@@ -34,7 +33,7 @@
   a{color:inherit;text-decoration:none}
   .page{max-width:var(--page-max);margin:0 auto;padding:0 var(--gutter)}
 
-  /* header */
+  /* Header */
   header{position:sticky;top:0;z-index:80;background:linear-gradient(180deg, rgba(4,8,15,0.6), rgba(4,8,15,0.2));border-bottom:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px)}
   .nav{height:var(--header-h);display:flex;align-items:center;justify-content:space-between;gap:12px}
   .brand{display:flex;align-items:center;gap:12px}
@@ -43,7 +42,7 @@
   .nav-links a{color:var(--muted);font-weight:600}
   .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:10px 14px;border-radius:12px;color:#001525;font-weight:800;box-shadow:0 10px 30px rgba(29,140,204,0.12)}
 
-  /* common section heading style (centered with small gaps) */
+  /* Section headings centralized */
   .section-heading {
     margin-top: var(--section-heading-gap);
     margin-bottom: var(--section-heading-gap);
@@ -57,43 +56,28 @@
   section{padding:calc(var(--section-gap) - var(--section-heading-gap)) 0}
   p{margin:0 0 12px;color:var(--muted);line-height:1.6}
 
-  /* HERO (balanced) */
+  /* HERO */
   .hero { position:relative; min-height:78vh; display:flex; align-items:center; justify-content:center; background:var(--bg-inner); overflow:hidden; }
   .hero-inner { width:100%; max-width:1200px; display:flex; gap:36px; padding:32px var(--gutter); align-items:center; z-index:2; }
   @media (max-width:1100px){ .hero-inner { gap:22px; padding:28px 18px } }
   @media (max-width:880px){ .hero-inner { flex-direction:column-reverse; padding:22px 14px } }
 
-  /* LEFT: constrain width */
   .hero-left { flex:1 1 56%; max-width: 620px; min-width:320px; }
-  .hero-left h1 {
-    font-weight:800;
-    line-height:1.02;
-    margin:0 0 16px;
-    color:#eaf8ff;
-    font-size: clamp(28px, 4.2vw, 44px);
-  }
+  .hero-left h1 { font-weight:800; line-height:1.02; margin:0 0 16px; color:#eaf8ff; font-size: clamp(28px, 4.2vw, 44px); }
   .hero-left p { color:var(--muted); margin-bottom:18px; max-width:54ch; }
 
   .hero-ctas { display:flex; gap:12px; flex-wrap:wrap; margin-top:6px; }
-
   .kpis { display:flex; gap:12px; margin-top:18px; flex-wrap:wrap; }
   .kpi { background:rgba(255,255,255,0.03); border-radius:10px; padding:8px 12px; border:1px solid rgba(255,255,255,0.02); color:#dff6ff; min-width:110px; text-align:center; font-weight:600; font-size:0.95rem; }
 
-  /* RIGHT: visual */
   .hero-right { flex:0 0 420px; display:flex; align-items:center; justify-content:center; }
   .visual { width:100%; max-width:420px; border-radius:14px; padding:12px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); box-shadow:0 22px 60px rgba(0,0,0,0.6); display:flex; flex-direction:column; gap:12px; }
   .visual .image-wrap { width:100%; height:260px; border-radius:10px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#2b0f4e,#0ea9d1); }
   .visual img { width:100%; height:100%; object-fit:cover; display:block; }
 
-  @media (max-width:880px){
-    .hero-right { width:100%; max-width:640px; margin-bottom:8px; }
-    .visual .image-wrap { height:200px; }
-    .hero-left { max-width:760px; }
-  }
-
   .neural-canvas { position:absolute; inset:0; z-index:1; pointer-events:none; opacity:0.6; filter:blur(0.2px); }
 
-  /* two-column about/why */
+  /* content cards and grids */
   .two-col{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
   @media (max-width:980px){ .two-col{grid-template-columns:1fr} }
   .card{background:rgba(255,255,255,0.02);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 28px rgba(0,0,0,0.35)}
@@ -101,11 +85,6 @@
   @media (max-width:980px){ .grid-3{grid-template-columns:1fr} }
   .service-card, .case-card, .testimonial{padding:20px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
   .service-card h3, .case-card h3{color:#eaf8ff;margin-bottom:10px}
-
-  .btn-section { display:flex; justify-content:center; margin-top:10px; }
-  .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.06); color:var(--text); padding:10px 14px; border-radius:10px; font-weight:700; cursor:pointer; }
-
-  .service-card .learn { margin-top:12px; display:inline-block; padding:8px 12px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#001525; border-radius:10px; font-weight:700; }
 
   .micro{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
   @media (max-width:720px){ .micro{flex-direction:column;align-items:flex-start} }
@@ -145,6 +124,7 @@
         <a href="#about">About</a>
         <a href="#services">Services</a>
         <a href="#testimonials">Testimonials</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact" class="btn-primary">Contact</a>
       </nav>
     </div>
@@ -153,7 +133,6 @@
   <!-- HERO -->
   <main>
     <section class="hero" aria-label="Hero">
-      <!-- neural-lines canvas -->
       <canvas class="neural-canvas" id="neuralCanvas" aria-hidden="true"></canvas>
 
       <div class="hero-inner">
@@ -163,7 +142,7 @@
 
           <div class="hero-ctas">
             <a href="#contact" class="btn-primary">Request consult</a>
-            <a href="#case-studies" class="card small btn-secondary" style="display:inline-flex;align-items:center;padding:8px 12px;border-radius:10px">View case studies</a>
+            <a class="card small" style="display:inline-flex;align-items:center;padding:8px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.02);">View case studies</a>
           </div>
 
           <div class="kpis" aria-hidden="true">
@@ -190,8 +169,6 @@
     <!-- ABOUT -->
     <section id="about" class="page">
       <div class="section-heading">About Avios AI</div>
-      <div class="btn-section"><button class="btn-secondary" onclick="location.href='#contact'">Let's talk</button></div>
-
       <div style="margin-top:10px" class="two-col page">
         <div class="card">
           <p>Avios AI helps teams replace manual work with reliable AI systems. Practical automation, domain-aware assistants and multimodal tools that deliver measurable ROI — not demos.</p>
@@ -211,7 +188,6 @@
             <li>Production-ready: reliable & monitored systems</li>
             <li>Privacy-aware: secure integrations</li>
           </ul>
-          <div style="margin-top:12px"><a href="#contact" class="btn-primary">Let's talk</a></div>
         </aside>
       </div>
     </section>
@@ -219,23 +195,19 @@
     <!-- SERVICES -->
     <section id="services" class="page">
       <div class="section-heading">Services</div>
-      <div class="btn-section"><button class="btn-secondary" onclick="location.href='#services'">Explore services</button></div>
 
       <div class="grid-3" style="margin-top:12px">
         <div class="service-card">
           <h3>AI Automation</h3>
           <p class="muted">Automate workflows, document processing and reporting with auditable pipelines.</p>
-          <a class="learn" href="#contact">Learn more</a>
         </div>
         <div class="service-card">
           <h3>NLP Copilots</h3>
           <p class="muted">Assistants for support, summarization, and knowledge work tailored to your data.</p>
-          <a class="learn" href="#contact">Learn more</a>
         </div>
         <div class="service-card">
           <h3>Multimodal Systems</h3>
           <p class="muted">Combine text, images and documents to build smarter experiences.</p>
-          <a class="learn" href="#contact">Learn more</a>
         </div>
       </div>
     </section>
@@ -243,7 +215,6 @@
     <!-- CASE STUDIES -->
     <section id="case-studies" class="page">
       <div class="section-heading">Case studies</div>
-      <div class="btn-section"><button class="btn-secondary" onclick="location.href='#case-studies'">View case studies</button></div>
 
       <div class="case-grid" style="margin-top:12px">
         <article class="case-card">
@@ -277,7 +248,6 @@
     <!-- TESTIMONIALS -->
     <section id="testimonials" class="page">
       <div class="section-heading">What clients say</div>
-      <div class="btn-section"><button class="btn-secondary" onclick="location.href='#testimonials'">Read more testimonials</button></div>
 
       <div style="max-width:860px;margin:14px auto 0">
         <div class="swiper">
@@ -315,7 +285,6 @@
     <!-- CONTACT -->
     <section id="contact" class="page">
       <div class="section-heading">Request a free consultation</div>
-      <div class="btn-section"><button class="btn-secondary" onclick="location.href='#contact'">Request consultation</button></div>
 
       <div class="contact-grid" style="margin-top:12px">
         <div class="card">
@@ -364,7 +333,7 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
   <script>
-  // Neural-lines background (canvas) — sized to hero container
+  // Neural-lines background (canvas)
   (function(){
     const canvas = document.getElementById('neuralCanvas');
     if(!canvas) return;
@@ -435,7 +404,7 @@
       });
     });
 
-    // Contact form (Apps Script) — same handler you used
+    // Contact form (Apps Script)
     (function(){
       const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbye6WBe-sERGIk_PvApsCFrS46Dq0t0s2rvic0mduAn1iZY_q5J49jinkaHPneqXxY18Q/exec";
       const form = document.getElementById('contact-form');
