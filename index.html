@@ -1,212 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Avios AI — Build AI That Works for Your Business</title>
-  <meta name="description" content="Avios AI builds production-ready AI automation, NLP copilots and multimodal systems that reduce manual work and deliver measurable ROI." />
-  <link rel="canonical" href="https://vineeth2002.github.io/Avios-AI/" />
-  <meta name="robots" content="index, follow" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Avios AI — Build AI That Works for Your Business</title>
+<meta name="description" content="Avios AI builds production-ready AI automation, NLP copilots and multimodal systems that reduce manual work and deliver measurable ROI." />
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='18' width='100' height='100' fill='%23063a6b'/><text x='50' y='62' font-family='Inter,Arial' font-weight='700' font-size='56' fill='%23ffffff' text-anchor='middle'>A</text></svg>" type="image/svg+xml">
 
-  <!-- Inline favicon -->
-  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='18' width='100' height='100' fill='%23063a6b'/><text x='50' y='62' font-family='Inter,Arial' font-weight='700' font-size='56' fill='%23ffffff' text-anchor='middle'>A</text></svg>" type="image/svg+xml">
+<!-- Fonts & utilities -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 
-  <!-- Fonts & utils -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+<style>
+  /* -------------------------
+     Global variables & reset
+     ------------------------- */
+  :root{
+    --bg: #fbfdff;
+    --panel: #ffffff;
+    --muted: #6b7280;
+    --text: #071124;
+    --accent: #0b7fe6;
+    --accent-2: #60a5fa;
+    --glass-border: 1px solid rgba(7,17,36,0.06);
+    --radius: 12px;
+    --page-max: 1100px;
+    --gutter: 28px;
+    --header-h: 72px;
+    --section-gap: 80px; /* consistent vertical spacing */
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+  a{color:inherit}
 
-  <style>
-    /* -------------------------
-       Theme & base layout
-       ------------------------- */
-    :root{
-      --bg:#fbfdff;
-      --panel:#ffffff;
-      --muted:#6b7280;
-      --text:#071124;
-      --accent:#0b7fe6;
-      --accent-2:#60a5fa;
-      --glass-border:1px solid rgba(7,17,36,0.06);
-      --radius:12px;
-      --page-max:1100px; /* central max width */
-      --gutter:24px;     /* safe gutter from edges */
-      --header-h:64px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-    a{color:inherit}
+  /* site wrapper keeps content away from edges */
+  .site{max-width:var(--page-max);margin:0 auto;padding:0 var(--gutter)}
 
-    /* page wrapper ensures nothing touches screen edges */
-    .page { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--gutter); }
+  /* Header */
+  header{position:sticky;top:0;background:rgba(255,255,255,0.9);backdrop-filter:blur(6px);border-bottom:var(--glass-border);z-index:60}
+  .nav{height:var(--header-h);display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand .title{font-weight:800;font-size:1rem}
+  .brand .subtitle{font-size:12px;color:var(--muted)}
+  .nav-links{display:flex;gap:18px;align-items:center}
+  .nav-links a{font-weight:600;text-decoration:none;color:var(--text)}
+  .btn-primary{padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;font-weight:800;text-decoration:none;box-shadow:0 10px 24px rgba(11,127,230,0.12)}
 
-    /* Header */
-    header { position: sticky; top: 0; z-index: 60; background: rgba(255,255,255,0.86); backdrop-filter: blur(6px); border-bottom: var(--glass-border); }
-    .nav { display:flex; align-items:center; justify-content:space-between; height:var(--header-h); gap:12px; }
-    .brand { display:flex; align-items:center; gap:12px; font-weight:700; }
-    .brand svg { width:44px; height:44px; border-radius:8px; display:block; }
-    .brand-title { font-weight:800; font-size:1rem }
-    .nav-links { display:flex; gap:18px; align-items:center }
-    .nav-links a { text-decoration:none; color:var(--text); font-weight:600; }
-    .cta-btn { padding:9px 14px; border-radius:10px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff; font-weight:800; box-shadow:0 8px 26px rgba(11,127,230,0.12); text-decoration:none }
+  /* page sections */
+  section{padding-top:var(--section-gap);padding-bottom:var(--section-gap)}
+  h1,h2,h3{margin:0 0 12px}
+  p{margin:0 0 12px;color:var(--muted);line-height:1.5}
 
-    /* Sections vertical rhythm */
-    section { padding: 56px 0; }
+  /* Hero */
+  .hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;padding-top:18px}
+  @media (max-width:980px){ .hero{grid-template-columns:1fr;text-align:center} .hero .visual{order:-1} }
+  .hero-title{font-weight:800;font-size:clamp(28px,5vw,44px);line-height:1.02}
+  .hero-sub{max-width:60ch}
+  .hero-cta{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap;align-items:center}
+  .kpi-row{margin-top:18px;display:flex;gap:14px;flex-wrap:wrap}
+  .kpi{padding:12px 14px;border-radius:10px;background:linear-gradient(90deg,#fff,#fbfdff);border:var(--glass-border);min-width:120px;text-align:center}
+  .kpi strong{display:block;color:var(--text)}
 
-    /* Hero */
-    .hero { display:grid; grid-template-columns:1fr 460px; gap:36px; align-items:center; padding-top:18px; }
-    @media (max-width:980px) { .hero { grid-template-columns:1fr; text-align:center } .hero .visual-card { order:-1 } }
-    .hero-title { font-size:clamp(28px,5vw,44px); line-height:1.02; margin:0 0 12px; font-weight:800; }
-    .hero-sub { color:var(--muted); margin:0 0 18px; max-width:56ch; }
-    .hero-cta { display:flex; gap:12px; flex-wrap:wrap; margin-top:12px; align-items:center; }
-    .kpi-row { margin-top:18px; display:flex; gap:14px; }
+  /* visual card */
+  .visual{background:var(--panel);border-radius:var(--radius);border:var(--glass-border);box-shadow:0 8px 24px rgba(11,20,40,0.03);overflow:hidden}
+  .visual .illustration{height:260px;width:100%;display:block;background:linear-gradient(180deg,#e9f6ff,#fff);display:flex;align-items:center;justify-content:center}
+  .visual .inner{padding:18px}
 
-    .kpi { padding:12px 14px; border-radius:10px; background:linear-gradient(90deg,#fff,#fbfdff); border:var(--glass-border); min-width:120px; text-align:center; }
-    .kpi strong { display:block; color:var(--text); font-size:16px }
+  /* grids & cards */
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media (max-width:980px){ .grid-3{grid-template-columns:1fr} }
+  .card{background:var(--panel);border-radius:12px;padding:18px;border:var(--glass-border);box-shadow:0 8px 24px rgba(11,20,40,0.03)}
 
-    /* Cards & grids */
-    .card { background:var(--panel); border-radius:12px; padding:18px; border:var(--glass-border); box-shadow:0 8px 24px rgba(11,20,40,0.03); }
-    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-    @media (max-width:980px) { .grid-3 { grid-template-columns:1fr } }
+  /* micro CTA */
+  .micro{display:flex;justify-content:space-between;align-items:center;gap:12px;background:linear-gradient(90deg,#f7fbff,#f3fbff);padding:14px;border-radius:12px;border:1px solid rgba(11,20,40,0.03)}
+  @media (max-width:720px){ .micro{flex-direction:column;align-items:flex-start} }
 
-    /* Visual hero card */
-    .visual-card { border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column; justify-content:center; align-items:stretch; padding:0; border:var(--glass-border); background:linear-gradient(180deg,#fff,#fbfdff) }
+  /* testimonial */
+  .testimonial{padding:18px;border-radius:12px;border:var(--glass-border);background:linear-gradient(180deg,#fff,#fbfdff)}
 
-    .visual-inner { padding:18px; display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
-    .visual-illustration { width:100%; height:260px; display:block; border-bottom:1px solid rgba(11,20,40,0.03) }
+  /* faq */
+  .faq-item{padding:12px 0;border-bottom:1px solid rgba(11,20,40,0.04);cursor:pointer}
+  .faq-question{font-weight:700}
+  .faq-answer{display:none;color:var(--muted);padding-top:8px}
 
-    /* Case compact */
-    .case-compact { display:flex; gap:12px; align-items:flex-start }
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:22px}
+  @media (max-width:980px){ .contact-grid{grid-template-columns:1fr } }
+  label{display:block;margin-bottom:8px;font-weight:700}
+  input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(11,20,40,0.06);background:transparent;color:var(--text);outline:none}
+  textarea{min-height:140px}
+  .submit{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;padding:12px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
 
-    /* Testimonials */
-    .testimonial { padding:20px; border-radius:12px; background:linear-gradient(180deg,#fff,#fbfdff); border:var(--glass-border); }
+  /* footer */
+  footer{padding:28px 0;text-align:center;color:var(--muted);font-size:0.95rem;border-top:1px solid rgba(11,20,40,0.03)}
 
-    /* Micro CTA */
-    .micro { background:linear-gradient(90deg,#f7fbff,#f3fbff); border-radius:12px; padding:12px; border:1px solid rgba(11,20,40,0.03); display:flex; justify-content:space-between; align-items:center; gap:14px; }
-
-    /* FAQ */
-    .faq-item { border-bottom:1px solid rgba(11,20,40,0.04); padding:12px 0; cursor:pointer; }
-    .faq-question { font-weight:700; }
-    .faq-answer { color:var(--muted); display:none; padding-top:8px }
-
-    /* Contact grid */
-    .contact-grid { display:grid; grid-template-columns:1fr 360px; gap:22px; }
-    @media (max-width:980px) { .contact-grid { grid-template-columns:1fr } }
-    label { display:block; margin-bottom:8px; font-weight:700; }
-    input, textarea { width:100%; padding:12px; border-radius:10px; border:1px solid rgba(11,20,40,0.06); background:transparent; color:var(--text); outline:none }
-
-    /* Footer */
-    footer { padding:28px 0; text-align:center; color:var(--muted); font-size:0.95rem; border-top:1px solid rgba(11,20,40,0.03) }
-
-    /* Small utility */
-    .muted { color:var(--muted) }
-    .center { text-align:center }
-
-  </style>
+  /* small helpers */
+  .muted{color:var(--muted)}
+  .center{text-align:center}
+</style>
 </head>
 <body>
-  <!-- Header -->
+  <!-- header -->
   <header>
-    <div class="page">
-      <div class="nav" role="navigation" aria-label="Main">
-        <div class="brand" aria-label="Avios AI">
-          <!-- inline SVG logo -->
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="false" role="img" style="width:44px;height:44px;border-radius:8px;">
-            <defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#0b7fe6"/><stop offset="1" stop-color="#60a5fa"/></linearGradient></defs>
-            <rect rx="18" width="100" height="100" fill="url(#lg)"/>
-            <path d="M30 65 L45 35 L60 65 Z" fill="#fff" opacity="0.98"></path>
-          </svg>
-          <div>
-            <div class="brand-title">Avios AI</div>
-            <div class="muted" style="font-size:12px;margin-top:2px">Production AI, simply delivered</div>
-          </div>
+    <div class="site nav" role="navigation" aria-label="Main nav">
+      <div class="brand" aria-hidden="false">
+        <!-- inline logo -->
+        <svg width="44" height="44" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="false" role="img" style="border-radius:8px;">
+          <defs><linearGradient id="lg2" x1="0" x2="1"><stop offset="0" stop-color="#0b7fe6"/><stop offset="1" stop-color="#60a5fa"/></linearGradient></defs>
+          <rect rx="18" width="100" height="100" fill="url(#lg2)"/>
+          <path d="M30 65 L45 35 L60 65 Z" fill="#fff"></path>
+        </svg>
+        <div>
+          <div class="title">Avios AI</div>
+          <div class="subtitle muted">Production AI, simply delivered</div>
         </div>
-
-        <nav class="nav-links" aria-label="Primary links">
-          <a href="#services">Services</a>
-          <a href="#case-studies">Case studies</a>
-          <a href="#testimonials">Testimonials</a>
-          <a class="cta-btn" href="#contact">Request consult</a>
-        </nav>
       </div>
+
+      <nav class="nav-links" aria-label="Primary links">
+        <a href="#services">Services</a>
+        <a href="#case-studies">Case studies</a>
+        <a href="#testimonials">Testimonials</a>
+        <a class="btn-primary" href="#contact">Request consult</a>
+      </nav>
     </div>
   </header>
 
-  <!-- page content container -->
+  <!-- content -->
   <main>
-    <div class="page" style="padding-top:12px;">
+    <div class="site" style="padding-top:18px;">
       <!-- HERO -->
       <section class="hero" aria-label="Hero">
         <div>
           <h1 class="hero-title">Build AI That Works for Your Business</h1>
-          <p class="hero-sub">We design focused automation, practical NLP assistants and multimodal systems that reduce manual work and improve decisions — starting with a measurable PoC.</p>
-
+          <p class="hero-sub">Targeted automation, practical NLP assistants and multimodal systems that reduce manual work and improve decisions — starting with a measurable PoC.</p>
           <div class="hero-cta">
-            <a class="cta-btn" href="#contact">Request a free consult</a>
+            <a class="btn-primary" href="#contact">Request a free consult</a>
             <a class="card" href="#case-studies" style="display:inline-flex;align-items:center;padding:10px 14px;border-radius:10px;text-decoration:none">See case studies</a>
           </div>
-
-          <div class="kpi-row" aria-hidden="true">
+          <div class="kpi-row" aria-hidden="true" style="margin-top:16px">
             <div class="kpi"><strong>1–2 weeks</strong><span class="muted">PoC</span></div>
             <div class="kpi"><strong>Production</strong><span class="muted">Deployable</span></div>
             <div class="kpi"><strong>Secure</strong><span class="muted">Private by design</span></div>
           </div>
         </div>
 
-        <aside class="visual-card" aria-hidden="false">
-          <div class="visual-illustration" role="img" aria-label="Abstract representation of AI systems">
-            <!-- calm inline illustration; no external assets -->
+        <aside class="visual" aria-hidden="false">
+          <div class="illustration" role="img" aria-label="Abstract AI visual">
+            <!-- calm, centered illustration -->
             <svg viewBox="0 0 600 360" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="false">
               <defs>
-                <linearGradient id="G1" x1="0" x2="1"><stop offset="0" stop-color="#e6f6ff"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
-                <linearGradient id="G2" x1="0" x2="1"><stop offset="0" stop-color="#0b7fe6"/><stop offset="1" stop-color="#60a5fa"/></linearGradient>
+                <linearGradient id="G1b" x1="0" x2="1"><stop offset="0" stop-color="#e6f6ff"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+                <linearGradient id="G2b" x1="0" x2="1"><stop offset="0" stop-color="#0b7fe6"/><stop offset="1" stop-color="#60a5fa"/></linearGradient>
               </defs>
-              <rect width="100%" height="100%" fill="url(#G1)" />
+              <rect width="100%" height="100%" fill="url(#G1b)"/>
               <g transform="translate(80,40)">
                 <circle cx="40" cy="40" r="28" fill="#fff"/>
-                <circle cx="40" cy="40" r="24" fill="url(#G2)" opacity="0.95"/>
+                <circle cx="40" cy="40" r="24" fill="url(#G2b)" opacity="0.96"/>
                 <circle cx="160" cy="80" r="18" fill="#f7fbff"/>
                 <circle cx="240" cy="40" r="34" fill="#fff"/>
-                <circle cx="240" cy="40" r="30" fill="url(#G2)" opacity="0.9"/>
-                <rect x="110" y="140" rx="10" ry="10" width="220" height="60" fill="#ffffff" opacity="0.9"/>
+                <circle cx="240" cy="40" r="30" fill="url(#G2b)" opacity="0.9"/>
+                <rect x="110" y="140" rx="10" ry="10" width="220" height="60" fill="#ffffff" opacity="0.92"/>
                 <text x="220" y="180" font-family="Inter,Arial" font-size="20" text-anchor="middle" fill="#0b7fe6">Avios • PoC</text>
               </g>
             </svg>
           </div>
-
-          <div class="visual-inner">
+          <div class="inner" style="padding:18px">
             <h4 style="margin:0">Approach that converts</h4>
-            <p class="muted" style="margin:0">We build measurable prototypes, validate impact and then ship production-ready systems with monitoring.</p>
-            <div style="margin-top:8px">
-              <a href="#contact" class="cta-btn" style="font-size:14px">Start your PoC</a>
-            </div>
+            <p class="muted" style="margin:6px 0 0">Measure impact with a focused PoC, then ship production with monitoring and support.</p>
+            <div style="margin-top:10px"><a class="btn-primary" href="#contact" style="font-size:14px">Start a PoC</a></div>
           </div>
         </aside>
       </section>
 
       <!-- MICRO CTA -->
       <section>
-        <div class="micro page">
+        <div class="micro">
           <div>
             <strong>Start with a focused PoC</strong>
             <div class="muted" style="margin-top:6px">A small, measurable experiment to prove impact on your key metric.</div>
           </div>
-          <div><a class="cta-btn" href="#contact">Book a free call</a></div>
+          <div><a class="btn-primary" href="#contact">Book a free call</a></div>
         </div>
       </section>
 
       <!-- ABOUT -->
       <section id="about">
-        <div class="page" style="display:grid;grid-template-columns:1fr 360px;gap:22px;align-items:start">
+        <div style="display:grid;grid-template-columns:1fr 360px;gap:22px;align-items:start">
           <div class="card">
             <h2 style="margin-top:0">About Avios AI</h2>
             <p class="muted">We help teams move from manual processes to reliable AI systems. Our work is practical: automation to reduce effort, NLP assistants to surface insights, and multimodal systems to process diverse data types.</p>
-
             <h3 style="margin-top:16px">How we work</h3>
             <ul style="margin-left:18px;color:var(--muted)">
-              <li>Discovery: define the key metric</li>
-              <li>Prototype: focused PoC with measurable outcomes</li>
-              <li>Ship: production rollout with monitoring & support</li>
+              <li>Discovery — define the key metric</li>
+              <li>Prototype — focused PoC with measurable outcomes</li>
+              <li>Ship — production rollout with monitoring & support</li>
             </ul>
           </div>
 
@@ -217,170 +205,121 @@
               <li>Production-ready: robust & monitored systems</li>
               <li>Secure by design: privacy & access controls</li>
             </ul>
-            <div style="margin-top:14px"><a class="cta-btn" href="#contact">Let’s talk</a></div>
+            <div style="margin-top:14px"><a class="btn-primary" href="#contact">Let’s talk</a></div>
           </aside>
         </div>
       </section>
 
       <!-- SERVICES -->
       <section id="services">
-        <div class="page">
-          <h2 class="center">Services</h2>
-          <div class="grid-3" style="margin-top:18px">
-            <div class="card">
-              <h3 style="margin-bottom:8px">AI Automation</h3>
-              <p class="muted">Automate manual workflows — document processing, reporting, routing and more with auditable pipelines.</p>
-            </div>
-            <div class="card">
-              <h3 style="margin-bottom:8px">NLP Copilots</h3>
-              <p class="muted">Domain-aware assistants for support, summaries, knowledge discovery and internal workflows.</p>
-            </div>
-            <div class="card">
-              <h3 style="margin-bottom:8px">Multimodal Systems</h3>
-              <p class="muted">Integrate text, images and documents to build systems that understand and act on varied inputs.</p>
-            </div>
-          </div>
+        <h2 class="center">Services</h2>
+        <div class="grid-3" style="margin-top:18px">
+          <div class="card"><h3>AI Automation</h3><p class="muted">Automate manual workflows — document processing, reporting, routing and more with auditable pipelines.</p></div>
+          <div class="card"><h3>NLP Copilots</h3><p class="muted">Domain-aware assistants for support, summaries and knowledge workflows.</p></div>
+          <div class="card"><h3>Multimodal Systems</h3><p class="muted">Integrate text, images and documents to build systems that understand varied inputs.</p></div>
         </div>
       </section>
 
       <!-- CASE STUDIES -->
       <section id="case-studies">
-        <div class="page">
-          <h2 class="center">Case studies</h2>
-          <div class="grid-3" style="margin-top:18px">
-            <article class="card">
-              <h3>Support Copilot — FinTech</h3>
-              <p class="case-meta muted">Problem: high support volume · Result: 35% faster triage, 30% fewer escalations.</p>
-              <p class="muted">We built an assistant that summarized tickets and suggested responses, integrated into the existing workflow.</p>
-            </article>
-
-            <article class="card">
-              <h3>Reporting Automation — Logistics</h3>
-              <p class="case-meta muted">Problem: manual weekly reports · Result: 20+ hours saved / week.</p>
-              <p class="muted">Automated data extraction, transformation and scheduled reporting with alerts.</p>
-            </article>
-
-            <article class="card">
-              <h3>Document Extraction — Enterprise</h3>
-              <p class="case-meta muted">Problem: slow manual extraction · Result: 96% accuracy automated extraction.</p>
-              <p class="muted">Custom extraction models plus a human-in-the-loop review for high-value documents.</p>
-            </article>
-          </div>
+        <h2 class="center">Case studies</h2>
+        <div class="grid-3" style="margin-top:18px">
+          <article class="card"><h3>Support Copilot — FinTech</h3><p class="muted">Problem: high support volume · Result: 35% faster triage, 30% fewer escalations. We built an assistant that summarized tickets and suggested responses.</p></article>
+          <article class="card"><h3>Reporting Automation — Logistics</h3><p class="muted">Problem: manual weekly reports · Result: 20+ hours saved / week through automated ETL and scheduled reporting with alerts.</p></article>
+          <article class="card"><h3>Document Extraction — Enterprise</h3><p class="muted">Problem: slow manual extraction · Result: 96% accurate automated extraction with human-in-loop review.</p></article>
         </div>
       </section>
 
       <!-- TRUST -->
       <section>
-        <div class="page">
-          <div class="card" style="display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap">
-            <div>
-              <h3 style="margin:0">Trusted & secure</h3>
-              <p class="muted" style="margin-top:6px">We design for privacy, observability and reliability. Deploy on your cloud or ours, with secure integrations and clear SLAs.</p>
-            </div>
-            <div style="display:flex;gap:18px;align-items:center">
-              <div style="text-align:center"><strong>PoC</strong><div class="muted">1–2 weeks</div></div>
-              <div style="text-align:center"><strong>Deployable</strong><div class="muted">Production-ready</div></div>
-              <div style="text-align:center"><strong>Support</strong><div class="muted">Monitoring & updates</div></div>
-            </div>
+        <div class="card" style="display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+          <div><h3 style="margin:0">Trusted & secure</h3><p class="muted" style="margin-top:6px">Design for privacy, observability and reliability — deploy on your cloud or ours, with secure integrations and SLAs.</p></div>
+          <div style="display:flex;gap:18px;align-items:center">
+            <div style="text-align:center"><strong>PoC</strong><div class="muted">1–2 weeks</div></div>
+            <div style="text-align:center"><strong>Deployable</strong><div class="muted">Production-ready</div></div>
+            <div style="text-align:center"><strong>Support</strong><div class="muted">Monitoring & updates</div></div>
           </div>
         </div>
       </section>
 
       <!-- MICRO CTA -->
       <section>
-        <div class="page">
-          <div class="micro">
-            <div><strong>Curious how AI fits your workflow?</strong><div class="muted" style="margin-top:6px">Tell us one pain point — we’ll propose a focused experiment.</div></div>
-            <div><a class="cta-btn" href="#contact">Start conversation</a></div>
-          </div>
+        <div class="micro">
+          <div><strong>Curious how AI fits your workflow?</strong><div class="muted" style="margin-top:6px">Tell us one pain point — we’ll propose a focused experiment.</div></div>
+          <div><a class="btn-primary" href="#contact">Start conversation</a></div>
         </div>
       </section>
 
       <!-- TESTIMONIALS -->
       <section id="testimonials">
-        <div class="page">
-          <h2 class="center">What clients say</h2>
-          <div style="display:flex;justify-content:center;margin-top:18px">
-            <div class="swiper" style="width:100%;max-width:820px">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide testimonial">
-                  <p>"Avios delivered a production-ready NLP assistant in 2 weeks — saved our team hours every day."</p>
-                  <cite>— Product Lead, FinTech</cite>
-                </div>
-                <div class="swiper-slide testimonial">
-                  <p>"They automated reporting workflows and reduced manual effort by 40%."</p>
-                  <cite>— Head of Ops, Logistics</cite>
-                </div>
-                <div class="swiper-slide testimonial">
-                  <p>"Clear communication, fast delivery and production-grade reliability."</p>
-                  <cite>— CTO, SaaS</cite>
-                </div>
-              </div>
-              <div class="swiper-pagination" style="margin-top:12px"></div>
+        <h2 class="center">What clients say</h2>
+        <div style="display:flex;justify-content:center;margin-top:18px">
+          <div class="swiper" style="width:100%;max-width:820px">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide testimonial"><p>"Avios delivered a production-ready NLP assistant in 2 weeks — saved our team hours every day."</p><cite>— Product Lead, FinTech</cite></div>
+              <div class="swiper-slide testimonial"><p>"They automated reporting workflows and reduced manual effort by 40%."</p><cite>— Head of Ops, Logistics</cite></div>
+              <div class="swiper-slide testimonial"><p>"Clear communication, fast delivery and production-grade reliability."</p><cite>— CTO, SaaS</cite></div>
             </div>
+            <div class="swiper-pagination" style="margin-top:12px"></div>
           </div>
         </div>
       </section>
 
       <!-- FAQ -->
       <section id="faq">
-        <div class="page">
-          <h2 class="center">Frequently asked</h2>
-          <div style="max-width:900px;margin:18px auto">
-            <div class="card">
-              <div class="faq-item"><div class="faq-question">How long does a PoC take?</div><div class="faq-answer">Typically 1–2 weeks. We design a focused experiment that proves impact on a key metric.</div></div>
-              <div class="faq-item"><div class="faq-question">Is my data secure?</div><div class="faq-answer">Yes. We follow privacy-first practices and can deploy on your cloud or ours with strict access controls.</div></div>
-              <div class="faq-item"><div class="faq-question">What industries do you work with?</div><div class="faq-answer">We’ve helped finance, logistics, SaaS, and enterprise teams. Our focus is solving measurable business problems.</div></div>
-            </div>
+        <h2 class="center">Frequently asked</h2>
+        <div style="max-width:900px;margin:18px auto">
+          <div class="card">
+            <div class="faq-item"><div class="faq-question">How long does a PoC take?</div><div class="faq-answer">Typically 1–2 weeks. We design a focused experiment that proves impact on a key metric.</div></div>
+            <div class="faq-item"><div class="faq-question">Is my data secure?</div><div class="faq-answer">Yes. We follow privacy-first practices and can deploy on your cloud or ours with strict access controls.</div></div>
+            <div class="faq-item"><div class="faq-question">What industries do you work with?</div><div class="faq-answer">We’ve helped finance, logistics, SaaS, and enterprise teams. We focus on measurable business problems.</div></div>
           </div>
         </div>
       </section>
 
       <!-- CONTACT -->
       <section id="contact">
-        <div class="page">
-          <h2 class="center">Request a free consultation</h2>
-          <div style="margin-top:18px" class="contact-grid">
-            <div class="card">
-              <form id="contact-form" novalidate>
-                <label for="name">Name</label>
-                <input id="name" name="name" type="text" placeholder="Your name" required>
+        <h2 class="center">Request a free consultation</h2>
+        <div style="margin-top:18px" class="contact-grid">
+          <div class="card">
+            <form id="contact-form" novalidate>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required>
 
-                <label for="email" style="margin-top:10px">Work email</label>
-                <input id="email" name="email" type="email" placeholder="you@company.com" required>
+              <label for="email" style="margin-top:10px">Work email</label>
+              <input id="email" name="email" type="email" placeholder="you@company.com" required>
 
-                <label for="company" style="margin-top:10px">Company (optional)</label>
-                <input id="company" name="company" type="text" placeholder="Company">
+              <label for="company" style="margin-top:10px">Company (optional)</label>
+              <input id="company" name="company" type="text" placeholder="Company">
 
-                <label for="message" style="margin-top:10px">Project summary</label>
-                <textarea id="message" name="message" placeholder="Brief description, goals and timeline" required></textarea>
+              <label for="message" style="margin-top:10px">Project summary</label>
+              <textarea id="message" name="message" placeholder="Brief description, goals and timeline" required></textarea>
 
-                <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
-                  <button id="contact-submit" class="submit">Request consultation</button>
-                  <div style="color:var(--muted);font-size:0.95rem">Or email: <a href="mailto:aviosplatform@gmail.com" style="color:var(--accent)">aviosplatform@gmail.com</a></div>
-                </div>
+              <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
+                <button id="contact-submit" class="submit">Request consultation</button>
+                <div style="color:var(--muted);font-size:0.95rem">Or email: <a href="mailto:aviosplatform@gmail.com" style="color:var(--accent)">aviosplatform@gmail.com</a></div>
+              </div>
 
-                <p id="form-status" style="margin-top:12px;color:var(--muted)"></p>
-                <div id="fallback-mailto" style="margin-top:8px;display:none"></div>
-              </form>
-            </div>
-
-            <aside class="card">
-              <h4 style="margin-top:0">What happens next</h4>
-              <ul style="margin-left:18px;color:var(--muted)"><li>We review details and schedule a 15-min call</li><li>We propose a focused PoC with measurable KPIs</li><li>We deliver a production-ready path & timeline</li></ul>
-              <div style="margin-top:14px;color:var(--muted)"><strong>Typical timeline:</strong> PoC 1–2 weeks • Production 4–8 weeks</div>
-            </aside>
+              <p id="form-status" style="margin-top:12px;color:var(--muted)"></p>
+              <div id="fallback-mailto" style="margin-top:8px;display:none"></div>
+            </form>
           </div>
+
+          <aside class="card">
+            <h4 style="margin-top:0">What happens next</h4>
+            <ul style="margin-left:18px;color:var(--muted)"><li>We review details and schedule a 15-min call</li><li>We propose a focused PoC with measurable KPIs</li><li>We deliver a production-ready path & timeline</li></ul>
+            <div style="margin-top:14px;color:var(--muted)"><strong>Timeline:</strong> PoC 1–2 weeks • Production 4–8 weeks</div>
+          </aside>
         </div>
       </section>
     </div>
   </main>
 
   <!-- floating CTA -->
-  <a class="cta-btn" href="#contact" style="position:fixed;right:18px;bottom:18px;border-radius:999px;z-index:60">Book consult</a>
+  <a class="btn-primary" href="#contact" style="position:fixed;right:18px;bottom:18px;border-radius:999px;z-index:60">Book consult</a>
 
   <footer>
-    <div class="page">
+    <div class="site">
       <div style="padding:18px 0;color:var(--muted)">© 2025 Avios AI — Built by Vineeth</div>
     </div>
   </footer>
@@ -469,9 +408,9 @@
       loop: true,
       centeredSlides: true,
       slidesPerView: 1,
-      autoplay: { delay: 3800, disableOnInteraction: false },
+      autoplay: { delay: 3600, disableOnInteraction: false },
       pagination: { el: '.swiper-pagination', clickable: true },
-      speed: 600
+      speed: 700
     });
   </script>
 </body>
