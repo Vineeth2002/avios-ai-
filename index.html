@@ -15,6 +15,7 @@
 
 <link rel="icon" href="/favicon.ico" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 
 <style>
 :root{
@@ -69,16 +70,21 @@ nav.topnav a { color:rgba(255,255,255,0.92); text-decoration:none; font-weight:6
 }
 .hero-card img{ width:100%; height:auto; display:block; object-fit:cover; border-radius:12px; }
 
-/* 3D-like neural network overlay (hero-only) */
+/* 3D-like neural network overlay (hero-only). pointer-events none so it won't block anything */
 .network { position:absolute; inset:0; pointer-events:none; z-index:1; opacity:0.96; }
+
+/* layered effects to give depth */
 .net-layer { transform-style:preserve-3d; }
 .net-lines { stroke:rgba(60,170,230,0.08); stroke-width:1.4; mix-blend-mode:screen; filter: drop-shadow(0 8px 20px rgba(0,120,170,0.08)); }
 .net-nodes { fill:rgba(40,170,220,0.95); filter:drop-shadow(0 6px 18px rgba(0,120,170,0.12)); }
+
 .node-pulse { animation: pulse 2.8s ease-in-out infinite; transform-origin:center; }
 .node-pulse.slow { animation-duration:4.4s; }
 @keyframes pulse { 0%{ transform:scale(1); opacity:0.95 } 50%{ transform:scale(1.28); opacity:1 } 100%{ transform:scale(1); opacity:0.95 } }
+
 .path-drift { animation: drift 10s linear infinite; transform-origin:center; }
 @keyframes drift { 0%{ transform:translateZ(-6px) translateY(0) } 50%{ transform:translateZ(6px) translateY(-8px) } 100%{ transform:translateZ(-6px) translateY(0) } }
+
 .net-foreground { stroke: rgba(95,190,255,0.22); stroke-width:1.6; opacity:0.85; animation: slowMove 18s ease-in-out infinite; filter: drop-shadow(0 12px 26px rgba(0,120,170,0.06)); }
 @keyframes slowMove { 0%{ transform:translateY(0) } 50%{ transform:translateY(-6px) } 100%{ transform:translateY(0) } }
 
@@ -88,6 +94,9 @@ main.content{ max-width:var(--content-max); margin:40px auto; padding:0 20px 80p
 .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
 .card { background:linear-gradient(180deg, rgba(2,10,14,0.45), rgba(2,10,14,0.6)); border-radius:14px; padding:20px; border:1px solid rgba(255,255,255,0.02); box-shadow:0 10px 24px rgba(2,10,12,0.45); }
 .card h3{ margin:0 0 10px; color:var(--white); } .card p{ margin:0; color:var(--muted); }
+
+/* testimonials */
+.testimonials { max-width:860px; margin:0 auto; }
 
 /* FAQ */
 .faq-list { max-width:860px; margin:0 auto; } .faq-item { background:transparent; border-radius:12px; margin-bottom:12px; padding:14px 16px; border:1px solid rgba(255,255,255,0.03); display:flex; align-items:flex-start; justify-content:space-between; cursor:pointer; }
@@ -99,6 +108,11 @@ main.content{ max-width:var(--content-max); margin:40px auto; padding:0 20px 80p
 .contact-wrap input, .contact-wrap textarea { width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); background:rgba(0,0,0,0.12); color:var(--white); margin-bottom:14px; outline:none; }
 .contact-wrap textarea { min-height:140px; resize:vertical; }
 .status { text-align:center; margin-top:8px; color:var(--muted); min-height:22px; }
+
+/* fallback panel */
+.fallback-box { margin-top:16px; padding:14px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); }
+.fallback-actions { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
+.fallback-pre { white-space:pre-wrap; color:var(--muted); font-size:0.95rem; background:transparent; border-radius:8px; padding:8px; }
 
 /* footer */
 footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font-size:14px; border-top:1px solid rgba(255,255,255,0.02); }
@@ -141,28 +155,32 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
 </header>
 
 <section class="hero" aria-labelledby="hero-heading">
-  <!-- neural-network decorative SVG (hero-only) -->
+  <!-- 3D-ish network SVG overlay (decorative only) -->
   <svg class="network" viewBox="0 0 1600 600" preserveAspectRatio="none" aria-hidden="true" role="img">
     <g class="net-layer" transform="translate(0,8)">
       <path class="net-lines path-drift" d="M80 160 C220 120, 420 100, 580 150 C760 200, 920 160, 1100 210 C1280 260, 1420 220, 1560 200" />
       <path class="net-lines" d="M120 80 C260 40, 420 60, 620 100 C820 140, 980 120, 1180 140 C1380 160, 1500 140, 1560 120" style="opacity:0.4" />
     </g>
+
     <g class="net-layer" transform="translate(0,0)">
       <path class="net-foreground" d="M220 140 L320 90 L480 130 L640 110 L820 160" />
       <path class="net-foreground" d="M540 220 L660 180 L820 200 L980 180 L1200 220" />
     </g>
+
     <g class="net-layer" transform="translate(0,0)">
       <circle class="net-nodes node-pulse slow" cx="220" cy="140" r="4.4"></circle>
       <circle class="net-nodes node-pulse" cx="320" cy="90" r="3.8"></circle>
       <circle class="net-nodes node-pulse slow" cx="480" cy="130" r="5.2"></circle>
       <circle class="net-nodes node-pulse" cx="640" cy="110" r="3.6"></circle>
       <circle class="net-nodes node-pulse" cx="820" cy="160" r="4"></circle>
+
       <circle class="net-nodes node-pulse" cx="540" cy="220" r="3.6"></circle>
       <circle class="net-nodes node-pulse slow" cx="660" cy="180" r="4.8"></circle>
       <circle class="net-nodes node-pulse" cx="820" cy="200" r="3.6"></circle>
       <circle class="net-nodes node-pulse slow" cx="980" cy="180" r="4.6"></circle>
       <circle class="net-nodes node-pulse" cx="1200" cy="220" r="3.8"></circle>
     </g>
+
     <g transform="translate(0,0)" style="mix-blend-mode: screen; opacity:0.45;">
       <circle cx="360" cy="70" r="36" fill="rgba(20,150,220,0.04)"></circle>
       <circle cx="980" cy="40" r="24" fill="rgba(20,150,220,0.03)"></circle>
@@ -192,12 +210,15 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
 </section>
 
 <main class="content" id="main">
+
   <section id="about" class="section" aria-labelledby="about-title">
     <h2 id="about-title">About Avios AI</h2>
+
     <div class="grid-3" style="margin-top:18px;">
       <div class="card" style="grid-column:span 2">
         <h3>What we do</h3>
         <p>We help teams replace manual work with reliable AI systems: practical automation, domain-aware assistants, and multimodal tools that deliver measurable ROI — not demos.</p>
+
         <h4 style="margin-top:14px;color:var(--muted)">How we work</h4>
         <ul style="color:var(--muted); margin-top:8px; line-height:1.6;">
           <li><strong>Discovery</strong> — define a measurable outcome</li>
@@ -205,6 +226,7 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
           <li><strong>Production</strong> — rollout, monitoring & iterative improvement</li>
         </ul>
       </div>
+
       <div class="card">
         <h3>Why Avios</h3>
         <p style="color:var(--muted)">Business-first: measurable KPIs. Production-ready: reliable & monitored systems. Privacy-aware: secure integrations.</p>
@@ -299,6 +321,7 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
 
   <section id="contact" class="section" aria-labelledby="contact-title">
     <h2 id="contact-title">Contact</h2>
+
     <div class="contact-wrap" role="form" aria-labelledby="contact-title">
       <form id="contact-form" autocomplete="on">
         <label for="name">Name</label>
@@ -320,15 +343,15 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
 
         <div id="form-status" class="status" role="status" aria-live="polite"></div>
 
-        <!-- fallback panel -->
-        <div id="fallback-panel" style="display:none; margin-top:16px; padding:14px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03);">
-          <div style="color:var(--muted); margin-bottom:8px;">We couldn't send via the contact form. Use one of the options below:</div>
-          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-            <button id="copy-email" class="copy-btn" type="button">Copy email (aviosplatform@gmail.com)</button>
-            <button id="open-mail-client" class="btn btn-primary" type="button">Open Gmail compose</button>
-            <button id="copy-body" class="copy-btn" type="button" title="Copy message body">Copy message text</button>
+        <!-- fallback panel (hidden by default) -->
+        <div id="fallback-panel" class="fallback-box" style="display:none;">
+          <div style="color:var(--muted); margin-bottom:8px;">We couldn't send via the contact form. You can contact us directly:</div>
+          <div class="fallback-actions">
+            <button id="copy-email" class="copy-btn">Copy email (aviosplatform@gmail.com)</button>
+            <button id="open-mail-client" class="btn btn-primary">Open mail client (prefill)</button>
+            <button id="copy-body" class="copy-btn" title="Copy message body">Copy message text</button>
           </div>
-          <div id="fallback-preserve" style="margin-top:10px; color:var(--muted); font-size:0.95rem; white-space:pre-wrap;"></div>
+          <div id="fallback-preserve" class="fallback-pre" aria-live="polite"></div>
         </div>
       </form>
     </div>
@@ -340,9 +363,11 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
 </footer>
 
 <script>
-/* ===================== CONFIG ===================== */
-const APPSCRIPT_EXEC = "https://script.google.com/macros/s/AKfycbxR7P4PhV7UVmKcsauVX-tDc286cAx5pyZ5wVyWd4KUgI28F2TvIGvFmdDtOUYUwSj9Qg/exec";
-/* ================================================== */
+/* -------------------------
+   EDITED: Apps Script web app URL
+   Replace below if you redeploy to a different URL.
+*/
+const APPSCRIPT_EXEC = "https://script.google.com/macros/s/AKfycbxSwcwJm3KIXdRxqcnymm06TZCaHdo0pMWOyYk8vHCf/dev";
 
 /* FAQ toggle */
 document.querySelectorAll('.faq-item').forEach(item => {
@@ -351,137 +376,25 @@ document.querySelectorAll('.faq-item').forEach(item => {
   item.addEventListener('keydown', (ev) => { if(ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(); }});
 });
 
-/* Elements */
+/* Contact form behavior with robust fallback */
 const form = document.getElementById('contact-form');
 const statusEl = document.getElementById('form-status');
 const submitBtn = document.getElementById('contact-submit');
 const fallbackPanel = document.getElementById('fallback-panel');
-const copyEmailBtn = document.getElementById('copy-email');
-const openMailClientBtn = document.getElementById('open-mail-client');
-const copyBodyBtn = document.getElementById('copy-body');
+const copyEmail = document.getElementById('copy-email');
+const openMailClient = document.getElementById('open-mail-client');
+const copyBody = document.getElementById('copy-body');
 const fallbackPreserve = document.getElementById('fallback-preserve');
 
-/* Build message body */
 function buildEmailBody(data){
   return `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company}\n\nMessage:\n${data.message}`;
 }
 
-/* Hidden iframe POST fallback implementation */
-function postViaHiddenForm(url, data) {
-  return new Promise((resolve, reject) => {
-    try {
-      const iframeName = "hidden_iframe_" + Math.random().toString(36).slice(2);
-      const iframe = document.createElement('iframe');
-      iframe.name = iframeName;
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
-
-      let loaded = false;
-      const timeout = setTimeout(() => {
-        if(!loaded) {
-          cleanup();
-          reject(new Error('iframe POST timed out'));
-        }
-      }, 9000);
-
-      iframe.addEventListener('load', function () {
-        loaded = true;
-        clearTimeout(timeout);
-        cleanup();
-        resolve({ ok: true, message: 'Posted via hidden form (iframe) - loaded' });
-      });
-
-      function cleanup() {
-        try { iframe.remove(); } catch(e){}
-        try { formNode.remove(); } catch(e){}
-      }
-
-      const formNode = document.createElement('form');
-      formNode.action = url;
-      formNode.method = 'POST';
-      formNode.target = iframeName;
-      formNode.style.display = 'none';
-
-      for (const k in data) {
-        const inp = document.createElement('input');
-        inp.type = 'hidden';
-        inp.name = k;
-        inp.value = data[k] || '';
-        formNode.appendChild(inp);
-      }
-      document.body.appendChild(formNode);
-      formNode.submit();
-    } catch (err) {
-      reject(err);
-    }
-  });
-}
-
-/* Attempt send using fetch then iframe fallback */
-async function trySend(data) {
-  const params = new URLSearchParams(data).toString();
-  try {
-    const resp = await fetch(APPSCRIPT_EXEC, {
-      method:'POST',
-      headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
-      body: params,
-      mode:'cors'
-    });
-    let json = null;
-    try { json = await resp.json(); } catch(e){ json = null; }
-    if (resp.ok && json && (json.success === true || json.success === "true")) {
-      return { ok:true, via:'fetch', json };
-    }
-    return { ok:false, via:'fetch', code: resp.status, text: await resp.text().catch(()=>'') };
-  } catch (err) {
-    console.warn('fetch failed, trying iframe fallback:', err);
-    try {
-      const res = await postViaHiddenForm(APPSCRIPT_EXEC, data);
-      return { ok:true, via:'iframe', info: res };
-    } catch (err2) {
-      console.error('iframe fallback failed:', err2);
-      return { ok:false, via:'both', error: err2 };
-    }
-  }
-}
-
-/* Show fallback options */
-function showFallback(data){
-  fallbackPanel.style.display = 'block';
-  fallbackPreserve.textContent = `Message preview — please copy if needed:\n\n${buildEmailBody(data)}`;
-
-  copyEmailBtn.onclick = async () => {
-    try { await navigator.clipboard.writeText('aviosplatform@gmail.com'); copyEmailBtn.textContent = 'Copied ✓'; setTimeout(()=> copyEmailBtn.textContent = 'Copy email (aviosplatform@gmail.com)', 1400); } 
-    catch(e){ copyEmailBtn.textContent = 'Copy failed'; setTimeout(()=> copyEmailBtn.textContent = 'Copy email (aviosplatform@gmail.com)', 1400); }
-  };
-
-  copyBodyBtn.onclick = async () => {
-    try { await navigator.clipboard.writeText(buildEmailBody(data)); copyBodyBtn.textContent = 'Copied ✓'; setTimeout(()=> copyBodyBtn.textContent = 'Copy message text', 1400); } 
-    catch(e){ copyBodyBtn.textContent = 'Copy failed'; setTimeout(()=> copyBodyBtn.textContent = 'Copy message text', 1400); }
-  };
-
-  openMailClientBtn.onclick = () => {
-    const email = 'aviosplatform@gmail.com';
-    const subject = encodeURIComponent('Website contact: ' + (data.name || 'Website user'));
-    const body = encodeURIComponent(buildEmailBody(data));
-    // Gmail web compose (primary)
-    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${subject}&body=${body}`;
-    // Outlook web compose (secondary)
-    const outlookLink = `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(email)}&subject=${subject}&body=${body}`;
-    // Open Gmail compose in new tab
-    window.open(gmailLink, '_blank', 'noopener');
-    // Also open a second tab for Outlook as optional (comment out if not wanted)
-    // window.open(outlookLink, '_blank', 'noopener');
-    // copy body as well (useful if browser blocks)
-    try { navigator.clipboard.writeText(buildEmailBody(data)); } catch(e){}
-  };
-}
-
-/* Form submit handler */
-form.addEventListener('submit', async (ev) => {
-  ev.preventDefault();
+/* Try sending to Apps Script; fallback if anything goes wrong */
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
   statusEl.style.color = 'var(--muted)';
-  statusEl.textContent = 'Sending…';
+  statusEl.textContent = "Sending…";
   submitBtn.disabled = true;
   fallbackPanel.style.display = 'none';
   fallbackPreserve.textContent = '';
@@ -495,30 +408,100 @@ form.addEventListener('submit', async (ev) => {
 
   if(!data.name || !data.email || !data.message) {
     statusEl.style.color = '#ffcccb';
-    statusEl.textContent = 'Please fill name, email and message.';
+    statusEl.textContent = "Please fill name, email and message.";
     submitBtn.disabled = false;
     return;
   }
 
-  const res = await trySend(data);
+  const params = new URLSearchParams();
+  for (const k in data) params.append(k, data[k]);
 
-  if (res.ok) {
-    statusEl.style.color = '#9be7b7';
-    statusEl.textContent = 'Message sent — we will reply within one business day.';
-    form.reset();
-    fallbackPanel.style.display = 'none';
-    console.log('Contact sent ok via', res.via, res);
-  } else {
+  // Attempt POST with timeout
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(()=> controller.abort(), 10000); // 10s
+
+    const resp = await fetch(APPSCRIPT_EXEC, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString(),
+      signal: controller.signal,
+      credentials: 'omit'
+    });
+
+    clearTimeout(timeout);
+
+    let json = null;
+    try { json = await resp.json(); } catch(e){ json = null; }
+
+    if (resp.ok && ( (json && (json.status === 'ok' || json.success === true || json.success === "true")) || resp.status === 200)) {
+      statusEl.style.color = '#9be7b7';
+      statusEl.textContent = "Message sent — we will reply within one business day.";
+      form.reset();
+      fallbackPanel.style.display = 'none';
+      fallbackPreserve.textContent = '';
+      submitBtn.disabled = false;
+      return;
+    } else {
+      statusEl.style.color = '#ffd1a8';
+      statusEl.textContent = "Network error — use fallback options below.";
+      showFallback(data);
+      console.warn('Apps Script response (non-ok):', resp.status, resp.statusText, json);
+    }
+  } catch (err) {
     statusEl.style.color = '#ffd1a8';
-    statusEl.textContent = 'Network error — use fallback options below.';
+    statusEl.textContent = "Network/livetime error — use fallback options below.";
     showFallback(data);
-    console.warn('Send failed:', res);
+    console.error("Contact send error:", err);
+  } finally {
+    submitBtn.disabled = false;
   }
-
-  submitBtn.disabled = false;
 });
 
-/* Smooth scrolling anchor links */
+function showFallback(data){
+  fallbackPanel.style.display = 'block';
+  const email = 'aviosplatform@gmail.com';
+  const subject = encodeURIComponent("Website contact: " + (data.name || 'Website user'));
+  const body = encodeURIComponent(buildEmailBody(data));
+  const mailto = `mailto:${email}?subject=${subject}&body=${body}`;
+
+  copyEmail.onclick = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      copyEmail.textContent = 'Copied ✓';
+      setTimeout(()=> copyEmail.textContent = 'Copy email (aviosplatform@gmail.com)', 1400);
+    } catch (err) {
+      copyEmail.textContent = 'Copy failed';
+      console.error(err);
+    }
+  };
+
+  openMailClient.onclick = (ev) => {
+    ev.preventDefault();
+    const a = document.createElement('a');
+    a.href = mailto;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  };
+
+  copyBody.onclick = async () => {
+    try {
+      await navigator.clipboard.writeText(buildEmailBody(data));
+      copyBody.textContent = 'Copied ✓';
+      setTimeout(()=> copyBody.textContent = 'Copy message text', 1400);
+    } catch (err) {
+      copyBody.textContent = 'Copy failed';
+      console.error(err);
+    }
+  };
+
+  fallbackPreserve.textContent = `Message preview — please copy if needed:\n\n${buildEmailBody(data)}`;
+}
+
+/* Smooth anchor scrolling */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', (e) => {
     const target = document.querySelector(a.getAttribute('href'));
@@ -530,7 +513,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-/* Hero image fallback notice for debugging (console) */
+/* Hero image check - graceful placeholder */
 (function checkHero(){
   const img = document.querySelector('.hero-card img');
   if(!img) return;
