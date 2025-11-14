@@ -109,10 +109,6 @@ main.content{ max-width:var(--content-max); margin:40px auto; padding:0 20px 80p
 .contact-wrap textarea { min-height:140px; resize:vertical; }
 .status { text-align:center; margin-top:8px; color:var(--muted); min-height:22px; }
 
-/* fallback box styling */
-.fallback-box { margin-top:16px; padding:16px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); }
-.fallback-row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:10px; }
-
 /* footer */
 footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font-size:14px; border-top:1px solid rgba(255,255,255,0.02); }
 
@@ -343,15 +339,14 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
         <div id="form-status" class="status" role="status" aria-live="polite"></div>
 
         <!-- fallback panel (hidden by default) -->
-        <div id="fallback-panel" class="fallback-box" style="display:none;">
+        <div id="fallback-panel" style="display:none; margin-top:16px; padding:14px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03);">
           <div style="color:var(--muted); margin-bottom:8px;">We couldn't send via the contact form. You can contact us directly:</div>
-
-          <div class="fallback-row">
-            <button id="fallback-copy-email" class="copy-btn" type="button">Copy email (aviosplatform@gmail.com)</button>
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <a id="fallback-mailto" href="mailto:aviosplatform@gmail.com" class="btn btn-ghost" style="padding:10px 14px;" target="_blank" rel="noopener">Email aviosplatform@gmail.com</a>
+            <button id="copy-email" class="copy-btn" type="button">Copy email</button>
             <button id="open-mail-client" class="btn btn-primary" type="button">Open mail client (prefill)</button>
-            <button id="fallback-copy-body" class="copy-btn" type="button">Copy message text</button>
+            <button id="copy-body" class="copy-btn" type="button" title="Copy message body">Copy message text</button>
           </div>
-
           <div id="fallback-preserve" style="margin-top:10px; color:var(--muted); font-size:0.95rem; white-space:pre-wrap;"></div>
         </div>
       </form>
@@ -364,8 +359,9 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
 </footer>
 
 <script>
-/* ========== CONFIG: paste your Apps Script web app URL here ========== */
-const APPSCRIPT_EXEC = "https://script.google.com/macros/s/AKfycby6km1jYMcIRZbdfLI0T-QSydWZ9um-2rjijJxtu3GPu6Bf7zQdmZMe9MgT1ItAAnM6ig/exec";
+/* ====== IMPORTANT: point to your Apps Script web app URL (use the /dev or /exec URL you deployed) ====== */
+// I set this to the /dev URL you provided earlier (works for POST). If you re-deploy change this value.
+const APPSCRIPT_EXEC = "https://script.google.com/macros/s/AKfycbxSwcwJm3KIXdRxqcnymm06TZCaHdo0pMWOyYk8vHCf/dev";
 
 /* FAQ toggle */
 document.querySelectorAll('.faq-item').forEach(item => {
@@ -379,10 +375,11 @@ const form = document.getElementById('contact-form');
 const statusEl = document.getElementById('form-status');
 const submitBtn = document.getElementById('contact-submit');
 const fallbackPanel = document.getElementById('fallback-panel');
+const fallbackMailto = document.getElementById('fallback-mailto');
+const copyEmail = document.getElementById('copy-email');
+const openMailClient = document.getElementById('open-mail-client');
+const copyBody = document.getElementById('copy-body');
 const fallbackPreserve = document.getElementById('fallback-preserve');
-const fallbackCopyEmail = document.getElementById('fallback-copy-email');
-const fallbackCopyBody = document.getElementById('fallback-copy-body');
-const openMailClientBtn = document.getElementById('open-mail-client');
 
 function buildEmailBody(data){
   return `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company}\n\nMessage:\n${data.message}`;
@@ -403,18 +400,21 @@ form.addEventListener('submit', async (e) => {
   };
 
   if(!data.name || !data.email || !data.message) {
-    statusEl.style.color = '#ffb4a6';
+    statusEl.style.color = '#ffcccb';
     statusEl.textContent = "Please fill name, email and message.";
     submitBtn.disabled = false;
     return;
   }
 
+  // Send as application/x-www-form-urlencoded (Apps Script handles form & json)
+  const params = new URLSearchParams();
+  for (const k in data) params.append(k, data[k]);
+
   try {
-    // Send JSON POST to the Apps Script web app
     const resp = await fetch(APPSCRIPT_EXEC, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString(),
       mode: 'cors'
     });
 
@@ -428,6 +428,7 @@ form.addEventListener('submit', async (e) => {
       fallbackPanel.style.display = 'none';
       fallbackPreserve.textContent = '';
     } else {
+      // show graceful fallback panel
       statusEl.style.color = '#ffd1a8';
       statusEl.textContent = "Error sending — please use the fallback options below.";
       showFallback(data);
@@ -435,7 +436,7 @@ form.addEventListener('submit', async (e) => {
     }
   } catch (err) {
     statusEl.style.color = '#ffd1a8';
-    statusEl.textContent = "Network error — use fallback options below.";
+    statusEl.textContent = "Network/livetime error — use fallback options below.";
     showFallback(data);
     console.error("Contact send error:", err);
   } finally {
@@ -449,49 +450,48 @@ function showFallback(data){
   const subject = encodeURIComponent("Website contact: " + (data.name || 'Website user'));
   const body = encodeURIComponent(buildEmailBody(data));
   const mailto = `mailto:${email}?subject=${subject}&body=${body}`;
+  fallbackMailto.href = mailto;
+  // openMailClient will try multiple open strategies, fallback to copying if browsers block
+  openMailClient.onclick = async () => {
+    try {
+      // first try to open default handler in same tab (works in many browsers)
+      window.location.href = mailto;
+      // as a secondary attempt (some browsers handle mailto via new window)
+      setTimeout(()=> window.open(mailto, '_blank', 'noopener'), 350);
+    } catch (err) {
+      // fallback: copy body and show instructions
+      try { await navigator.clipboard.writeText(buildEmailBody(data)); } catch(e){}
+      alert("Your browser blocked opening the mail client. The message body has been copied — please paste into an email to aviosplatform@gmail.com.");
+    }
+  };
 
   fallbackPreserve.textContent = `Message preview — please copy if needed:\n\n${buildEmailBody(data)}`;
-
-  // Reliable mailto invocation: create a temporary anchor and click it (works well across desktop browsers)
-  openMailClientBtn.onclick = () => {
-    try {
-      const a = document.createElement('a');
-      a.href = mailto;
-      // choose _self so some browsers open the default mail client instead of a blank tab
-      a.target = '_self';
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      setTimeout(()=> a.remove(), 500);
-    } catch (err) {
-      // Fallback to window.location if anchor click fails
-      window.location.href = mailto;
-    }
-  };
-
-  fallbackCopyEmail.onclick = async () => {
-    try {
-      await navigator.clipboard.writeText(email);
-      fallbackCopyEmail.textContent = 'Copied ✓';
-      setTimeout(()=> fallbackCopyEmail.textContent = 'Copy email (aviosplatform@gmail.com)', 1400);
-    } catch (err) {
-      fallbackCopyEmail.textContent = 'Copy failed';
-      console.error(err);
-    }
-  };
-
-  fallbackCopyBody.onclick = async () => {
-    const text = fallbackPreserve.textContent || '';
-    try {
-      await navigator.clipboard.writeText(text);
-      fallbackCopyBody.textContent = 'Copied ✓';
-      setTimeout(()=> fallbackCopyBody.textContent = 'Copy message text', 1400);
-    } catch (err) {
-      fallbackCopyBody.textContent = 'Copy failed';
-      console.error(err);
-    }
-  };
+  document.getElementById('fallback-preserve').setAttribute('aria-live','polite');
 }
+
+/* copy helpers */
+copyEmail.addEventListener('click', async () => {
+  const email = 'aviosplatform@gmail.com';
+  try {
+    await navigator.clipboard.writeText(email);
+    copyEmail.textContent = 'Copied ✓';
+    setTimeout(()=> copyEmail.textContent = 'Copy email', 1400);
+  } catch (err) {
+    copyEmail.textContent = 'Copy failed';
+    console.error(err);
+  }
+});
+copyBody.addEventListener('click', async () => {
+  const text = fallbackPreserve.textContent || '';
+  try {
+    await navigator.clipboard.writeText(text);
+    copyBody.textContent = 'Copied ✓';
+    setTimeout(()=> copyBody.textContent = 'Copy message text', 1400);
+  } catch (err) {
+    copyBody.textContent = 'Copy failed';
+    console.error(err);
+  }
+});
 
 /* Hero image check - graceful placeholder */
 (function checkHero(){
