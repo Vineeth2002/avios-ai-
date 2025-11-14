@@ -321,41 +321,43 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="site-section">
-    <h2 class="center" style="font-size:1.75rem;margin-bottom:18px;">Contact</h2>
+  <section id="contact" class="section" aria-labelledby="contact-title">
+    <h2 id="contact-title">Contact</h2>
 
-    <div class="contact-panel">
-      <form id="contact-form" class="grid gap-4" autocomplete="on">
-        <div class="form-row" style="flex-direction:column;">
-          <label style="font-weight:700">Name</label>
-          <input class="input" name="name" placeholder="Your name" required />
-        </div>
+    <div class="contact-wrap" role="form" aria-labelledby="contact-title">
+      <form id="contact-form" autocomplete="on">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" placeholder="Your name" required>
 
-        <div class="form-row" style="flex-direction:column;">
-          <label style="font-weight:700">Email</label>
-          <input class="input" name="email" type="email" placeholder="Your email" required />
-        </div>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="Your email" required>
 
-        <div class="form-row" style="flex-direction:column;">
-          <label style="font-weight:700">Company</label>
-          <input class="input" name="company" placeholder="Company (optional)" />
-        </div>
+        <label for="company">Company</label>
+        <input id="company" name="company" type="text" placeholder="Company (optional)">
 
-        <div class="form-row" style="flex-direction:column;">
-          <label style="font-weight:700">Message</label>
-          <textarea class="textarea" name="message" placeholder="How can we help?" required></textarea>
-        </div>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="How can we help?" required></textarea>
 
         <div style="display:flex;gap:12px;align-items:center;">
-          <button id="contact-submit" type="submit" class="btn-primary">Send Message</button>
-          <button type="reset" class="btn-ghost">Reset</button>
-          <div id="form-status" style="color:var(--muted);margin-left:8px;"></div>
+          <button id="contact-submit" class="btn btn-primary" type="submit">Send Message</button>
+          <button id="contact-reset" type="reset" class="btn btn-ghost">Reset</button>
+        </div>
+
+        <div id="form-status" class="status" role="status" aria-live="polite"></div>
+
+        <!-- fallback panel (hidden by default) -->
+        <div id="fallback-panel" style="display:none; margin-top:16px; padding:14px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03);">
+          <div style="color:var(--muted); margin-bottom:8px;">We couldn't send via the contact form. You can contact us directly:</div>
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <a id="fallback-mailto" href="mailto:aviosplatform@gmail.com" class="btn btn-ghost" style="padding:10px 14px;">Email aviosplatform@gmail.com</a>
+            <button id="copy-email" class="copy-btn">Copy email</button>
+            <button id="open-mail-client" class="btn btn-primary">Open mail client (prefill)</button>
+            <button id="copy-body" class="copy-btn" title="Copy message body">Copy message text</button>
+          </div>
+          <div id="fallback-preserve" style="margin-top:10px; color:var(--muted); font-size:0.95rem;"></div>
         </div>
       </form>
     </div>
-
-    <!-- fallback panel will be inserted by script if needed -->
   </section>
 </main>
 
