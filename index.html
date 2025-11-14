@@ -69,24 +69,16 @@ nav.topnav a { color:rgba(255,255,255,0.92); text-decoration:none; font-weight:6
 }
 .hero-card img{ width:100%; height:auto; display:block; object-fit:cover; border-radius:12px; }
 
-/* 3D-like neural network overlay (hero-only). pointer-events none so it won't block anything */
+/* 3D-like neural network overlay (hero-only) */
 .network { position:absolute; inset:0; pointer-events:none; z-index:1; opacity:0.96; }
-
-/* layered effects to give depth */
 .net-layer { transform-style:preserve-3d; }
 .net-lines { stroke:rgba(60,170,230,0.08); stroke-width:1.4; mix-blend-mode:screen; filter: drop-shadow(0 8px 20px rgba(0,120,170,0.08)); }
 .net-nodes { fill:rgba(40,170,220,0.95); filter:drop-shadow(0 6px 18px rgba(0,120,170,0.12)); }
-
-/* Node pulsation + slow drift for depth */
 .node-pulse { animation: pulse 2.8s ease-in-out infinite; transform-origin:center; }
 .node-pulse.slow { animation-duration:4.4s; }
 @keyframes pulse { 0%{ transform:scale(1); opacity:0.95 } 50%{ transform:scale(1.28); opacity:1 } 100%{ transform:scale(1); opacity:0.95 } }
-
-/* Gentle path wave movement (3D drift) */
 .path-drift { animation: drift 10s linear infinite; transform-origin:center; }
 @keyframes drift { 0%{ transform:translateZ(-6px) translateY(0) } 50%{ transform:translateZ(6px) translateY(-8px) } 100%{ transform:translateZ(-6px) translateY(0) } }
-
-/* thin foreground animated connections for parallax */
 .net-foreground { stroke: rgba(95,190,255,0.22); stroke-width:1.6; opacity:0.85; animation: slowMove 18s ease-in-out infinite; filter: drop-shadow(0 12px 26px rgba(0,120,170,0.06)); }
 @keyframes slowMove { 0%{ transform:translateY(0) } 50%{ transform:translateY(-6px) } 100%{ transform:translateY(0) } }
 
@@ -96,9 +88,6 @@ main.content{ max-width:var(--content-max); margin:40px auto; padding:0 20px 80p
 .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
 .card { background:linear-gradient(180deg, rgba(2,10,14,0.45), rgba(2,10,14,0.6)); border-radius:14px; padding:20px; border:1px solid rgba(255,255,255,0.02); box-shadow:0 10px 24px rgba(2,10,12,0.45); }
 .card h3{ margin:0 0 10px; color:var(--white); } .card p{ margin:0; color:var(--muted); }
-
-/* testimonials */
-.testimonials { max-width:860px; margin:0 auto; }
 
 /* FAQ */
 .faq-list { max-width:860px; margin:0 auto; } .faq-item { background:transparent; border-radius:12px; margin-bottom:12px; padding:14px 16px; border:1px solid rgba(255,255,255,0.03); display:flex; align-items:flex-start; justify-content:space-between; cursor:pointer; }
@@ -152,32 +141,28 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
 </header>
 
 <section class="hero" aria-labelledby="hero-heading">
-  <!-- 3D-ish network SVG overlay (decorative only) -->
+  <!-- neural-network decorative SVG (hero-only) -->
   <svg class="network" viewBox="0 0 1600 600" preserveAspectRatio="none" aria-hidden="true" role="img">
     <g class="net-layer" transform="translate(0,8)">
       <path class="net-lines path-drift" d="M80 160 C220 120, 420 100, 580 150 C760 200, 920 160, 1100 210 C1280 260, 1420 220, 1560 200" />
       <path class="net-lines" d="M120 80 C260 40, 420 60, 620 100 C820 140, 980 120, 1180 140 C1380 160, 1500 140, 1560 120" style="opacity:0.4" />
     </g>
-
     <g class="net-layer" transform="translate(0,0)">
       <path class="net-foreground" d="M220 140 L320 90 L480 130 L640 110 L820 160" />
       <path class="net-foreground" d="M540 220 L660 180 L820 200 L980 180 L1200 220" />
     </g>
-
     <g class="net-layer" transform="translate(0,0)">
       <circle class="net-nodes node-pulse slow" cx="220" cy="140" r="4.4"></circle>
       <circle class="net-nodes node-pulse" cx="320" cy="90" r="3.8"></circle>
       <circle class="net-nodes node-pulse slow" cx="480" cy="130" r="5.2"></circle>
       <circle class="net-nodes node-pulse" cx="640" cy="110" r="3.6"></circle>
       <circle class="net-nodes node-pulse" cx="820" cy="160" r="4"></circle>
-
       <circle class="net-nodes node-pulse" cx="540" cy="220" r="3.6"></circle>
       <circle class="net-nodes node-pulse slow" cx="660" cy="180" r="4.8"></circle>
       <circle class="net-nodes node-pulse" cx="820" cy="200" r="3.6"></circle>
       <circle class="net-nodes node-pulse slow" cx="980" cy="180" r="4.6"></circle>
       <circle class="net-nodes node-pulse" cx="1200" cy="220" r="3.8"></circle>
     </g>
-
     <g transform="translate(0,0)" style="mix-blend-mode: screen; opacity:0.45;">
       <circle cx="360" cy="70" r="36" fill="rgba(20,150,220,0.04)"></circle>
       <circle cx="980" cy="40" r="24" fill="rgba(20,150,220,0.03)"></circle>
@@ -207,7 +192,6 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
 </section>
 
 <main class="content" id="main">
-  <!-- ABOUT, SERVICES, CASE STUDIES, TESTIMONIALS, FAQ (unchanged) -->
   <section id="about" class="section" aria-labelledby="about-title">
     <h2 id="about-title">About Avios AI</h2>
     <div class="grid-3" style="margin-top:18px;">
@@ -278,6 +262,7 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
         </div>
         <div aria-hidden="true" style="align-self:center; color:var(--muted)">▸</div>
       </div>
+
       <div class="faq-item" data-id="q2" role="button" tabindex="0">
         <div>
           <div class="faq-q">Which deployment options do you support?</div>
@@ -285,6 +270,7 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
         </div>
         <div aria-hidden="true" style="align-self:center; color:var(--muted)">▸</div>
       </div>
+
       <div class="faq-item" data-id="q3" role="button" tabindex="0">
         <div>
           <div class="faq-q">How do you ensure reliability?</div>
@@ -292,6 +278,7 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
         </div>
         <div aria-hidden="true" style="align-self:center; color:var(--muted)">▸</div>
       </div>
+
       <div class="faq-item" data-id="q4" role="button" tabindex="0">
         <div>
           <div class="faq-q">Do you handle data privacy?</div>
@@ -299,6 +286,7 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
         </div>
         <div aria-hidden="true" style="align-self:center; color:var(--muted)">▸</div>
       </div>
+
       <div class="faq-item" data-id="q5" role="button" tabindex="0">
         <div>
           <div class="faq-q">What industries do you work with?</div>
@@ -311,7 +299,6 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
 
   <section id="contact" class="section" aria-labelledby="contact-title">
     <h2 id="contact-title">Contact</h2>
-
     <div class="contact-wrap" role="form" aria-labelledby="contact-title">
       <form id="contact-form" autocomplete="on">
         <label for="name">Name</label>
@@ -333,12 +320,12 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
 
         <div id="form-status" class="status" role="status" aria-live="polite"></div>
 
-        <!-- fallback panel (hidden by default) -->
+        <!-- fallback panel -->
         <div id="fallback-panel" style="display:none; margin-top:16px; padding:14px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03);">
-          <div style="color:var(--muted); margin-bottom:8px;">We couldn't send via the contact form. You can contact us directly:</div>
+          <div style="color:var(--muted); margin-bottom:8px;">We couldn't send via the contact form. Use one of the options below:</div>
           <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
             <button id="copy-email" class="copy-btn" type="button">Copy email (aviosplatform@gmail.com)</button>
-            <button id="open-mail-client" class="btn btn-primary" type="button">Open mail client (prefill)</button>
+            <button id="open-mail-client" class="btn btn-primary" type="button">Open Gmail compose</button>
             <button id="copy-body" class="copy-btn" type="button" title="Copy message body">Copy message text</button>
           </div>
           <div id="fallback-preserve" style="margin-top:10px; color:var(--muted); font-size:0.95rem; white-space:pre-wrap;"></div>
@@ -353,9 +340,9 @@ footer.sitefoot { padding:36px 16px; text-align:center; color:var(--muted); font
 </footer>
 
 <script>
-/* ===================== USER CONFIG - set your Apps Script exec URL here ===================== */
-const APPSCRIPT_EXEC = "https://script.google.com/macros/s/AKfycby6km1jYMcIRZbdfLI0T-QSydWZ9um-2rjijJxtu3GPu6Bf7zQdmZMe9MgT1ItAAnM6ig/exec";
-/* ========================================================================================== */
+/* ===================== CONFIG ===================== */
+const APPSCRIPT_EXEC = "https://script.google.com/macros/s/AKfycbxR7P4PhV7UVmKcsauVX-tDc286cAx5pyZ5wVyWd4KUgI28F2TvIGvFmdDtOUYUwSj9Qg/exec";
+/* ================================================== */
 
 /* FAQ toggle */
 document.querySelectorAll('.faq-item').forEach(item => {
@@ -364,11 +351,7 @@ document.querySelectorAll('.faq-item').forEach(item => {
   item.addEventListener('keydown', (ev) => { if(ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(); }});
 });
 
-/* Contact form, with robust fallbacks:
-   1) Try fetch() POST to APPSCRIPT_EXEC (modern, preferred)
-   2) If fetch fails -> create hidden iframe + POST form to APPSCRIPT_EXEC (bypass many JS/CORS blocks)
-   3) If that fails -> show fallback panel with email/copy options and mailto (prefill)
-*/
+/* Elements */
 const form = document.getElementById('contact-form');
 const statusEl = document.getElementById('form-status');
 const submitBtn = document.getElementById('contact-submit');
@@ -378,11 +361,12 @@ const openMailClientBtn = document.getElementById('open-mail-client');
 const copyBodyBtn = document.getElementById('copy-body');
 const fallbackPreserve = document.getElementById('fallback-preserve');
 
+/* Build message body */
 function buildEmailBody(data){
   return `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company}\n\nMessage:\n${data.message}`;
 }
 
-/* helper: hidden iframe + form POST fallback */
+/* Hidden iframe POST fallback implementation */
 function postViaHiddenForm(url, data) {
   return new Promise((resolve, reject) => {
     try {
@@ -392,20 +376,18 @@ function postViaHiddenForm(url, data) {
       iframe.style.display = 'none';
       document.body.appendChild(iframe);
 
-      // monitor load to detect a response (can't access cross-origin response content, but can know it loaded)
       let loaded = false;
       const timeout = setTimeout(() => {
         if(!loaded) {
           cleanup();
           reject(new Error('iframe POST timed out'));
         }
-      }, 8000);
+      }, 9000);
 
       iframe.addEventListener('load', function () {
         loaded = true;
         clearTimeout(timeout);
         cleanup();
-        // We can't read the iframe response cross-origin; treat load as success.
         resolve({ ok: true, message: 'Posted via hidden form (iframe) - loaded' });
       });
 
@@ -414,7 +396,6 @@ function postViaHiddenForm(url, data) {
         try { formNode.remove(); } catch(e){}
       }
 
-      // build form
       const formNode = document.createElement('form');
       formNode.action = url;
       formNode.method = 'POST';
@@ -436,30 +417,27 @@ function postViaHiddenForm(url, data) {
   });
 }
 
+/* Attempt send using fetch then iframe fallback */
 async function trySend(data) {
-  // Try fetch first
   const params = new URLSearchParams(data).toString();
   try {
     const resp = await fetch(APPSCRIPT_EXEC, {
       method:'POST',
       headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
       body: params,
-      mode: 'cors' // prefer CORS; if blocked, catch below
+      mode:'cors'
     });
-    // attempt parse json - if server returns valid JSON then we can check success
     let json = null;
     try { json = await resp.json(); } catch(e){ json = null; }
     if (resp.ok && json && (json.success === true || json.success === "true")) {
       return { ok:true, via:'fetch', json };
     }
-    // not OK but server responded; still return non-ok
     return { ok:false, via:'fetch', code: resp.status, text: await resp.text().catch(()=>'') };
   } catch (err) {
-    // network/CORS or blocked - continue to iframe fallback
-    console.warn('fetch failed, will try iframe fallback:', err);
+    console.warn('fetch failed, trying iframe fallback:', err);
     try {
-      const result = await postViaHiddenForm(APPSCRIPT_EXEC, data);
-      return { ok:true, via:'iframe', info: result };
+      const res = await postViaHiddenForm(APPSCRIPT_EXEC, data);
+      return { ok:true, via:'iframe', info: res };
     } catch (err2) {
       console.error('iframe fallback failed:', err2);
       return { ok:false, via:'both', error: err2 };
@@ -467,54 +445,46 @@ async function trySend(data) {
   }
 }
 
+/* Show fallback options */
 function showFallback(data){
   fallbackPanel.style.display = 'block';
   fallbackPreserve.textContent = `Message preview — please copy if needed:\n\n${buildEmailBody(data)}`;
-  // copy email handler will set clipboard when clicked
+
   copyEmailBtn.onclick = async () => {
-    try {
-      await navigator.clipboard.writeText('aviosplatform@gmail.com');
-      copyEmailBtn.textContent = 'Copied ✓';
-      setTimeout(()=> copyEmailBtn.textContent = 'Copy email (aviosplatform@gmail.com)', 1400);
-    } catch(e){ copyEmailBtn.textContent = 'Copy failed'; setTimeout(()=> copyEmailBtn.textContent = 'Copy email (aviosplatform@gmail.com)', 1400); }
+    try { await navigator.clipboard.writeText('aviosplatform@gmail.com'); copyEmailBtn.textContent = 'Copied ✓'; setTimeout(()=> copyEmailBtn.textContent = 'Copy email (aviosplatform@gmail.com)', 1400); } 
+    catch(e){ copyEmailBtn.textContent = 'Copy failed'; setTimeout(()=> copyEmailBtn.textContent = 'Copy email (aviosplatform@gmail.com)', 1400); }
   };
 
   copyBodyBtn.onclick = async () => {
-    try {
-      await navigator.clipboard.writeText(buildEmailBody(data));
-      copyBodyBtn.textContent = 'Copied ✓';
-      setTimeout(()=> copyBodyBtn.textContent = 'Copy message text', 1400);
-    } catch(e){ copyBodyBtn.textContent = 'Copy failed'; setTimeout(()=> copyBodyBtn.textContent = 'Copy message text', 1400); }
+    try { await navigator.clipboard.writeText(buildEmailBody(data)); copyBodyBtn.textContent = 'Copied ✓'; setTimeout(()=> copyBodyBtn.textContent = 'Copy message text', 1400); } 
+    catch(e){ copyBodyBtn.textContent = 'Copy failed'; setTimeout(()=> copyBodyBtn.textContent = 'Copy message text', 1400); }
   };
 
-  openMailClientBtn.onclick = async () => {
+  openMailClientBtn.onclick = () => {
     const email = 'aviosplatform@gmail.com';
     const subject = encodeURIComponent('Website contact: ' + (data.name || 'Website user'));
     const body = encodeURIComponent(buildEmailBody(data));
-    const mailto = `mailto:${email}?subject=${subject}&body=${body}`;
-
-    try {
-      // Primary: try to navigate current page (many browsers will open default mail app)
-      window.location.href = mailto;
-      // Secondary: open in new tab/window (some browsers will block one of these but not both)
-      setTimeout(()=> {
-        try { window.open(mailto, '_blank', 'noopener'); } catch(e) {}
-      }, 350);
-      // Also copy body so if the client blocked the mailto, user still has the body
-      try { await navigator.clipboard.writeText(buildEmailBody(data)); } catch(e){}
-    } catch (err) {
-      try { await navigator.clipboard.writeText(buildEmailBody(data)); } catch(e){}
-      alert("Your browser blocked opening the mail client. The message body has been copied — please paste into an email to aviosplatform@gmail.com.");
-    }
+    // Gmail web compose (primary)
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${subject}&body=${body}`;
+    // Outlook web compose (secondary)
+    const outlookLink = `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(email)}&subject=${subject}&body=${body}`;
+    // Open Gmail compose in new tab
+    window.open(gmailLink, '_blank', 'noopener');
+    // Also open a second tab for Outlook as optional (comment out if not wanted)
+    // window.open(outlookLink, '_blank', 'noopener');
+    // copy body as well (useful if browser blocks)
+    try { navigator.clipboard.writeText(buildEmailBody(data)); } catch(e){}
   };
 }
 
+/* Form submit handler */
 form.addEventListener('submit', async (ev) => {
   ev.preventDefault();
   statusEl.style.color = 'var(--muted)';
   statusEl.textContent = 'Sending…';
   submitBtn.disabled = true;
   fallbackPanel.style.display = 'none';
+  fallbackPreserve.textContent = '';
 
   const data = {
     name: form.name.value.trim(),
@@ -532,24 +502,23 @@ form.addEventListener('submit', async (ev) => {
 
   const res = await trySend(data);
 
-  if(res.ok) {
+  if (res.ok) {
     statusEl.style.color = '#9be7b7';
     statusEl.textContent = 'Message sent — we will reply within one business day.';
     form.reset();
     fallbackPanel.style.display = 'none';
+    console.log('Contact sent ok via', res.via, res);
   } else {
-    // show fallback options
     statusEl.style.color = '#ffd1a8';
     statusEl.textContent = 'Network error — use fallback options below.';
     showFallback(data);
-    // provide console details for debugging
-    console.warn('send result:', res);
+    console.warn('Send failed:', res);
   }
 
   submitBtn.disabled = false;
 });
 
-/* Smooth anchor scrolling that accounts for sticky header */
+/* Smooth scrolling anchor links */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', (e) => {
     const target = document.querySelector(a.getAttribute('href'));
@@ -561,7 +530,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-/* Hero image graceful fallback */
+/* Hero image fallback notice for debugging (console) */
 (function checkHero(){
   const img = document.querySelector('.hero-card img');
   if(!img) return;
