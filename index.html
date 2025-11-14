@@ -450,13 +450,23 @@ function showFallback(data){
   const body = encodeURIComponent(buildEmailBody(data));
   const mailto = `mailto:${email}?subject=${subject}&body=${body}`;
 
-  // prepare fallback content and buttons
   fallbackPreserve.textContent = `Message preview — please copy if needed:\n\n${buildEmailBody(data)}`;
 
+  // Reliable mailto invocation: create a temporary anchor and click it (works well across desktop browsers)
   openMailClientBtn.onclick = () => {
-    // Use window.open to trigger mail client / webmail prefill in a new tab/window.
-    // On desktop this will open mailto: so OS/chrome will use user's default mail app or webmail handler.
-    window.open(mailto, '_blank');
+    try {
+      const a = document.createElement('a');
+      a.href = mailto;
+      // choose _self so some browsers open the default mail client instead of a blank tab
+      a.target = '_self';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(()=> a.remove(), 500);
+    } catch (err) {
+      // Fallback to window.location if anchor click fails
+      window.location.href = mailto;
+    }
   };
 
   fallbackCopyEmail.onclick = async () => {
