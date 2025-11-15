@@ -198,6 +198,7 @@ main.content{ max-width:var(--content-max); margin:40px auto; padding:0 20px 80p
         </div>
 
         <div id="debug-output" class="debug" style="display:none;"></div>
+        <div id="debug-toggle-note" style="margin-top:8px;color:var(--muted);font-size:12px">Note: add <code>?debug=1</code> to the URL to show debug details (dev only).</div>
       </form>
     </div>
   </section>
@@ -208,12 +209,11 @@ main.content{ max-width:var(--content-max); margin:40px auto; padding:0 20px 80p
 
 <script>
 /* -------------------------
-   IMPORTANT: update this if you redeploy to a different exec URL
-   Using the exec URL that returned {"status":"ok","message":"Web app deployed"}
+   Apps Script exec URL — set to your deployed web app exec URL
 */
-const APPSCRIPT_EXEC = "https://script.google.com/macros/s/AKfycbxR7P4PhV7UVmKcsauVX-tDc286cAx5pyZ5wVyWd4KUgI28F2TvIGvFmdDtOUYUwSj9Qg/exec";
+const APPSCRIPT_EXEC = "https://script.google.com/macros/s/AKfycbwKXoHvrCwj2DyLpR4vbJIiCZxOEE14PGgNq4UezdQUpMnQid81ZqdH8PUnqyPqFO83Uw/exec";
 
-/* FAQ */
+/* FAQ toggle */
 document.querySelectorAll('.faq-item').forEach(item => {
   const toggle = () => item.classList.toggle('open');
   item.addEventListener('click', toggle);
@@ -235,83 +235,6 @@ function buildEmailBody(data){
   return `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company}\n\nMessage:\n${data.message}`;
 }
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  statusEl.style.color = 'var(--muted)';
-  statusEl.textContent = "Sending…";
-  debugOutput.style.display = 'none';
-  fallbackPanel.style.display = 'none';
-  submitBtn.disabled = true;
-
-  const data = {
-    name: form.name.value.trim(),
-    email: form.email.value.trim(),
-    company: form.company.value.trim(),
-    message: form.message.value.trim()
-  };
-
-  if(!data.name || !data.email || !data.message) {
-    statusEl.style.color = '#ffb4b4';
-    statusEl.textContent = "Please fill name, email and message.";
-    submitBtn.disabled = false;
-    return;
-  }
-
-  const params = new URLSearchParams();
-  for (const k in data) params.append(k, data[k]);
-
-  try {
-    // timeout controller
-    const controller = new AbortController();
-    const timeout = setTimeout(()=> controller.abort(), 15000); // 15s
-
-    const resp = await fetch(APPSCRIPT_EXEC, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: params.toString(),
-      signal: controller.signal,
-      credentials: 'omit'
-    });
-
-    clearTimeout(timeout);
-
-    // try parse json, otherwise read text
-    let bodyText = '';
-    try { bodyText = await resp.text(); } catch(e){ bodyText = ''; }
-    let json = null;
-    try { json = JSON.parse(bodyText); } catch(e){ json = null; }
-
-    // show debugging info
-    debugOutput.style.display = 'block';
-    debugOutput.textContent = `HTTP ${resp.status} ${resp.statusText}\n\nResponse body:\n${bodyText}`;
-
-    if (resp.ok && json && json.status === 'ok') {
-      statusEl.style.color = '#9be7b7';
-      statusEl.textContent = "Message sent — we will reply within one business day.";
-      form.reset();
-      fallbackPanel.style.display = 'none';
-      fallbackPreserve.textContent = '';
-      submitBtn.disabled = false;
-      return;
-    } else {
-      // non-ok or not expected json
-      statusEl.style.color = '#ffd1a8';
-      statusEl.textContent = "Error sending — use fallback options below.";
-      showFallback(data);
-      console.warn('Apps Script response non-ok:', resp.status, resp.statusText, json, bodyText);
-    }
-  } catch (err) {
-    console.error("Contact send error:", err);
-    statusEl.style.color = '#ffd1a8';
-    statusEl.textContent = "Network/livetime error — use fallback options below.";
-    showFallback(data);
-    debugOutput.style.display = 'block';
-    debugOutput.textContent = `Fetch error: ${String(err)}\n\nMake sure:\n• Apps Script is deployed (exec) and matches APPSCRIPT_EXEC\n• You ran requestMailAuthorization() in Apps Script and allowed mail/send scope\n• Web app was deployed with Execute as: Me and Who has access: Anyone`;
-  } finally {
-    submitBtn.disabled = false;
-  }
-});
-
 function showFallback(data){
   fallbackPanel.style.display = 'block';
   const email = 'aviosplatform@gmail.com';
@@ -324,12 +247,9 @@ function showFallback(data){
     catch(e){ copyEmail.textContent = 'Copy failed'; console.error(e); }
   };
 
-  // Open Gmail web compose in new tab (works in desktop if user logged into Gmail).
   openMailClient.onclick = (ev) => {
     ev.preventDefault();
-    // Gmail compose URL: opens Compose with to, subject, body
     const gmailUrl = `https://mail.google.com/mail/?view=cm&tf=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent("Website contact: " + (data.name||""))}&body=${encodeURIComponent(buildEmailBody(data))}`;
-    // open in new tab
     window.open(gmailUrl, '_blank', 'noopener,noreferrer');
   };
 
@@ -362,6 +282,103 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     card.innerHTML = '<div style="color:var(--muted);text-align:center;padding:44px">Hero visual missing — upload <code>assets/hero-image.png</code>.</div>';
   });
 })();
+
+/* Safer submit handler (replaces previous submit block) */
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  statusEl.style.color = 'var(--muted)';
+  statusEl.textContent = "Sending…";
+  debugOutput.style.display = 'none';
+  fallbackPanel.style.display = 'none';
+  submitBtn.disabled = true;
+
+  const data = {
+    name: form.name.value.trim(),
+    email: form.email.value.trim(),
+    company: form.company.value.trim(),
+    message: form.message.value.trim()
+  };
+
+  if (!data.name || !data.email || !data.message) {
+    statusEl.style.color = '#ffb4b4';
+    statusEl.textContent = "Please fill name, email and message.";
+    submitBtn.disabled = false;
+    return;
+  }
+
+  const params = new URLSearchParams();
+  for (const k in data) params.append(k, data[k]);
+
+  const isDebug = window.location.search.includes('debug=1');
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000); // 20s
+
+    const resp = await fetch(APPSCRIPT_EXEC, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json, text/plain'
+      },
+      body: params.toString(),
+      signal: controller.signal,
+      credentials: 'omit'
+    });
+
+    clearTimeout(timeout);
+    const bodyText = await resp.text();
+
+    if (isDebug) {
+      debugOutput.style.display = 'block';
+      debugOutput.textContent = `HTTP ${resp.status} ${resp.statusText}\n\nHeaders:\n` +
+        Array.from(resp.headers.entries()).map(h => h.join(': ')).join('\n') +
+        `\n\nBody:\n${bodyText}`;
+    } else {
+      debugOutput.style.display = 'none';
+      debugOutput.textContent = '';
+    }
+
+    let json = null;
+    try { json = JSON.parse(bodyText); } catch (err) { json = null; }
+
+    if (resp.ok && json && json.success === true) {
+      statusEl.style.color = '#9be7b7';
+      statusEl.textContent = "Message sent — we will reply within one business day.";
+      form.reset();
+      fallbackPanel.style.display = 'none';
+      fallbackPreserve.textContent = '';
+      submitBtn.disabled = false;
+      return;
+    }
+
+    statusEl.style.color = '#ffd1a8';
+    if (!resp.ok) {
+      statusEl.textContent = "Error sending — use fallback options below.";
+    } else {
+      statusEl.textContent = "Unable to send your message right now — please use one of the fallback options below.";
+    }
+    showFallback(data);
+    console.warn('Contact send unexpected response', { status: resp.status, bodyText, json });
+
+  } catch (err) {
+    console.error("Contact send error:", err);
+    statusEl.style.color = '#ffd1a8';
+    if (err.name === 'AbortError') {
+      statusEl.textContent = "Request timed out — use fallback options below.";
+    } else {
+      statusEl.textContent = "Network or CORS error — use fallback options below.";
+    }
+    showFallback(data);
+
+    if (isDebug) {
+      debugOutput.style.display = 'block';
+      debugOutput.textContent = `Fetch error: ${String(err)}\n\nMake sure:\n• Apps Script is deployed (exec) and matches APPSCRIPT_EXEC\n• You ran requestMailAuthorization() in Apps Script and allowed mail/send scope\n• Web app was deployed with Execute as: Me and Who has access: Anyone`;
+    }
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
 </script>
 
 </body>
